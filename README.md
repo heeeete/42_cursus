@@ -1,1 +1,1 @@
-# 42_curriculum
+42seoul
