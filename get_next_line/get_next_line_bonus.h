@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:37:26 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/03 19:20:08 by huipark          ###   ########.fr       */
+/*   Updated: 2022/09/04 20:03:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ typedef struct s_list
 
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 char	*get_next_line(int fd);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-size_t	ft_strlcat(char *dest, const char *src, size_t size);
-void	node_free(t_list **head, t_list **current);
-char	*check(char *line);
-t_list	*fd_check(t_list *head, int fd);
 
 #endif
