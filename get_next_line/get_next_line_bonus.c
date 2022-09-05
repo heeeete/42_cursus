@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:09:59 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/04 20:02:54 by huipark          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:31:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*check(char *line)
 	return (res);
 }
 
-static char	*get_read(int fd, char *line)
+char	*get_read(int fd, char *line)
 {
 	char	*buf;
 	char	*temp_address;
