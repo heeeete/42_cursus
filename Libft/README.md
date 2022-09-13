@@ -1,77 +1,5 @@
 ## Mandatory part
 
-| **프로그램 이름**            | libft.a                                                                                        |
-| ---------------------------- | ---------------------------------------------------------------------------------------------- |
-| **제출할 파일**              | `*.c, libft.h, Makefile`                                                                                 |
-| **Makefile**                 | 만드세요                                                                                       |
-| **사용가능한 <br>외부 함수** | `자세한 내용은 아래를 확인하세요`                                                              |
-| **설명**                     | `42 과정을 진행하면서 유용하게 쓰일 수 있는 함수들을 담은, 여러분만의 라이브러리를 작성하세요` |
-
-<br>
-
-## 3.1 Technical considerations
-
-- ##### _It is forbidden to declare global variables._
-
-  전역변수는 사용할 수 없습니다.
-
-- ##### _If you need subfunctions to write a complex function, you should define these subfunctions as `static` to avoid publishing them with your library. It would be a good habit to do this in your future projects as well._
-
-  복잡한 함수를 구현하기 위해 하위 함수 (subfunction) 을 작성해야 한다면, 이러한 함수들을 `static` 으로 선언하여 라이브러리와 함께 컴파일되는 것을 막는 것이 좋습니다. 이러한 습관은 나중의 프로젝트를 진행할 때도 도움이 될 거에요.
-
-- ##### _Submit all files in the root of your repository._
-
-  모든 파일을 레포지토리의 루트 폴더에 제출하세요.
-
-- ##### _It is forbidden to submit unused files._
-
-  사용하지 않는 파일의 제출은 금지됩니다.
-
-- ##### _Every .c must compile with flags._
-
-  모든 .c 파일은 플래그와 함께 컴파일되어야 합니다.
-
-- ##### _You must use the command `ar` to create your library, using the command `libtool` is forbidden._
-
-  반드시 `ar` 명령어를 사용하여 라이브러리를 생성하여야 합니다. `libtool` 명령어는 사용이 금지됩니다.
-
-<br>
-
-## 3.2 Part 1 - Libc functions
-
-##### _In this first part, you must re-code a set of the `libc` functions, as defined in their `man`. Your functions will need to present the same prototype and behaviors as the originals. Your functions’ names must be prefixed by "`ft_`". For instance, `strlen`becomes`ft_strlen`.
-
-첫 번째 파트에서는, `man`에 정의되어 있는 그대로 `libc` 함수들을 새로 구현하셔야 합니다. 여러분의 함수들은 원본과 같은 프로토타입으로 선언되어야 하며, 같은 방식으로 동작해야 합니다. 다만 함수의 이름 앞에는 `"ft_"`를 붙여야 합니다. 예를 들면, `strlen`을 구현한 함수의 이름은 `ft_strlen`이 됩니다.
-
-> ⚠️
->
-> ##### Some of the functions’ prototypes you have to re-code use the "restrict" qualifier. This keyword is part of the c99 standard. It is therefore forbidden to include it in your prototypes and to compile it with the flag `-std=c99`.
->
-> 여러분이 재구현하여야 하는 함수들 중 일부는 원본의 프로토타입에 "restrict" 한정자가 사용됩니다. 이 키워드는 c99 표준에 해당하므로, 여러분의 라이브러리 프로토타입들에 이 키워드를 포함시키고 `std=c99` 플래그를 사용하여 컴파일하는 것은 금지됩니다.
-
-##### _You must re-code the following functions. These function do not need any external functions:_
-
-아래의 함수들을 다시 구현하세요. 이 함수들은 외부 함수를 필요로 하지 않습니다 :
-
-- `isalpha`, `isdigit`, `isalnum`, `isascii`, `isprint`
-- `strlen`, `memset`, `bzero`, `memcpy`, `memmove`, `strlcpy`, `strlcat`, `strncmp`
-- `toupper`, `tolower`, `strchr`, `strrchr`
-- `memchr`, `memcmp`, `strnstr`, `atoi`
-
-##### _You must also re-code the following functions, using the function "`malloc`":_
-
-다음의 함수들은 외부 함수 `malloc` 을 사용하여 구현하세요 :
-
-- `calloc`, `strdup`
-
-<br>
-
-## 3.3 Part 2 - Additional functions
-
-##### _In this second part, you must code a set of functions that are either not included in the `libc`, or included in a different form. Some of these functions can be useful to write Part 1’s functions._
-
-두 번째 파트에서는, `libc`에 포함되어 있지 않거나 다른 형식으로 포함된 함수들을 재구현하여야 합니다. 다음 함수들 중 일부는 Part 1 함수를 작성할 때 도움이 될 거에요.
-
 <br>
 
 | **함수 이름**                | ft_substr                                                                                                                                                                                                                                                                                                                                |
@@ -198,45 +126,6 @@
 # Chapter 4
 
 ## Bonus part
-
-##### _If you completed the mandatory part, you’ll enjoy taking it further. You can see this last section as Bonus Points._
-
-필수 파트의 과제를 모두 수행하셨다면, 그보다 더 나아가는 것도 좋은 경험이 될 거에요. 이 마지막 섹션을 통해 보너스 점수를 얻어 보세요.
-
-##### _Having functions to manipulate memory and strings is very useful, but you’ll soon discover that having functions to manipulate lists is even more useful._
-
-메모리와 문자열을 다루는 함수는 아주 유용하게 사용할 수 있죠. 지금부터 여러분은 리스트를 다루는 함수가 얼마나 더 유용한 지 알 수 있을 거에요.
-
-##### _`make bonus` will add the bonus functions to the `libft.a` library._
-
-`make bonus` 는 `libft.a` 라이브러리에 보너스 함수들을 추가합니다.
-
-##### _You’ll use the following structure to represent the elements of your list. This structure must be added to your `libft.h` file._
-
-리스트의 요소들을 표현하기 위해 다음과 같은 구조체를 사용하세요. 이 구조체를 `libft.h` 파일에 추가하여야 합니다.
-
-```c
-typedef struct s_list
-{
-    void          *content;
-    struct s_list *next;
-}              t_list;
-```
-
-##### _Here is a description of the fields of the t_list struct:_
-
-다음은 t_list 구조체의 각 필드에 대한 설명입니다 :
-
-- ##### _`content` : The data contained in the element. The `void *` allows to store any kind of data._
-
-  `content`: 요소에 포함된 데이터. `void *` 를 통해 어떠한 자료형의 값도 담을 수 있습니다.
-
-- ##### _`next` : The next element’s address or `NULL` if it’s the last element._
-  `next`: 다음 요소의 주소값. 만약 해당 요소가 마지막 요소라면, `NULL`을 가리킵니다.
-
-##### _The following functions will allow you to easily use your lists._
-
-다음의 함수들은 리스트를 쉽게 다룰 수 있도록 돕습니다.
 
 <br>
 
