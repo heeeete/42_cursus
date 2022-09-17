@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:18:17 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/17 16:51:12 by huipark          ###   ########.fr       */
+/*   Updated: 2022/09/17 17:34:02 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	format_check(char c, va_list *ap)
 	if (c == 'd' || c == 'i')
 		return (ft_putnbr_id(va_arg(*ap, int)));
 	else if (c == 'u')
-		return (ft_putnbr_u(va_arg(*ap, int)));
+		return (ft_putnbr_u(va_arg(*ap, unsigned int)));
 	else if (c == 's')
 		return (ft_putstr(va_arg(*ap, char *)));
 	else if (c == 'c')
