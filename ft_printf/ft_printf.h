@@ -6,14 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:18:54 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/13 18:02:31 by huipark          ###   ########.fr       */
+/*   Updated: 2022/09/17 16:57:06 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
 
