@@ -28,6 +28,7 @@
 - ##### _To succeed `get_next_line` with a single static variable._
 
   하나의 정적변수로 `get_next_line` 성공하기.
+  
 
 - ##### _To be able to manage multiple file descriptors with your `get_next_line`. For example, if the file descriptors 3, 4 and 5 are accessible for reading, then you can call `get_next_line` once on 3, once on 4, once again on 3 then once on 5 etc. without losing the reading thread on each of the descriptors._
   `get_next_line`을 사용하여 여러 개의 파일 디스크립터를 관리할 수 있는 것. 예를 들어, 파일 디스크립터 3, 4, 5에 접근 가능한 경우, `get_next_line`은 각 디스크립터의 리딩 스레드를 잃지 않은 채로 3에서 한 번, 4에서 한 번, 다시 3에서 한 번, 5에서 한 번 호출될 수 있습니다.
