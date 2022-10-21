@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:18:51 by huipark           #+#    #+#             */
-/*   Updated: 2022/10/21 20:01:31 by huipark          ###   ########.fr       */
+/*   Updated: 2022/10/21 20:05:30 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,4 @@ int	ft_putnbr_u(unsigned int nbr)
 	recursive_call = recursive(nbr, recursive_call);
 	return (recursive_call);
 }
+
