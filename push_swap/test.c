@@ -20,10 +20,25 @@ void	ft_putstr(char *s)
 	write (1, &"\n", 1);
 }
 
-int	ft_atoi(const char *str)
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while ((*s1 || *s2))
+	{
+		if (*s1 == *s2)
+		{
+			s1++;
+			s2++;
+		}
+		else
+			return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	}
+	return (0);
+}
+
+long long ft_atoi(const char *str)
 {
 	long				sign;
-	unsigned long long	i;
+	long long	i;
 
 	sign = 1;
 	i = 0;
@@ -41,10 +56,6 @@ int	ft_atoi(const char *str)
 		i += (*str - '0');
 		str++;
 	}
-	if (i > 9223372036854775807 && sign == 1)
-		return (-1);
-	else if (i > 9223372036854775808ULL && sign == -1)
-		return (0);
 	return ((i * sign));
 }
 
@@ -87,14 +98,39 @@ int ERROR_ckeck(int argc, char *argv[])
 		if (ft_atoi(argv[i]) > INT_MAX || ft_atoi(argv[i]) < INT_MIN)
 			return (1);
 		while (argv[i][j])
-		{	
-			if ((argv[i][j] < '0' || argv[i][j] > '9'))
+		{	if (argv[i][0] == '-')
+			{
+				j++;
+				continue;
+			}
+			else if ((argv[i][j] < '0' || argv[i][j] > '9'))
 				return (1);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	return (0);
+}
+
+int ERROR_check2(int argc, char *argv[])
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i <= (argc - 2))
+	{
+		j = i + 1;
+		while (j <= (argc - 1))
+		{
+			if (!(ft_strcmp(argv[i], argv[j])))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int main(int argc, char *argv[])
@@ -102,7 +138,7 @@ int main(int argc, char *argv[])
 	t_list	*stack_A;
 	t_list	*stack_B;
 
-	if (ERROR_ckeck)
+	if (ERROR_ckeck(argc, argv) || ERROR_check2(argc, argv))
 	{
 		ft_putstr("Error");
 		return (0);
