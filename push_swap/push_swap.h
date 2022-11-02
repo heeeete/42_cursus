@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/10/27 20:24:06 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/02 22:12:13 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,22 @@ typedef struct s_head_tail
 int		ft_atoi(const char *str);
 int		ERROR_check(int argc, char *argv[]);
 int		ERROR_check2(int argc, char *argv[]);
-int		ft_strcmp(const char *s1, const char *s2);
+void	sa(t_point **A_info);
+void	sb(t_point **B_info);
+void	ss(t_point **A_info, t_point **B_info);
+void	pb(t_point **A_info, t_point **B_info);
+void	pa(t_point **A_info, t_point **B_info);
+void	ra(t_point **A_info);
+void	rb(t_point **B_info);
+void	rr(t_point **A_info, t_point **B_info);
+void	rra(t_point **A_info);
+void	rrb(t_point **B_info);
+void	rrr(t_point **A_info, t_point **B_info);
 void	ft_putstr(char *s);
-void	sa(t_list **stack_A, t_list *A_head);
-void	sb(t_list **stack_B, t_list *B_head);
+int		ft_strcmp(const char *s1, const char *s2);
+int		init_list(t_list **A, t_list **B, t_point **A_info , t_point **B_info);
 int		list_size(t_list *head);
+t_list	*newnode(t_list *head, int value);
+t_list	*init_value(t_list **head, int argc, char *argv[]);
 
 #endif

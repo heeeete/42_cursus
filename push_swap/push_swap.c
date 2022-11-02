@@ -6,72 +6,60 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/10/27 20:22:53 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/02 23:49:06 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	list_size(t_list *head)
-{
-	int size;
-
-	size = 0;
-	while (head->next != NULL)
-	{
-		head = head->next;
-		size++;
-	}
-	return (size);
-}
-
-t_list	*newnode(t_list **head, char *argv)
-{
-	t_list	*newnode;
-
-	newnode = (t_list *)malloc(sizeof(t_list));
-	newnode->value = ft_atoi(argv);
-	newnode->next = NULL;
-	newnode->prev = *head;
-	(*head)->next = newnode;
-	return (newnode);
-}
-
-t_list	*init_value(t_list **head, int argc, char *argv[])
-{
-	t_list	*node;
-
-	node = *head;
-	while (argc != 1)
-	{
-		*head = newnode(head, argv[argc - 1]);
-		argc--;
-	}
-	return (node);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_list	*stack_A;
 	t_list	*stack_B;
-	t_list	*A_head;
+	t_point	*A_info;
+	t_point	*B_info;
 
 	if (ERROR_check(argc, argv) || ERROR_check2(argc, argv))
 	{
 		ft_putstr("Error");
 		return (0);
 	}
-	stack_A = (t_list *)malloc(sizeof(t_list));
-	stack_B = (t_list *)malloc(sizeof(t_list));
-	if (!stack_A || !stack_B)
+	if (init_list(&stack_A, &stack_B, &A_info, &B_info))
 		return (0);
-	A_head = init_value(&stack_A, argc, argv);
-	sa(&stack_A, A_head);
-	while (stack_A ->prev != NULL)
+	A_info->head = init_value(&stack_A, argc, argv);
+	if (!(A_info->head))
+		return (0);
+	A_info->tail = stack_A;
+
+	sa(&A_info);
+	pb(&A_info, &B_info);
+	pb(&A_info, &B_info);
+	pb(&A_info, &B_info);
+	rr(&A_info, &B_info);
+	rrr(&A_info, &B_info);
+	sb(&B_info);
+
+	while (A_info ->head->next != NULL)
 	{
-		printf("%d\n", stack_A->value);
-		stack_A = stack_A->prev;
+		A_info->head = A_info->head->next;
+		printf("stack A %d\n", A_info->head->value);
 	}
-	
-	// printf("%d\n", stack_A->size);
+	printf("\n\n");
+	while (B_info ->head->next != NULL)
+	{
+		B_info->head = B_info->head->next;
+		printf("stack B %d\n", B_info->head->value);
+	}
+	printf("\n\n");
+	while (A_info ->tail->prev != NULL)
+	{
+		printf("stack A %d\n", A_info->tail->value);
+		A_info->tail = A_info->tail->prev;
+	}
+	printf("\n\n");
+	while (B_info ->tail->prev != NULL)
+	{
+		printf("stack B %d\n", B_info->tail->value);
+		B_info->tail = B_info->tail->prev;
+	}
 }
