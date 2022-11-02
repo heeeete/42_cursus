@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:18:17 by huipark           #+#    #+#             */
-/*   Updated: 2022/10/21 20:01:22 by huipark          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:48:55 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (read_count);
 }
-
