@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 20:52:39 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 22:41:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@ int	main(int argc, char *argv[])
 	t_point	*A_info;
 	t_point	*B_info;
 
-	if (ERROR_check(argc, argv))
-	{
-		ft_putstr("Error");
-		return (0);
-	}
 	if (init_list(&stack_A, &stack_B, &A_info, &B_info))
 		return (0);
 	A_info->head = init_value(&stack_A, argc, argv);
 	if (!(A_info->head))
 		return (0);
 	A_info->tail = stack_A;
-
+	if (ERROR_check(argc, argv) || ERROR_check3(A_info->head))
+	{
+		ft_putstr("Error");
+		return (0);
+	}
 	// sa(&A_info);
 	// pb(&A_info, &B_info);
 	// pb(&A_info, &B_info);
@@ -38,11 +37,10 @@ int	main(int argc, char *argv[])
 	// rr(&A_info, &B_info);
 	// rrr(&A_info, &B_info);
 	// sb(&B_info);
-
 	while (A_info ->head->next != NULL)
 	{
 		A_info->head = A_info->head->next;
-		printf("stack A %d\n", A_info->head->value);
+		printf("stack A head %d\n", A_info->head->value);
 	}
 	printf("\n\n");
 	while (B_info ->head->next != NULL)

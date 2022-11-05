@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 01:41:55 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 18:51:10 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 21:14:30 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*col_malloc(char *res, char const *s, int cnt)
 	return (res);
 }
 
-static void	ft_free(char **res, int row_cnt)
+static void	ft_free2(char **res, int row_cnt)
 {
 	int	i;
 
@@ -96,7 +96,7 @@ char	**ft_split(char const *s, char c)
 		res[i] = col_malloc(res[i], s, col_count(s, c));
 		if (!res[i])
 		{
-			ft_free(res, i);
+			ft_free2(res, i);
 			return (0);
 		}
 		s += col_count(s, c);

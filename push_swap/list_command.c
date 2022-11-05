@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 19:42:41 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 22:14:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_list	*init_value(t_list **head, int argc, char *argv[])
 {
 	t_list	*node;
 	char	**str;
-	char	*temp;
 	int		i;
 
 	i = 0;
@@ -60,9 +59,7 @@ t_list	*init_value(t_list **head, int argc, char *argv[])
 		while (i > 0)
 			newnode(*head, str[--i]);
 		argc--;
-		while (str[i])
-			free (str[i++]);
-		free (str);
+		ft_free(str);
 		i = 0;
 	}
 	(*head) = (*head)->next;

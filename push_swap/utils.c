@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 20:40:33 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 22:13:58 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 long long	ft_atoi(const char *str)
 {
 	long				sign;
-	long long	i;
+	long long			i;
 
 	sign = 1;
 	i = 0;
@@ -33,10 +33,6 @@ long long	ft_atoi(const char *str)
 		i += (*str - '0');
 		str++;
 	}
-	if (i > 9223372036854775807 && sign == 1)
-		return (-1);
-	else if (i > 9223372036854775808ULL && sign == -1)
-		return (0);
 	return (i * sign);
 }
 
@@ -63,4 +59,14 @@ int	ft_strcmp(const char *s1, const char *s2)
 			return (*(unsigned char *)s1 - *(unsigned char *)s2);
 	}
 	return (0);
+}
+
+void	ft_free(char **dest)
+{
+	int	i;
+
+	i = 0;
+	while (dest[i])
+		free (dest[i++]);
+	free (dest);
 }

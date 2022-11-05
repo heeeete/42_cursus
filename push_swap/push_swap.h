@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 20:40:47 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 22:12:25 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		list_size(t_list *head);
 t_list	*newnode(t_list *head, char *argv);
 t_list	*init_value(t_list **head, int argc, char *argv[]);
 char	**ft_split(char const *s, char c);
+void	ft_free(char **dest);
+int	ERROR_check3(t_list *head);
 
 
 #endif

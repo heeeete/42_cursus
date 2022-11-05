@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/03 20:52:40 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/05 22:48:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ERROR_check(int argc, char *argv[])
 	int		j;
 	char	**str;
 
-	i = 0;
 	while (argc-- > 1)
 	{
+		i = 0;
 		str = ft_split(argv[argc], ' ');
 		while (str[i])
 		{
@@ -41,14 +41,32 @@ int	ERROR_check(int argc, char *argv[])
 	return (0);
 }
 
+int	ERROR_check3(t_list *head)
+{
+	t_list	*temp;
+
+	while (head->next != NULL)
+	{
+		head = head->next;
+		if (head->next != NULL)
+			temp = head->next;
+		while (temp != NULL)
+		{
+			printf("%d        %d\n", head->value, temp->value);
+			if (head->value == temp->value)
+				return (1);
+			temp = temp->next;
+		}
+	}
+	return (0);
+}
+
 int	ERROR_check2(int argc, char *argv[])
 {
 	int	i;
 	int	j;
-	char	***str;
 
 	i = 0;
-	while ()
 	if (argc == 1)
 		return (1);
 	while (i <= (argc - 2))
