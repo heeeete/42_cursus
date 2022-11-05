@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/02 20:20:55 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/03 19:42:41 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	list_size(t_list *head)
 	return (size);
 }
 
-t_list	*newnode(t_list *head, int value)
+t_list	*newnode(t_list *head, char *str)
 {
 	t_list	*newnode;
 
@@ -34,7 +34,7 @@ t_list	*newnode(t_list *head, int value)
 	newnode = (t_list *)malloc(sizeof(t_list));
 	if (!newnode)
 		return (0);
-	newnode->value = value;
+	newnode->value = ft_atoi(str);
 	newnode->next = NULL;
 	newnode->prev = head;
 	head->next = newnode;
@@ -44,21 +44,26 @@ t_list	*newnode(t_list *head, int value)
 t_list	*init_value(t_list **head, int argc, char *argv[])
 {
 	t_list	*node;
-	t_list	*newnode;
+	char	**str;
+	char	*temp;
+	int		i;
 
+	i = 0;
 	node = *head;
 	while (argc != 1)
 	{
+		str = ft_split(argv[argc - 1], ' ');
 		while ((*head)->next != NULL)
 			*head = (*head)->next;
-		newnode = (t_list *)malloc(sizeof(t_list));
-		if (!newnode)
-			return (0);
-		newnode->value = ft_atoi(argv[argc - 1]);
-		newnode->next = NULL;
-		newnode->prev = *head;
-		(*head)->next = newnode;
+		while (str[i] != NULL)
+			i++;
+		while (i > 0)
+			newnode(*head, str[--i]);
 		argc--;
+		while (str[i])
+			free (str[i++]);
+		free (str);
+		i = 0;
 	}
 	(*head) = (*head)->next;
 	return (node);

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/02 22:12:13 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/03 20:40:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_head_tail
 	struct s_list	*tail;
 }	t_point;
 
-int		ft_atoi(const char *str);
+long long int		ft_atoi(const char *str);
 int		ERROR_check(int argc, char *argv[]);
 int		ERROR_check2(int argc, char *argv[]);
 void	sa(t_point **A_info);
@@ -50,7 +50,9 @@ void	ft_putstr(char *s);
 int		ft_strcmp(const char *s1, const char *s2);
 int		init_list(t_list **A, t_list **B, t_point **A_info , t_point **B_info);
 int		list_size(t_list *head);
-t_list	*newnode(t_list *head, int value);
+t_list	*newnode(t_list *head, char *argv);
 t_list	*init_value(t_list **head, int argc, char *argv[]);
+char	**ft_split(char const *s, char c);
+
 
 #endif

@@ -6,16 +6,16 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/10/27 17:11:46 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/03 20:40:33 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	long				sign;
-	unsigned long long	i;
+	long long	i;
 
 	sign = 1;
 	i = 0;
@@ -37,7 +37,7 @@ int	ft_atoi(const char *str)
 		return (-1);
 	else if (i > 9223372036854775808ULL && sign == -1)
 		return (0);
-	return ((int)(i * sign));
+	return (i * sign);
 }
 
 void	ft_putstr(char *s)
