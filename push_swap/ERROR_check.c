@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/05 22:48:34 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 17:00:40 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	ERROR_check(int argc, char *argv[])
 			j = 0;
 			while (str[i][j])
 			{
-				if (str[i][0] == '-' && j == 0)
-					j++;
+				j += (str[i][0] == '-' && j == 0);
 				if (str[i][j] < '0' || str[i][j] > '9')
 					return (1);
 				j++;
@@ -38,10 +37,11 @@ int	ERROR_check(int argc, char *argv[])
 			i++;
 		}
 	}
+	ft_free(str);
 	return (0);
 }
 
-int	ERROR_check3(t_list *head)
+int	ERROR_check2(t_list *head)
 {
 	t_list	*temp;
 
@@ -52,33 +52,10 @@ int	ERROR_check3(t_list *head)
 			temp = head->next;
 		while (temp != NULL)
 		{
-			printf("%d        %d\n", head->value, temp->value);
 			if (head->value == temp->value)
 				return (1);
 			temp = temp->next;
 		}
-	}
-	return (0);
-}
-
-int	ERROR_check2(int argc, char *argv[])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (argc == 1)
-		return (1);
-	while (i <= (argc - 2))
-	{
-		j = i + 1;
-		while (j <= (argc - 1))
-		{
-			if (!(ft_strcmp(argv[i], argv[j])))
-				return (1);
-			j++;
-		}
-		i++;
 	}
 	return (0);
 }

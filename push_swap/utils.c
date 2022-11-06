@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/05 22:13:58 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 17:00:33 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,6 @@ void	ft_putstr(char *s)
 		s++;
 	}
 	write (1, &"\n", 1);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	while ((*s1 || *s2))
-	{
-		if (*s1 == *s2)
-		{
-			s1++;
-			s2++;
-		}
-		else
-			return (*(unsigned char *)s1 - *(unsigned char *)s2);
-	}
-	return (0);
 }
 
 void	ft_free(char **dest)

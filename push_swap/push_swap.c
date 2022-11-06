@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/05 22:41:47 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 16:57:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@ int	main(int argc, char *argv[])
 	t_point	*A_info;
 	t_point	*B_info;
 
-	if (init_list(&stack_A, &stack_B, &A_info, &B_info))
-		return (0);
-	A_info->head = init_value(&stack_A, argc, argv);
-	if (!(A_info->head))
-		return (0);
-	A_info->tail = stack_A;
-	if (ERROR_check(argc, argv) || ERROR_check3(A_info->head))
+
+	if (argc > 1 && !(ERROR_check(argc, argv)))
+	{	
+		if (init_list(&stack_A, &stack_B, &A_info, &B_info))
+			return (0);
+		A_info->head = init_value(&stack_A, argc, argv);
+		if (!(A_info->head))
+			return (0);
+		if (ERROR_check2(A_info->head))
+		{
+			ft_putstr("Error");
+			return (0);
+		}
+		A_info->tail = stack_A;
+	}
+	else
 	{
 		ft_putstr("Error");
 		return (0);
