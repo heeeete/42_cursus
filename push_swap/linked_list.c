@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_command.c                                     :+:      :+:    :+:   */
+/*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/06 20:22:08 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 22:33:28 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 int	list_size(t_list *head)
 {
@@ -25,56 +25,50 @@ int	list_size(t_list *head)
 	return (size);
 }
 
-t_list	*newnode(t_list *head, char *str)
+void	newnode(t_list *head, char *str)
 {
 	t_list	*newnode;
 
 	while (head->next != NULL)
 		head = head->next;
-	newnode = (t_list *)malloc(sizeof(t_list));
-	if (!newnode)
-		return (0);
+	newnode = wrap_malloc(sizeof(t_list));
 	newnode->value = ft_atoi(str);
 	newnode->next = NULL;
 	newnode->prev = head;
 	head->next = newnode;
-	return (head);
 }
 
-t_list	*init_value(t_list **head, int argc, char *argv[])
+void	init_value(t_point **info, int argc, char *argv[])
 {
 	t_list	*node;
 	char	**str;
 	int		i;
 
 	i = 0;
-	node = *head;
+	node = (*info)->tail;
 	while (argc != 1)
 	{
 		str = ft_split(argv[argc - 1], ' ');
-		while ((*head)->next != NULL)
-			*head = (*head)->next;
+		while ((*info)->tail->next != NULL)
+			(*info)->tail= (*info)->tail->next;
 		while (str[i] != NULL)
 			i++;
 		while (i > 0)
-			newnode(*head, str[--i]);
+			newnode((*info)->tail,  str[--i]);
 		argc--;
 		ft_free(str);
 		i = 0;
 	}
-	(*head) = (*head)->next;
-	return (node);
+	(*info)->tail = (*info)->tail->next;
+	(*info)->head = node;
 }
 
-int	init_list(t_list **A, t_list **B, t_point **A_info , t_point **B_info)
+void	init_list(t_point **A_info , t_point **B_info)
 {
-	*A = (t_list *)malloc(sizeof(t_list));
-	*B = (t_list *)malloc(sizeof(t_list));
 	*A_info = (t_point *)malloc(sizeof(t_point));
 	*B_info = (t_point *)malloc(sizeof(t_point));
-	if (!(*A) || !(*B) || !(*A_info) || !(*B_info))
-		return (1);
-	(*B_info)->head = *B;
-	(*B_info)->tail = *B;
-	return (0);
+	(*A_info)->head = (t_list *)malloc(sizeof(t_list));
+	(*A_info)->tail = (t_list *)malloc(sizeof(t_list));
+	(*B_info)->head = (t_list *)malloc(sizeof(t_list));
+	(*B_info)->tail = (t_list *)malloc(sizeof(t_list));
 }

@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:38:53 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/02 21:48:07 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 22:33:41 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 void	ra(t_point **A_info)
 {
