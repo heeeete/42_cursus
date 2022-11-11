@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/06 22:33:28 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/11 22:13:43 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,18 @@ void	init_value(t_point **info, int argc, char *argv[])
 	}
 	(*info)->tail = (*info)->tail->next;
 	(*info)->head = node;
+	(*info)->head->start_size = list_size((*info)->head);
+	(*info)->head->size = list_size((*info)->head);
 }
 
-void	init_list(t_point **A_info , t_point **B_info)
+void	init_list(t_point **A_info, t_point **B_info, t_arr_info **arr_info)
 {
-	*A_info = (t_point *)malloc(sizeof(t_point));
-	*B_info = (t_point *)malloc(sizeof(t_point));
-	(*A_info)->head = (t_list *)malloc(sizeof(t_list));
-	(*A_info)->tail = (t_list *)malloc(sizeof(t_list));
-	(*B_info)->head = (t_list *)malloc(sizeof(t_list));
-	(*B_info)->tail = (t_list *)malloc(sizeof(t_list));
+	*A_info = (t_point *)wrap_malloc(sizeof(t_point));
+	*B_info = (t_point *)wrap_malloc(sizeof(t_point));
+	*arr_info = (t_arr_info *)wrap_malloc(sizeof(t_arr_info));
+	(*A_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
+	(*A_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
+	(*B_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
+	(*B_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
+	(*B_info)->head->size = 0;
 }

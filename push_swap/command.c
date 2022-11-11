@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:45:57 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/06 22:34:02 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/11 22:14:59 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	pb(t_point **A_info, t_point **B_info)
 	head->next = node;
 	node->next = NULL;
 	node->prev = head;
+	(*B_info)->head->size += 1;
+	(*A_info)->head->size -= 1;
 }
 
 void	pa(t_point **A_info, t_point **B_info)
@@ -88,4 +90,6 @@ void	pa(t_point **A_info, t_point **B_info)
 	head->next = node;
 	node->next = NULL;
 	node->prev = head;
+	(*B_info)->head->size -= 1;
+	(*A_info)->head->size += 1;
 }

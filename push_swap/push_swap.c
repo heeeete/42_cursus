@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/08 19:30:58 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/09 18:43:51 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,17 @@ int count(char *argv[])
 	return (cnt);
 }
 
-void	init_arr(int **a, char *argv[])
+void	set_info(t_arr_info **arr_info, int max_index)
+{
+	// max_index -= 1;
+	
+	(*arr_info)->max = (*arr_info)->arr[0];
+	(*arr_info)->min = (*arr_info)->arr[max_index - 1];
+	(*arr_info)->one_over_three_pivot = (*arr_info)->arr[max_index / 3];
+	(*arr_info)->two_over_three_pivot = (*arr_info)->arr[max_index * 2 / 3];
+}
+
+void	set_arr(t_arr_info **arr_info, char *argv[])
 {
 	int		i;
 	int		j;
@@ -47,43 +57,44 @@ void	init_arr(int **a, char *argv[])
 	i = 1;
 	k = 0;
 	cnt = count(argv);
-	printf("cnt = %d", cnt);
-	*a = wrap_malloc(sizeof(int) * cnt);
+	(*arr_info)->arr = wrap_malloc(sizeof(int) * cnt);
 	i = 1;
 	while (argv[i])
 	{
-				printf("I = %d\n", i);
-
 		j = 0;
 		str = ft_split(argv[i], ' ');
 		while (str[j])
-		free (str);
-			(*a)[k++] = ft_atoi(str[j++]);
+			(*arr_info)->arr[k++] = ft_atoi(str[j++]);
 		i++;
 	}
-	// quicksort (a, 0, sizeof(a) / sizeof(int));
+	free (str);
+	quicksort (&(*arr_info)->arr, 0, cnt - 1);
+	set_info(arr_info, cnt);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_point	*A_info;
-	t_point	*B_info;
-	int		*arr;
+	t_point		*A_info;
+	t_point		*B_info;
+	t_arr_info	*arr_info;
 
-	init_list(&A_info, &B_info);
+	init_list(&A_info, &B_info, &arr_info);
 	error_check(argc, argv);
 	init_value(&A_info, argc, argv);
 	error_check2(argc, A_info->head);
-	init_arr(&arr, argv);
-	arr[5] = NULL;
-	int ca = sizeof(arr) / sizeof(int);
-	int i = 0;
-	while (ca)
+	set_arr(&arr_info, argv);
+
+	int i =  12;
+	int j = 0;
+	while (i >= 0)
 	{
-		printf("arr = %d   ", arr[i]);
-		i++;
-		ca--;
+		printf("arr = %d   ", arr_info->arr[j++]);
+		i--;
 	}
+	printf("max = %d\n", arr_info->max);
+	printf("min = %d\n", arr_info->min);
+	printf("1/3 pivot = %d\n", arr_info->one_over_three_pivot);
+	printf("2/3 pivot = %d\n", arr_info->two_over_three_pivot);
 
 	// sa(&A_info);
 	// pb(&A_info, &B_info);
@@ -93,22 +104,6 @@ int	main(int argc, char *argv[])
 	// rrr(&A_info, &B_info);
 	// sb(&B_info);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	printf("stack A head\n");
 	while (A_info ->head->next != NULL)
 	{
