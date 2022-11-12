@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/09 18:43:51 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/12 15:14:30 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,19 @@ int	main(int argc, char *argv[])
 	init_value(&A_info, argc, argv);
 	error_check2(argc, A_info->head);
 	set_arr(&arr_info, argv);
+	separation(A_info, B_info, arr_info);
 
-	int i =  12;
-	int j = 0;
-	while (i >= 0)
-	{
-		printf("arr = %d   ", arr_info->arr[j++]);
-		i--;
-	}
-	printf("max = %d\n", arr_info->max);
-	printf("min = %d\n", arr_info->min);
-	printf("1/3 pivot = %d\n", arr_info->one_over_three_pivot);
-	printf("2/3 pivot = %d\n", arr_info->two_over_three_pivot);
+	// int i =  12;
+	// int j = 0;
+	// while (i >= 0)
+	// {
+	// 	printf("arr = %d   ", arr_info->arr[j++]);
+	// 	i--;
+	// }
+	// printf("max = %d\n", arr_info->max);
+	// printf("min = %d\n", arr_info->min);
+	// printf("1/3 pivot = %d\n", arr_info->one_over_three_pivot);
+	// printf("2/3 pivot = %d\n", arr_info->two_over_three_pivot);
 
 	// sa(&A_info);
 	// pb(&A_info, &B_info);
@@ -115,7 +116,7 @@ int	main(int argc, char *argv[])
 	while (B_info ->head->next != NULL)
 	{
 		B_info->head = B_info->head->next;
-		printf("%d", B_info->head->value);
+		printf("%d\n", B_info->head->value);
 	}
 	printf("\n\n");
 	printf("stack A tail\n");

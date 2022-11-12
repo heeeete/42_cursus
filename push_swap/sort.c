@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/11 22:24:16 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/12 19:23:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,17 @@ void	separation(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
 			ra(&A_info);
 		else
 			pb(&A_info, &B_info);
+	}
+	if (A_info->tail->value > A_info->tail->prev->value)
+		sa(&A_info);
+}
+
+void	sort(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+{
+	while (B_info->head->size)
+	{
+		pa(&A_info, &B_info);
+		if (&A_info->tail->value > &A_info->tail->prev->value)
+			sa(&A_info);
 	}
 }

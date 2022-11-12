@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/08 18:01:34 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:25:58 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ long long	ft_atoi(const char *str)
 		str++;
 	}
 	return (i * sign);
-}
-
-void	ft_putstr(char *s)
-{
-	while (*s)
-	{
-		write (1, s, 1);
-		s++;
-	}
-	write (1, &"\n", 1);
 }
 
 void	ft_free(char **dest)

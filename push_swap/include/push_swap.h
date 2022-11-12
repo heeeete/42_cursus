@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/09 16:22:50 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:25:56 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include "data_struct.h"
 
 long long int		ft_atoi(const char *str);
-void				ft_putstr(char *s);
 void				init_list(t_point **A_info, t_point **B_info, t_arr_info **arr_info);
 void				init_value(t_point **head, int argc, char *argv[]);
 void				ft_free(char **dest);
@@ -31,6 +30,7 @@ void				error();
 void				error_check(int argc, char *argv[]);
 void				error_check2(int argc, t_list *head);
 void				quicksort(int **arr, int start, int end);
+void				separation(t_point *A_info, t_point *B_info, t_arr_info *arr_info);
 int					list_size(t_list *head);
 char				**ft_split(char const *s, char c);
 
