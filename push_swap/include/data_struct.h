@@ -8,6 +8,7 @@ typedef struct s_list
 	struct s_list	*next;
 	int				size;
 	int				start_size;
+	int				index;
 }	t_list;
 
 typedef struct s_head_tail

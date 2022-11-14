@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/12 16:25:56 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:31:42 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void				error_check(int argc, char *argv[]);
 void				error_check2(int argc, t_list *head);
 void				quicksort(int **arr, int start, int end);
 void				separation(t_point *A_info, t_point *B_info, t_arr_info *arr_info);
+void	sort2(t_point *A_info, t_point *B_info, t_arr_info *arr_info);
 int					list_size(t_list *head);
 char				**ft_split(char const *s, char c);
 

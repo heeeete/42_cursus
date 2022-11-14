@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:31:56 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/06 22:33:45 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:51:23 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	rra(t_point **A_info)
 	second_node->prev = (*A_info)->head;
 	first_node->next = NULL;
 	(*A_info)->tail = first_node;
+	write (1, "rra\n", 4);
 }
 
 void	rrb(t_point **B_info)
@@ -44,6 +45,7 @@ void	rrb(t_point **B_info)
 	second_node->prev = (*B_info)->head;
 	first_node->next = NULL;
 	(*B_info)->tail = first_node;
+	write (1, "rrb\n", 4);
 }
 
 void	rrr(t_point **A_info, t_point **B_info)
@@ -73,4 +75,5 @@ void	rrr(t_point **A_info, t_point **B_info)
 		first_node->next = NULL;
 		(*B_info)->tail = first_node;
 	}
+	write (1, "rrr\n", 4);
 }

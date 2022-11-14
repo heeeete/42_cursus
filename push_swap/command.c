@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:45:57 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/11 22:14:59 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:51:01 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sa(t_point **A_info)
 	temp = (*A_info)->tail->value;
 	(*A_info)->tail->value = (*A_info)->tail->prev->value;
 	(*A_info)->tail->prev->value = temp;
+	write (1, "sa\n", 3);
 }
 
 void	sb(t_point **B_info)
@@ -32,6 +33,7 @@ void	sb(t_point **B_info)
 	temp = (*B_info)->tail->value;
 	(*B_info)->tail->value = (*B_info)->tail->prev->value;
 	(*B_info)->tail->prev->value = temp;
+	write (1, "sb\n", 3);
 }
 
 void	ss(t_point **A_info, t_point **B_info)
@@ -50,6 +52,7 @@ void	ss(t_point **A_info, t_point **B_info)
 		(*B_info)->tail->value = (*B_info)->tail->prev->value;
 		(*B_info)->tail->prev->value = temp;
 	}
+	write (1, "ss\n", 3);
 }
 
 void	pb(t_point **A_info, t_point **B_info)
@@ -57,7 +60,7 @@ void	pb(t_point **A_info, t_point **B_info)
 	t_list *node;
 	t_list *head;
 
-	if (list_size((*A_info)->head) <= 1)
+	if (list_size((*A_info)->head) < 1)
 		return ;
 	head = (*B_info)->head;
 	node = (*A_info)->tail;
@@ -71,6 +74,7 @@ void	pb(t_point **A_info, t_point **B_info)
 	node->prev = head;
 	(*B_info)->head->size += 1;
 	(*A_info)->head->size -= 1;
+	write (1, "pb\n", 3);
 }
 
 void	pa(t_point **A_info, t_point **B_info)
@@ -78,7 +82,7 @@ void	pa(t_point **A_info, t_point **B_info)
 	t_list *node;
 	t_list *head;
 
-	if (list_size((*B_info)->head) <= 1)
+	if (list_size((*B_info)->head) < 1)
 		return ;
 	head = (*A_info)->head;
 	node = (*B_info)->tail;
@@ -92,4 +96,5 @@ void	pa(t_point **A_info, t_point **B_info)
 	node->prev = head;
 	(*B_info)->head->size -= 1;
 	(*A_info)->head->size += 1;
+	write (1, "pa\n", 3);
 }

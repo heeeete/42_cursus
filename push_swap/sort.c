@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/12 19:23:00 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:48:01 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,56 @@ void	separation(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
 		sa(&A_info);
 }
 
-void	sort(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+// int	get_min_command(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+// {
+
+// }
+
+t_list	*search_max_node(t_point *B_info)
 {
-	while (B_info->head->size)
+	t_list	*node;
+	t_list	*b_stack;
+	int		idx;
+
+	idx = 1;
+	b_stack = B_info->head->next;
+	node = b_stack;
+	while (b_stack->next)
 	{
-		pa(&A_info, &B_info);
-		if (&A_info->tail->value > &A_info->tail->prev->value)
-			sa(&A_info);
+		if (node->value < b_stack->next->value)
+			node = b_stack->next;
+		b_stack = b_stack->next;
+		idx++;
 	}
+	node->index = idx;
+	return (node);
+}
+
+int	temp_sort(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+{
+	t_point	*node = B_info;
+	t_point *A = A_info;
+	t_point *B = B_info;
+	while (list_size(node->head) != 0)
+		pa(&A_info, &node);
+	A_info = A;
+	B_info = B;
+	
+}
+
+// int	min_command(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+// {
+// 	t_list	*node = B_info->head->next;
+// 	while (node->next)
+// 	{
+// 		node
+// 	}
+// }
+
+void	sort2(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+{
+	temp_sort(A_info, B_info, arr_info);
+	// while (B_info->head->size != 0)
+	// {
+	// }
 }
