@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/13 18:56:44 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/14 21:32:54 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char *argv[])
 	printf("stack B tail\n");
 	while (B_info ->tail->prev != NULL)
 	{
-		printf("%d\n", B_info->tail->value);
+		printf("%d    %d\n", B_info->tail->value, B_info->tail->index);
 		B_info->tail = B_info->tail->prev;
 	}
 }

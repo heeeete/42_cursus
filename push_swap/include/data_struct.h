@@ -9,6 +9,7 @@ typedef struct s_list
 	int				size;
 	int				start_size;
 	int				index;
+	int				command_min;
 }	t_list;
 
 typedef struct s_head_tail
