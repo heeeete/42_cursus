@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/14 21:32:54 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:50:26 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	main(int argc, char *argv[])
 	set_arr(&arr_info, argv);
 	separation(A_info, B_info, arr_info);
 	sort2(A_info, B_info, arr_info);
-
 
 	printf("stack A head\n");
 	while (A_info ->head->next != NULL)
