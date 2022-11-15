@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/15 20:15:09 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:29:51 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,23 @@ int	a_upper (t_point *A_info, t_point *B_info, t_arr_info *arr_info, t_list *b)
 	return (command_count);
 }
 
+void	idx_up_down(t_point *A_info, t_point *B_info, t_arr_info *arr_info, t_list **b)
+{
+	int idx;
+
+	(*b)->index = find_index(B_info->head->next, *b);
+	idx = (*b)->index;
+	if (idx > list_size(B_info->head) / 2)
+		*b = (*b)->next;
+	else
+	{
+		if (B_info->head->next != *b)
+			*b = (*b)->prev;
+		else
+			*b = B_info->tail;
+	}
+}
+
 int	command_min(t_point *A_info, t_point *B_info, t_arr_info *arr_info, t_list *current)
 {
 	t_list	*a_bottom = A_info->head->next;
@@ -105,15 +122,16 @@ int	command_min(t_point *A_info, t_point *B_info, t_arr_info *arr_info, t_list *
 		{
 			if (value < a_bottom->value && a_bottom->value != arr_info->max)
 				command_count = a_upper(A_info, B_info, arr_info, b);
-			if (idx > list_size(B_info->head) / 2)
-				b = b->next;
-			else
-			{
-				if (B_info->head->next != b)
-					b = b->prev;
-				else
-					b = B_info->tail;
-			}
+			// if (idx > list_size(B_info->head) / 2)
+			// 	b = b->next;
+			// else
+			// {
+			// 	if (B_info->head->next != b)
+			// 		b = b->prev;
+			// 	else
+			// 		b = B_info->tail;
+			// }
+			idx_up_down(A_info, B_info, arr_info, &b);
 			command_count++;
 		}
 		else
