@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:31:56 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/14 16:42:45 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/16 19:57:19 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/push_swap.h"
 
-void	rra(t_point *A_info)
+void	go_rra(t_point *A_info)
 {
 	t_list	*first_node;
 	t_list	*second_node;
@@ -30,7 +30,7 @@ void	rra(t_point *A_info)
 	write (1, "rra\n", 4);
 }
 
-void	rrb(t_point *B_info)
+void	go_rrb(t_point *B_info)
 {
 	t_list	*first_node;
 	t_list	*second_node;
@@ -48,7 +48,7 @@ void	rrb(t_point *B_info)
 	write (1, "rrb\n", 4);
 }
 
-void	rrr(t_point *A_info, t_point *B_info)
+void	go_rrr(t_point *A_info, t_point *B_info)
 {
 	t_list	*first_node;
 	t_list	*second_node;

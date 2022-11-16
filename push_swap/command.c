@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:45:57 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/14 16:36:20 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/16 19:57:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/push_swap.h"
 
-void	sa(t_point *A_info)
+void	go_sa(t_point *A_info)
 {
 	int	temp;
 
@@ -24,7 +24,7 @@ void	sa(t_point *A_info)
 	write (1, "sa\n", 3);
 }
 
-void	sb(t_point *B_info)
+void	go_sb(t_point *B_info)
 {
 	int	temp;
 
@@ -36,7 +36,7 @@ void	sb(t_point *B_info)
 	write (1, "sb\n", 3);
 }
 
-void	ss(t_point *A_info, t_point *B_info)
+void	go_ss(t_point *A_info, t_point *B_info)
 {
 	int	temp;
 
@@ -55,12 +55,12 @@ void	ss(t_point *A_info, t_point *B_info)
 	write (1, "ss\n", 3);
 }
 
-void	pb(t_point *A_info, t_point *B_info)
+void	go_pb(t_point *A_info, t_point *B_info)
 {
 	t_list *node;
 	t_list *head;
 
-	if (list_size((A_info)->head) < 1)
+	if (list_size((A_info)->head) == 0)
 		return ;
 	head = (B_info)->head;
 	node = (A_info)->tail;
@@ -77,12 +77,12 @@ void	pb(t_point *A_info, t_point *B_info)
 	write (1, "pb\n", 3);
 }
 
-void	pa(t_point *A_info, t_point *B_info)
+void	go_pa(t_point *A_info, t_point *B_info)
 {
 	t_list *node;
 	t_list *head;
 
-	if (list_size((B_info)->head) < 1)
+	if (list_size((B_info)->head) == 0)
 		return ;
 	head = (A_info)->head;
 	node = (B_info)->tail;

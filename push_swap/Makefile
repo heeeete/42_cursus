@@ -11,7 +11,9 @@ FILES 	=		command.c \
 				reverse_rotate_command.c \
 				rotate_command.c \
 				sort.c \
-				utils.c
+				utils.c \
+				separation.c \
+				arr_init.c 
 
 # FILES_BONUS = 	ft_lstadd_back.c \
 # 				ft_lstadd_front.c \

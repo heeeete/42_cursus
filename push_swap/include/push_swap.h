@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/15 16:08:03 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/16 21:16:48 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@
 #include "command.h"
 #include "data_struct.h"
 
+enum	command_name
+{
+	sa, sb, ss, ra, rb, rr, rra, rrb, rrr, pa, pb
+};
+
 long long int		ft_atoi(const char *str);
+char				*ft_strdup(const char *s1);
 void				init_list(t_point **A_info, t_point **B_info, t_arr_info **arr_info);
 void				init_value(t_point **head, int argc, char *argv[]);
 void				ft_free(char **dest);
@@ -34,5 +40,6 @@ void				separation(t_point *A_info, t_point *B_info, t_arr_info *arr_info);
 void				sort2(t_point *A_info, t_point *B_info, t_arr_info *arr_info);
 int					list_size(t_list *head);
 char				**ft_split(char const *s, char c);
+void	init_arr(int **arr);
 
 #endif

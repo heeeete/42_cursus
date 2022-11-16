@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/12 16:25:58 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:24:39 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,26 @@ void	*wrap_malloc(size_t s)
 	if (ret == NULL)
 		exit (1);
 	return (ret);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int			i;
+	size_t		len;
+	char		*dest;
+
+	i = 0;
+	len = 0;
+	while (s1[len])
+		len++;
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (0);
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
