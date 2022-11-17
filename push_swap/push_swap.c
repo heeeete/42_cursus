@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/16 21:27:28 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/17 23:35:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,31 +86,31 @@ int	main(int argc, char *argv[])
 	separation(A_info, B_info, arr_info);
 	sort2(A_info, B_info, arr_info);
 
-	printf("stack A head\n");
-	while (A_info ->head->next != NULL)
-	{
-		A_info->head = A_info->head->next;
-		printf("%d\n", A_info->head->value);
-	}
-	printf("\n\n");
-	printf("stack B head\n");
-	while (B_info ->head->next != NULL)
-	{
-		B_info->head = B_info->head->next;
-		printf("%d\n", B_info->head->value);
-	}
-	printf("\n\n");
-	printf("stack A tail\n");
-	while (A_info ->tail->prev != NULL)
-	{
-		printf("%d\n", A_info->tail->value);
-		A_info->tail = A_info->tail->prev;
-	}
-	printf("\n\n");
-	printf("stack B tail\n");
-	while (B_info ->tail->prev != NULL)
-	{
-		printf("%d    %d\n", B_info->tail->value, B_info->tail->index);
-		B_info->tail = B_info->tail->prev;
-	}
+	// printf("stack A head\n");
+	// while (A_info ->head->next != NULL)
+	// {
+	// 	A_info->head = A_info->head->next;
+	// 	printf("%d\n", A_info->head->value);
+	// }
+	// printf("\n\n");
+	// printf("stack B head\n");
+	// while (B_info ->head->next != NULL)
+	// {
+	// 	B_info->head = B_info->head->next;
+	// 	printf("%d\n", B_info->head->value);
+	// }
+	// printf("\n\n");
+	// printf("stack A tail\n");
+	// while (A_info ->tail->prev != NULL)
+	// {
+	// 	printf("%d\n", A_info->tail->value);
+	// 	A_info->tail = A_info->tail->prev;
+	// }
+	// printf("\n\n");
+	// printf("stack B tail\n");
+	// while (B_info ->tail->prev != NULL)
+	// {
+	// 	printf("%d    %d\n", B_info->tail->value, B_info->tail->index);
+	// 	B_info->tail = B_info->tail->prev;
+	// }
 }
