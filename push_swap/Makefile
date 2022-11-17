@@ -1,14 +1,57 @@
-NAME        =   libft.a
-CC          =   cc
-CFLAGS      =   -Wall -Wextra -Werror
-SRCS        =   asd.c
+NAME	= push_swap
 
-AR          =   ar
-ARFLAGS     =   crs
-.PHONY : bonus all clean fclean re
-all : mandatory
-mandatory: $(NAME)($(SRCS:.c=.o))
-bonus : $(NAME)($(SRCS:.c=.o) $(SRCS_BONUS:.c=.o))
-clean : ; rm -f *.o
-fclean : clean ; rm -f $(NAME)
-re : fclean ; make all
+CC		= cc
+
+FILES 	=		command.c \
+				ERROR_check.c \
+				ft_split.c \
+				linked_list.c \
+				push_swap.c \
+				quick_sort.c \
+				reverse_rotate_command.c \
+				rotate_command.c \
+				sort.c \
+				utils.c \
+				separation.c \
+				arr_init.c 
+
+# FILES_BONUS = 	ft_lstadd_back.c \
+# 				ft_lstadd_front.c \
+# 				ft_lstclear.c \
+# 				ft_lstdelone.c \
+# 				ft_lstiter.c \
+# 				ft_lstlast.c \
+# 				ft_lstmap.c \
+# 				ft_lstnew.c \
+# 				ft_lstsize.c
+
+OBJS		= $(FILES:.c=.o)
+OBJS_BONUS 	= $(FILES_BONUS:.c=.o)
+
+AR		= ar -crs
+RM		= rm -f
+
+ifdef WITH_BONUS
+			OBJECTS	= $(OBJS) $(OBJS_BONUS)
+else
+			OBJECTS	= $(OBJS)
+endif
+
+all		:	$(NAME)
+
+$(NAME)	:	$(OBJECTS)
+			$(CC) -o $(NAME) $(OBJECTS)
+
+bonus	:	
+			make WITH_BONUS=1 all
+
+clean	:
+			$(RM) $(OBJS) $(OBJS_BONUS)
+
+fclean	:	clean
+			$(RM) $(NAME)
+
+re		: 
+			make fclean
+			make all
+.PHONY	: bonus all clean fclean re

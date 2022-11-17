@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/06 17:00:40 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/08 18:01:28 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
-int	ERROR_check(int argc, char *argv[])
+void	error_check(int argc, char *argv[])
 {
 	int		i;
 	int		j;
@@ -29,22 +29,23 @@ int	ERROR_check(int argc, char *argv[])
 			{
 				j += (str[i][0] == '-' && j == 0);
 				if (str[i][j] < '0' || str[i][j] > '9')
-					return (1);
+					error();
 				j++;
 			}
 			if (ft_atoi(str[i]) > INT_MAX || ft_atoi(str[i]) < INT_MIN)
-				return (1);
+				error();
 			i++;
 		}
 	}
 	ft_free(str);
-	return (0);
 }
 
-int	ERROR_check2(t_list *head)
+void	error_check2(int argc, t_list *head)
 {
 	t_list	*temp;
 
+	if (argc == 1)
+		return ;
 	while (head->next != NULL)
 	{
 		head = head->next;
@@ -53,9 +54,8 @@ int	ERROR_check2(t_list *head)
 		while (temp != NULL)
 		{
 			if (head->value == temp->value)
-				return (1);
+				error();
 			temp = temp->next;
 		}
 	}
-	return (0);
 }

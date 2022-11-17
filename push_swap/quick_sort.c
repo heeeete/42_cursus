@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "./include/push_swap.h"
 
 void swap(int *a, int *b)
 {
@@ -32,23 +31,15 @@ int sort(int *arr, int start, int end)
 	return (i + 1);
 }
 
-void quickSort(int *arr, int start, int end)
+void quicksort(int **arr, int start, int end)
 {
+	int pivot;
+
 	if (start < end)
 	{
-		int	pivot = sort(arr, start, end);
+		pivot = sort(*arr, start, end);
 
-		quickSort(arr, start, pivot - 1);
-		quickSort(arr, pivot + 1, end);
-	}
-}
-
-int main()
-{
-	int arr[] = {3,4,2,1,5,6,8,5,8,9,4,2,2,5,6,8,4,6};
-	quickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
-	for (int i = 0 ; i < sizeof(arr) / sizeof(int); i++)
-	{
-		printf("%d ", arr[i]);
+		quicksort(arr, start, pivot - 1);
+		quicksort(arr, pivot + 1, end);
 	}
 }

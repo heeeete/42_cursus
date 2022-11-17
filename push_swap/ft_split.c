@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 01:41:55 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/05 21:14:30 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/06 22:33:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 static int	row_count(char const *s, char c)
 {
