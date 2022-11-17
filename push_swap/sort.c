@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/17 23:35:35 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/18 00:04:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void	a_upper (t_point *A_info, t_point *B_info, t_list *b, int **command)
 	idx = b->index;
 	a_bottom = A_info->head->next;
 	command_count = 0;
-	while (b->value < a_bottom->value && a_bottom->value != A_info->head->max)
-	{
-		a_bottom = a_bottom->next;
-		(*command)[rra]++;
-	}
+	if (b->value < a_bottom->value && a_bottom->value != A_info->head->max)
+		while (b->value < a_bottom->value && a_bottom->value != A_info->head->max)
+		{
+			a_bottom = a_bottom->next;
+			(*command)[rra]++;
+		}
 }
 
 void	idx_up_down(t_point *A_info, t_point *B_info, t_list **b, int **cmd)
@@ -96,14 +97,7 @@ int	*command_min(t_point *A_info, t_point *B_info, t_list *current)
 	{
 		if (A_info->tail->value > value)
 		{
-			if (max_node_idx > A_info->head->start_size / 2)
-				while (a_top->value != max_node->prev->value)
-				{
-					a_top = a_top->prev;
-					command[ra]++;
-				}
-			else if (value < a_bottom->value && a_bottom->value != A_info->head->max)
-				a_upper(A_info, B_info, b, &command);
+			a_upper(A_info, B_info, b, &command);
 			if (value == B_info->tail->prev->value)
 			{
 				command[sb]++;
