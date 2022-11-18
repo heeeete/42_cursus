@@ -6,18 +6,33 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/16 18:25:17 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:57:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/push_swap.h"
+
+int	find_index(t_list *head, t_list *current)
+{
+	int	idx;
+	t_list	*node;
+
+	idx = 0;
+	node = head;
+	while (node != current)
+	{
+		node = node->next;
+		idx++;
+	}
+	return (idx);
+}
 
 int	list_size(t_list *head)
 {
 	int size;
 
 	size = 0;
-	while (head->next != NULL)
+	while (head->next)
 	{
 		head = head->next;
 		size++;

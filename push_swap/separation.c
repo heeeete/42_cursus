@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:40:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/17 22:09:51 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/18 19:02:17 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	separation2(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
 {
-	while (A_info->head->size != 3)
+	while (A_info->head->size > 2)
 	{
 		if (A_info->tail->value == arr_info->max)
 			go_ra(A_info, 0);
