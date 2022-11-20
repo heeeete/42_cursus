@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/16 20:24:39 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:05:23 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
 long long	ft_atoi(const char *str)
 {
@@ -46,7 +46,7 @@ void	ft_free(char **dest)
 	free (dest);
 }
 
-void	error()
+void	error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
@@ -60,26 +60,4 @@ void	*wrap_malloc(size_t s)
 	if (ret == NULL)
 		exit (1);
 	return (ret);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int			i;
-	size_t		len;
-	char		*dest;
-
-	i = 0;
-	len = 0;
-	while (s1[len])
-		len++;
-	dest = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (0);
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }

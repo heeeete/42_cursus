@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/08 18:01:28 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:56:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
 void	error_check(int argc, char *argv[])
 {
@@ -36,8 +36,8 @@ void	error_check(int argc, char *argv[])
 				error();
 			i++;
 		}
+		ft_free(str);
 	}
-	ft_free(str);
 }
 
 void	error_check2(int argc, t_list *head)
