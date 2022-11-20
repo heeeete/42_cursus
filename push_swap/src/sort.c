@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 19:22:43 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 22:05:52 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_list	*command_min_search(t_list	*node)
 	t_list	*temp;
 	int		i;
 
-	zero(&command_count2, &command_count, &i);
+	init_zero(&command_count2, &command_count, &i);
 	temp = node;
 	if (node->next != NULL)
 		node = node->next;
@@ -36,113 +36,101 @@ static t_list	*command_min_search(t_list	*node)
 			if (temp->value < node->value)
 				temp = node;
 		node = node->next;
-		zero(&command_count2, &command_count, &i);
+		init_zero(&command_count2, &command_count, &i);
 	}
 	return (temp);
 }
 
-// void	asd(t_point *A_info, t_point *B_info, t_list *node, char *command)
-// {
-// 	int	len;
-
-// 	len = 0;
-// 	while (command[len])
-// 		len++;
-// 	if (len == 2)
-// 	{
-// 		while (node->command[ra] != 0 && node->command[rb] != 0)
-// 		{
-// 			node->command[ra]--;
-// 			node->command[rb]--;
-// 			go_rr(A_info, B_info);
-// 		}
-// 	}
-// 	else if (len == 3)
-// 	{
-// 		while (node->command[rra] != 0 && node->command[rrb] != 0)
-// 		{
-// 			node->command[rra]--;
-// 			node->command[rrb]--;
-// 			go_rrr(A_info, B_info);
-// 		}
-// 	}
-// }
-
-void	move(t_point *A_info, t_point *B_info, t_list *node)
+static void	rotate(t_point *a_info, t_point *b_info,
+			t_list *node, char *command)
 {
-	while (node->command[sa]-- != 0)
-		go_sa(A_info);
-	while (node->command[sb]-- != 0)
-		go_sb(B_info);
-	while (node->command[ss]-- != 0)
-		go_ss(A_info, B_info);
-	while (node->command[ra] != 0 && node->command[rb] != 0)
+	int	len;
+
+	len = 0;
+	while (command[len])
+		len++;
+	if (len == 2)
 	{
-		node->command[ra]--;
-		node->command[rb]--;
-		go_rr(A_info, B_info);
+		while (node->command[ra] != 0 && node->command[rb] != 0)
+		{
+			node->command[ra]--;
+			node->command[rb]--;
+			go_rr(a_info, b_info);
+		}
 	}
-	// asd(A_info, B_info, node, "rr");
-	while (node->command[ra]-- != 0)
-		go_ra(A_info, 0);
-	while (node->command[rb]-- != 0)
-		go_rb(B_info, 0);
-	while (node->command[rra] != 0 && node->command[rrb] != 0)
+	else if (len == 3)
 	{
-		node->command[rra]--;
-		node->command[rrb]--;
-		go_rrr(A_info, B_info);
+		while (node->command[rra] != 0 && node->command[rrb] != 0)
+		{
+			node->command[rra]--;
+			node->command[rrb]--;
+			go_rrr(a_info, b_info);
+		}
 	}
-	// asd(A_info, B_info, node, "rrr");
-	while (node->command[rra]-- != 0)
-		go_rra(A_info, 0);
-	while (node->command[rrb]-- != 0)
-		go_rrb(B_info, 0);
-	go_pa(A_info, B_info);
 }
 
-void	last_sort(t_point *A_info)
+static void	move(t_point *a_info, t_point *b_info, t_list *node)
+{
+	while (node->command[sa]-- != 0)
+		go_sa(a_info);
+	while (node->command[sb]-- != 0)
+		go_sb(b_info);
+	while (node->command[ss]-- != 0)
+		go_ss(a_info, b_info);
+	rotate(a_info, b_info, node, "rr");
+	while (node->command[ra]-- != 0)
+		go_ra(a_info, 0);
+	while (node->command[rb]-- != 0)
+		go_rb(b_info, 0);
+	rotate(a_info, b_info, node, "rrr");
+	while (node->command[rra]-- != 0)
+		go_rra(a_info, 0);
+	while (node->command[rrb]-- != 0)
+		go_rrb(b_info, 0);
+	go_pa(a_info, b_info);
+}
+
+static void	last_sort(t_point *a_info)
 {
 	int		max_node_idx;
 	t_list	*max_node;
 
-	max_node = A_info->head->next;
-	while (max_node->value != A_info->head->max)
+	max_node = a_info->head->next;
+	while (max_node->value != a_info->head->max)
 		max_node = max_node->next;
-	max_node_idx = find_index(A_info->head->next, max_node);
-	if (max_node_idx > A_info->head->start_size / 2)
-		while (A_info->head->next->value != A_info->head->max)
-			go_ra(A_info, 0);
+	max_node_idx = find_index(a_info->head->next, max_node);
+	if (max_node_idx > a_info->head->start_size / 2)
+		while (a_info->head->next->value != a_info->head->max)
+			go_ra(a_info, 0);
 	else
-		while (A_info->head->next->value != A_info->head->max)
-			go_rra(A_info, 0);
+		while (a_info->head->next->value != a_info->head->max)
+			go_rra(a_info, 0);
 }
 
-void	sort2(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
+void	sort2(t_point *a_info, t_point *b_info, t_arr_info *arr_info)
 {
+	t_list	*current;
+	t_list	*cmd_min_node;
 	t_list	*temp;
-	t_list	*asd;
-	t_list	*q;
 
-	A_info->head->max = arr_info->max;
-	while (B_info->head->size != 0)
+	a_info->head->max = arr_info->max;
+	while (b_info->head->size != 0)
 	{
-		q = B_info->head->next;
-		temp = B_info->head->next;
+		temp = b_info->head->next;
+		current = b_info->head->next;
+		while (current)
+		{
+			init_arr(&current->command);
+			command_min(a_info, b_info, current, &current->command);
+			current = current->next;
+		}
+		cmd_min_node = command_min_search(b_info->head->next);
+		move (a_info, b_info, cmd_min_node);
 		while (temp)
 		{
-			init_arr(&temp->command);
-			command_min(A_info, B_info, temp, &temp->command);
+			free(temp->command);
 			temp = temp->next;
 		}
-		asd = command_min_search(B_info->head->next);
-		move (A_info, B_info, asd);
-		free (asd->command);
-		while (q->next)
-		{
-			free(q->command);
-			q = q->next;
-		}
 	}
-	last_sort(A_info);
+	last_sort(a_info);
 }

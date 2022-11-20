@@ -6,53 +6,53 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:38:53 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 16:41:11 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:33:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	go_ra(t_point *A_info, int rr_flag)
+void	go_ra(t_point *a_info, int rr_flag)
 {
 	t_list	*first_node;
 	t_list	*tail_node;
 
-	if (list_size((A_info)->head) <= 1)
+	if (list_size((a_info)->head) <= 1)
 		return ;
-	first_node = (A_info)->head->next;
-	tail_node = (A_info)->tail->prev;
-	(A_info)->head->next = (A_info)->tail;
-	(A_info)->tail->prev = (A_info)->head;
-	(A_info)->tail->next = first_node;
-	first_node->prev = (A_info)->tail;
+	first_node = (a_info)->head->next;
+	tail_node = (a_info)->tail->prev;
+	(a_info)->head->next = (a_info)->tail;
+	(a_info)->tail->prev = (a_info)->head;
+	(a_info)->tail->next = first_node;
+	first_node->prev = (a_info)->tail;
 	tail_node->next = NULL;
-	(A_info)->tail = tail_node;
+	(a_info)->tail = tail_node;
 	if (!rr_flag)
 		write (1, "ra\n", 3);
 }
 
-void	go_rb(t_point *B_info, int rr_flag)
+void	go_rb(t_point *b_info, int rr_flag)
 {
 	t_list	*first_node;
 	t_list	*tail_node;
 
-	if (list_size((B_info)->head) <= 1)
+	if (list_size((b_info)->head) <= 1)
 		return ;
-	first_node = (B_info)->head->next;
-	tail_node = (B_info)->tail->prev;
-	(B_info)->head->next = (B_info)->tail;
-	(B_info)->tail->prev = (B_info)->head;
-	(B_info)->tail->next = first_node;
-	first_node->prev = (B_info)->tail;
+	first_node = (b_info)->head->next;
+	tail_node = (b_info)->tail->prev;
+	(b_info)->head->next = (b_info)->tail;
+	(b_info)->tail->prev = (b_info)->head;
+	(b_info)->tail->next = first_node;
+	first_node->prev = (b_info)->tail;
 	tail_node->next = NULL;
-	(B_info)->tail = tail_node;
+	(b_info)->tail = tail_node;
 	if (!rr_flag)
 		write (1, "rb\n", 3);
 }
 
-void	go_rr(t_point *A_info, t_point *B_info)
+void	go_rr(t_point *a_info, t_point *b_info)
 {
-	go_ra(A_info, 1);
-	go_rb(B_info, 1);
+	go_ra(a_info, 1);
+	go_rb(b_info, 1);
 	write (1, "rr\n", 3);
 }

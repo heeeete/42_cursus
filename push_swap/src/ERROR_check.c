@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 16:21:12 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:56:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	error_check(int argc, char *argv[])
 				error();
 			i++;
 		}
+		ft_free(str);
 	}
-	ft_free(str);
 }
 
 void	error_check2(int argc, t_list *head)

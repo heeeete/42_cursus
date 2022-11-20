@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 16:53:22 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:07:04 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	aligned_already(t_list *head)
 	exit(0);
 }
 
-void	zero(int *a, int *b, int *c)
+void	init_zero(int *a, int *b, int *c)
 {
 	*a = 0;
 	*b = 0;

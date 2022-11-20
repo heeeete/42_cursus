@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 16:21:12 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 21:13:52 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_index(t_list *head, t_list *current)
 {
-	int	idx;
+	int		idx;
 	t_list	*node;
 
 	idx = 0;
@@ -29,7 +29,7 @@ int	find_index(t_list *head, t_list *current)
 
 int	list_size(t_list *head)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (head->next)
@@ -65,11 +65,11 @@ void	init_value(t_point **info, int argc, char *argv[])
 	{
 		str = ft_split(argv[argc - 1], ' ');
 		while ((*info)->tail->next != NULL)
-			(*info)->tail= (*info)->tail->next;
+			(*info)->tail = (*info)->tail->next;
 		while (str[i] != NULL)
 			i++;
 		while (i > 0)
-			newnode((*info)->tail,  str[--i]);
+			newnode((*info)->tail, str[--i]);
 		argc--;
 		ft_free(str);
 		i = 0;
@@ -82,18 +82,14 @@ void	init_value(t_point **info, int argc, char *argv[])
 	(*info)->head->size = list_size((*info)->head);
 }
 
-void	init_list(t_point **A_info, t_point **B_info, t_arr_info **arr_info)
+void	init_list(t_point **a_info, t_point **b_info, t_arr_info **arr_info)
 {
-	*A_info = (t_point *)wrap_malloc(sizeof(t_point));
-	*B_info = (t_point *)wrap_malloc(sizeof(t_point));
+	*a_info = (t_point *)wrap_malloc(sizeof(t_point));
+	*b_info = (t_point *)wrap_malloc(sizeof(t_point));
 	*arr_info = (t_arr_info *)wrap_malloc(sizeof(t_arr_info));
-	(*A_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
-	(*A_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
-	(*B_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
-	(*B_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
-	(*A_info)->tail->next = NULL;
-	(*A_info)->head->next = NULL;
-	(*B_info)->tail->next = NULL;
-	(*B_info)->head->next = NULL;
-	(*B_info)->head->size = 0;
+	(*a_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
+	(*b_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
+	(*a_info)->tail->next = NULL;
+	(*b_info)->head->next = NULL;
+	(*b_info)->head->size = 0;
 }
