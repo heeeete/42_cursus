@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:45:57 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/17 21:48:25 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 16:36:03 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
 void	go_sa(t_point *A_info)
 {
@@ -57,8 +57,8 @@ void	go_ss(t_point *A_info, t_point *B_info)
 
 void	go_pb(t_point *A_info, t_point *B_info)
 {
-	t_list *node;
-	t_list *head;
+	t_list	*node;
+	t_list	*head;
 
 	if (list_size((A_info)->head) == 0)
 		return ;
@@ -79,8 +79,8 @@ void	go_pb(t_point *A_info, t_point *B_info)
 
 void	go_pa(t_point *A_info, t_point *B_info)
 {
-	t_list *node;
-	t_list *head;
+	t_list	*node;
+	t_list	*head;
 
 	if (list_size((B_info)->head) == 0)
 		return ;

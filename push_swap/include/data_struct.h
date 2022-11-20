@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_struct.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/20 16:40:10 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/20 16:40:28 by huipark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DATA_STRUCT_H
 # define DATA_STRUCT_H
 
@@ -12,7 +24,6 @@ typedef struct s_list
 	int				*command;
 	int				max;
 }	t_list;
-
 
 typedef struct s_head_tail
 {
@@ -29,4 +40,4 @@ typedef struct s_arr_info
 	int	two_over_three_pivot;
 }	t_arr_info;
 
-# endif
+#	endif

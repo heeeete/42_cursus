@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr_init.c                                         :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 19:02:03 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/16 20:24:38 by huipark          ###   ########.fr       */
+/*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/20 16:53:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
-void	init_arr(int **arr)
+void	aligned_already(t_list *head)
 {
-	int	i;
-	
-	*arr = wrap_malloc(sizeof(int) * 11);
-	i = 0;
-	while (i <= 10)
+	while (head->next)
 	{
-		(*arr)[i] = 0;
-		i++;
+		if (head->value > head->next->value)
+			head = head->next;
+		else
+			return ;
 	}
+	exit(0);
+}
+
+void	zero(int *a, int *b, int *c)
+{
+	*a = 0;
+	*b = 0;
+	*c = 0;
 }

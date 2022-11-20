@@ -6,96 +6,18 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/18 18:57:38 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:22:43 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
-
-static void	bottom_raise (t_point *A_info, t_point *B_info, t_list *b, int **command)
-{
-	t_list	*a_bottom;
-	int		command_count;
-	int		idx;
-
-	idx = b->index;
-	a_bottom = A_info->head->next;
-	command_count = 0;
-	if (b->value < a_bottom->value && a_bottom->value != A_info->head->max)
-		while (b->value < a_bottom->value && a_bottom->value != A_info->head->max)
-		{
-			a_bottom = a_bottom->next;
-			(*command)[rra]++;
-		}
-}
-
-static void	idx_up_down(t_point *A_info, t_point *B_info, t_list **b, int **cmd)
-{
-	int	idx;
-
-	idx = (*b)->index;
-	while ((*b)->next)
-		if (idx >= list_size(B_info->head) / 2 && (*b)->next != NULL)
-		{
-			*b = (*b)->next;
-			(*cmd)[rb]++;
-		}
-		else if (idx < list_size(B_info->head) / 2 && (*b)->next != NULL)
-		{
-			if (B_info->head->next != *b)
-			{
-				*b = (*b)->prev;
-				(*cmd)[rrb]++;
-			}
-			else
-			{
-				*b = B_info->tail;
-				(*cmd)[rrb]++;
-			}
-		}
-}
-
-static void	command_min(t_point *A_info, t_point *B_info, t_list *current, int **command)
-{
-	t_list	*a_bottom = A_info->head->next;
-	t_list	*a_top = A_info->tail;
-	int		value;
-
-	value = current->value;
-	current->index = find_index(B_info->head->next, current);
-	int idx = current->index;
-		if (A_info->tail->value > value)
-		{
-			bottom_raise(A_info, B_info, current, command);
-			if (value == B_info->tail->prev->value)
-			{
-				(*command)[sb]++;
-				current = B_info->tail;
-			}
-		}
-		else
-			while (a_top->value < value)
-			{
-				a_top = a_top->prev;
-				(*command)[ra]++;
-			}
-	idx_up_down(A_info, B_info, &current, command);
-	(*command)[pa]++;
-}
-
-void	zero(int *a, int *b, int *c)
-{
-	*a = 0;
-	*b = 0;
-	*c = 0;
-}
+#include "../include/push_swap.h"
 
 static t_list	*command_min_search(t_list	*node)
 {
-	int	command_count;
-	int	command_count2;
+	int		command_count;
+	int		command_count2;
 	t_list	*temp;
-	int	i;
+	int		i;
 
 	zero(&command_count2, &command_count, &i);
 	temp = node;
@@ -119,6 +41,33 @@ static t_list	*command_min_search(t_list	*node)
 	return (temp);
 }
 
+// void	asd(t_point *A_info, t_point *B_info, t_list *node, char *command)
+// {
+// 	int	len;
+
+// 	len = 0;
+// 	while (command[len])
+// 		len++;
+// 	if (len == 2)
+// 	{
+// 		while (node->command[ra] != 0 && node->command[rb] != 0)
+// 		{
+// 			node->command[ra]--;
+// 			node->command[rb]--;
+// 			go_rr(A_info, B_info);
+// 		}
+// 	}
+// 	else if (len == 3)
+// 	{
+// 		while (node->command[rra] != 0 && node->command[rrb] != 0)
+// 		{
+// 			node->command[rra]--;
+// 			node->command[rrb]--;
+// 			go_rrr(A_info, B_info);
+// 		}
+// 	}
+// }
+
 void	move(t_point *A_info, t_point *B_info, t_list *node)
 {
 	while (node->command[sa]-- != 0)
@@ -133,6 +82,7 @@ void	move(t_point *A_info, t_point *B_info, t_list *node)
 		node->command[rb]--;
 		go_rr(A_info, B_info);
 	}
+	// asd(A_info, B_info, node, "rr");
 	while (node->command[ra]-- != 0)
 		go_ra(A_info, 0);
 	while (node->command[rb]-- != 0)
@@ -143,6 +93,7 @@ void	move(t_point *A_info, t_point *B_info, t_list *node)
 		node->command[rrb]--;
 		go_rrr(A_info, B_info);
 	}
+	// asd(A_info, B_info, node, "rrr");
 	while (node->command[rra]-- != 0)
 		go_rra(A_info, 0);
 	while (node->command[rrb]-- != 0)
@@ -165,16 +116,15 @@ void	last_sort(t_point *A_info)
 	else
 		while (A_info->head->next->value != A_info->head->max)
 			go_rra(A_info, 0);
-
 }
 
 void	sort2(t_point *A_info, t_point *B_info, t_arr_info *arr_info)
 {
-	t_list						*temp;
+	t_list	*temp;
 	t_list	*asd;
-	A_info->head->max = arr_info->max;
 	t_list	*q;
 
+	A_info->head->max = arr_info->max;
 	while (B_info->head->size != 0)
 	{
 		q = B_info->head->next;

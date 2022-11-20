@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/18 00:10:31 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 16:21:12 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
 int count(char *argv[])
 {
@@ -81,6 +81,7 @@ int	main(int argc, char *argv[])
 	init_list(&A_info, &B_info, &arr_info);
 	error_check(argc, argv);
 	init_value(&A_info, argc, argv);
+	aligned_already(A_info->head->next);
 	error_check2(argc, A_info->head);
 	set_arr(&arr_info, argv);
 	separation(A_info, B_info, arr_info);
@@ -101,7 +102,7 @@ int	main(int argc, char *argv[])
 	// }
 	// printf("\n\n");
 	// printf("stack A tail\n");
-	// while (A_info ->tail->prev != NULL)
+	// while (A_info->tail->prev != NULL)
 	// {
 	// 	printf("%d\n", A_info->tail->value);
 	// 	A_info->tail = A_info->tail->prev;

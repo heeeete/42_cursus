@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:18:07 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/16 20:24:39 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 16:53:24 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "../include/push_swap.h"
 
 long long	ft_atoi(const char *str)
 {
@@ -46,7 +46,7 @@ void	ft_free(char **dest)
 	free (dest);
 }
 
-void	error()
+void	error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
