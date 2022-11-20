@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 21:59:05 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/20 23:09:49 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int	main(int argc, char *argv[])
 	set_arr(&arr_info, argv);
 	separation(a_info, b_info, arr_info);
 	sort2(a_info, b_info, arr_info);
-	system("leaks push_swap");
 }

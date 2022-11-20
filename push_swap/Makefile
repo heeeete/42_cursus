@@ -3,7 +3,7 @@ NAME	= push_swap
 CC		= cc
 
 CFLAGS 	=-Wall -Wextra -Werror
-##AA =-fsanitize=address -g3
+##AA = -fsanitize=address
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=				\
