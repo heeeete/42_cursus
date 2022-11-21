@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:42:25 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 21:04:19 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:51:02 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	set_info(t_arr_info **arr_info, int max_index)
 	(*arr_info)->two_over_three_pivot = (*arr_info)->arr[max_index * 2 / 3];
 }
 
-void	set_arr(t_arr_info **arr_info, char *argv[])
+void	set_arr(t_point *a, t_arr_info **arr_info, char *argv[])
 {
 	int		i;
 	int		j;
@@ -68,6 +68,7 @@ void	set_arr(t_arr_info **arr_info, char *argv[])
 	}
 	quicksort (&(*arr_info)->arr, 0, cnt - 1);
 	set_info(arr_info, cnt);
+	a->head->max = (*arr_info)->max;
 }
 
 void	init_arr(int **arr)

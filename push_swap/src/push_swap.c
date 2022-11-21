@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 23:09:49 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/21 21:01:46 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 	init_value(&a_info, argc, argv);
 	aligned_already(a_info->head->next);
 	error_check2(argc, a_info->head);
-	set_arr(&arr_info, argv);
+	set_arr(a_info, &arr_info, argv);
 	separation(a_info, b_info, arr_info);
-	sort2(a_info, b_info, arr_info);
+	sort2(a_info, b_info);
 }

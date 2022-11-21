@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 23:00:34 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:51:27 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,12 @@ static void	last_sort(t_point *a_info)
 			go_rra(a_info, 0);
 }
 
-void	sort2(t_point *a_info, t_point *b_info, t_arr_info *arr_info)
+void	sort2(t_point *a_info, t_point *b_info)
 {
 	t_list	*current;
 	t_list	*cmd_min_node;
 	t_list	*temp;
 
-	a_info->head->max = arr_info->max;
 	while (b_info->head->size != 0)
 	{
 		temp = b_info->head->next;

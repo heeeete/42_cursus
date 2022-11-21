@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 20:18:53 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:51:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ void				error_check2(int argc, t_list *head);
 void				quicksort(int **arr, int start, int end);
 void				separation(t_point *a_info, t_point *b_info,
 						t_arr_info *arr_info);
-void				sort2(t_point *a_info, t_point *b_info,
-						t_arr_info *arr_info);
+void				sort2(t_point *a_info, t_point *b_info);
 int					list_size(t_list *head);
 char				**ft_split(char const *s, char c);
 void				init_arr(int **arr);
 void				aligned_already(t_list *head);
 void				init_zero(int *a, int *b, int *c);
-void				set_arr(t_arr_info **arr_info, char *argv[]);
+void				set_arr(t_point *a, t_arr_info **arr_info, char *argv[]);
 void				command_min(t_point *a_info, t_point *b_info,
 						t_list *current, int **command);
 
