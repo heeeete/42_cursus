@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 20:56:47 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/21 20:44:32 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_check(int argc, char *argv[])
 			j = 0;
 			while (str[i][j])
 			{
-				j += (str[i][0] == '-' && j == 0);
+				j += ((str[i][0] == '-' || str[i][0] == '+') && j == 0);
 				if (str[i][j] < '0' || str[i][j] > '9')
 					error();
 				j++;
