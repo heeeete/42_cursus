@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:54:52 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:28:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void				newnode(t_list *head, char *str);
 void				*wrap_malloc(size_t s);
 void				error(void);
 void				error_check(int argc, char *argv[]);
-void				error_check2(int argc, t_list *head);
+void				error_check2(int argc, char *argv[], t_list *head);
 void				quicksort(int **arr, int start, int end);
 void				separation(t_point *a_info, t_point *b_info,
 						t_arr_info *arr_info);
@@ -57,5 +57,6 @@ void				init_zero(int *a, int *b, int *c);
 void				set_arr(t_point *a, t_arr_info **arr_info, char *argv[]);
 void				command_min(t_point *a_info, t_point *b_info,
 						t_list *current, int **command);
+size_t				ft_strlen(const char *str);
 
 #endif

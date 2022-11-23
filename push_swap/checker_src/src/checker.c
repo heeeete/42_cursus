@@ -6,15 +6,55 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:53:30 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 22:09:04 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:18:47 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <unistd.h>
+#include <stdio.h>
+
 #include "../include/checker.h"
 
-void	checker()
+void	sort(t_point *a_info, t_point *b_info, char *str)
 {
+	if (!(ft_strcmp("sa\n", str)))
+		go_sa(a_info);
+	else if (!(ft_strcmp("sb\n", str)))
+		go_sb(b_info);
+	else if (!(ft_strcmp("ss\n", str)))
+		go_ss(a_info, b_info);
+	else if (!(ft_strcmp("rr\n", str)))
+		go_rr(a_info, b_info);
+	else if (!(ft_strcmp("ra\n", str)))
+		go_ra(a_info);
+	else if (!(ft_strcmp("rb\n", str)))
+		go_rb(b_info);
+	else if (!(ft_strcmp("rrr\n", str)))
+		go_rrr(a_info, b_info);
+	else if (!(ft_strcmp("rra\n", str)))
+		go_rra(a_info);
+	else if (!(ft_strcmp("rrb\n", str)))
+		go_rrb(b_info);
+	else if (!(ft_strcmp("pa\n", str)))
+		go_pa(a_info, b_info);
+	else if (!(ft_strcmp("pb\n", str)))
+		go_pb(a_info, b_info);
+	else
+		Error();
+}
 
+void	take_input(t_point *a_info, t_point *b_info)
+{
+	char	*str;
+
+	while (1)
+	{
+		str = get_next_line(STDIN_FILENO);
+		if (!str)
+			exit(1);
+		sort(a_info, b_info, str);
+		free (str);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -26,5 +66,11 @@ int main(int argc, char *argv[])
 	init_list(&a_info, &b_info, &arr_info);
 	error_check(argc, argv);
 	init_value(&a_info, argc, argv);
-	error_check2(argc, a_info->head);
+	error_check2(argc, argv, a_info->head);
+	take_input(a_info, b_info);
+	checker(a_info, b_info);
+	if (b_info->head->size == 0 && aligned_already(a_info->head->next))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }

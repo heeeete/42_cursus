@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   command_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:35:06 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:58:53 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 02:00:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#ifndef COMMAND_BONUS_H
+# define COMMAND_BONUS_H
 
-# include "data_struct.h"
+# include "data_struct_bonus.h"
 
 void	go_sa(t_point *a_info);
 void	go_sb(t_point *b_info);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ERROR_check.c                                      :+:      :+:    :+:   */
+/*   ERROR_check_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/21 20:44:32 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:23:35 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/checker.h"
 
 void	error_check(int argc, char *argv[])
 {
@@ -28,7 +28,7 @@ void	error_check(int argc, char *argv[])
 			while (str[i][j])
 			{
 				j += ((str[i][0] == '-' || str[i][0] == '+') && j == 0);
-				if (str[i][j] < '0' || str[i][j] > '9')
+				if ((str[i][j] < '0' || str[i][j] > '9'))
 					error();
 				j++;
 			}
@@ -40,13 +40,19 @@ void	error_check(int argc, char *argv[])
 	}
 }
 
-void	error_check2(int argc, t_list *head)
+void	error_check2(int argc, char *argv[], t_list *head)
 {
 	t_list	*temp;
+	int		temp_argc;
 
+	temp_argc = argc;
 	if (argc == 1)
 		return ;
-	while (head->next != NULL)
+	while (--argc)
+		if (!ft_strlen(argv[argc]))
+			Error();
+	argc = temp_argc;
+	while (head->next != NULL && argc != 2)
 	{
 		head = head->next;
 		if (head->next != NULL)

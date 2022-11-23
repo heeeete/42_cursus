@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:38:53 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 19:33:47 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 01:20:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/checker.h"
 
-void	go_ra(t_point *a_info, int rr_flag)
+void	go_ra(t_point *a_info)
 {
 	t_list	*first_node;
 	t_list	*tail_node;
@@ -27,11 +27,9 @@ void	go_ra(t_point *a_info, int rr_flag)
 	first_node->prev = (a_info)->tail;
 	tail_node->next = NULL;
 	(a_info)->tail = tail_node;
-	if (!rr_flag)
-		write (1, "ra\n", 3);
 }
 
-void	go_rb(t_point *b_info, int rr_flag)
+void	go_rb(t_point *b_info)
 {
 	t_list	*first_node;
 	t_list	*tail_node;
@@ -46,13 +44,10 @@ void	go_rb(t_point *b_info, int rr_flag)
 	first_node->prev = (b_info)->tail;
 	tail_node->next = NULL;
 	(b_info)->tail = tail_node;
-	if (!rr_flag)
-		write (1, "rb\n", 3);
 }
 
 void	go_rr(t_point *a_info, t_point *b_info)
 {
-	go_ra(a_info, 1);
-	go_rb(b_info, 1);
-	write (1, "rr\n", 3);
+	go_ra(a_info);
+	go_rb(b_info);
 }

@@ -1,9 +1,9 @@
 NAME	= push_swap
+BNAME	= checker
 
 CC		= cc
 
-CFLAGS 	=-Wall -Wextra -Werror
-##AA = -fsanitize=address
+CFLAGS	= -g
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=				\
@@ -30,29 +30,53 @@ SRC_OBJS				=	$(SRC_FILES:.c=.o)
 COMMAND_SRC_OBJS		=	$(COMMAND_SRC_FILES:.c=.o)
 OBJS_BONUS 	=				$(FILES_BONUS:.c=.o)
 
+
+
+SRC_DIR_BONUS		= 	./checker_src/src/
+SRC_FILES_BONUS 	=				\
+							$(SRC_DIR_BONUS)checker.c \
+							$(SRC_DIR_BONUS)ERROR_check_bonus.c \
+							$(SRC_DIR_BONUS)ft_split_bonus.c \
+							$(SRC_DIR_BONUS)linked_list_bonus.c \
+							$(SRC_DIR_BONUS)utils_bonus.c \
+							$(SRC_DIR_BONUS)utils2_bonus.c \
+
+COMMAND_SRC_DIR_BONUS = ./checker_src/command_src/
+COMMAND_SRC_FILES_BONUS =			\
+							$(COMMAND_SRC_DIR_BONUS)command_bonus.c \
+							$(COMMAND_SRC_DIR_BONUS)reverse_rotate_command_bonus.c \
+							$(COMMAND_SRC_DIR_BONUS)rotate_command_bonus.c
+
+GNL_SRC_DIR_BONUS		=	./checker_src/gnl/
+GNL_SRC_FILES_BONUS	=			\
+							$(GNL_SRC_DIR_BONUS)get_next_line.c \
+							$(GNL_SRC_DIR_BONUS)get_next_line_utils.c
+
+SRC_OBJS_BONUS				=	$(SRC_FILES_BONUS:.c=.o)
+COMMAND_SRC_OBJS_BONUS		=	$(COMMAND_SRC_FILES_BONUS:.c=.o)
+GNL_SRC_OBJS_BONUS			=	$(GNL_SRC_FILES_BONUS:.c=.o)
+
 AR		= ar -crs
 RM		= rm -f
 
-ifdef WITH_BONUS
-			OBJECTS	= $(SRC_OBJS) $(COMMAND_SRC_OBJS) $(OBJS_BONUS)
-else
-			OBJECTS	= $(SRC_OBJS) $(COMMAND_SRC_OBJS)
-endif
+OBJECTS_BONUS	= $(SRC_OBJS_BONUS) $(COMMAND_SRC_OBJS_BONUS) $(GNL_SRC_OBJS_BONUS)
+OBJECTS	= $(SRC_OBJS) $(COMMAND_SRC_OBJS) $(GNL_SRC_OBJS)
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS)
+			$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
-bonus	:	
-			make WITH_BONUS=1 all
+bonus	:	$(OBJECTS_BONUS)
+			$(CC) $(CFLAGS) $(OBJECTS_BONUS) -o $(BNAME)
 
 clean	:
+			$(RM) $(OBJECTS_BONUS)
 			$(RM) $(OBJECTS)
 
 fclean	: 	clean
 			$(RM) $(NAME)
-
+			$(RM) $(BNAME);
 re		: 
 			make fclean
 			make all

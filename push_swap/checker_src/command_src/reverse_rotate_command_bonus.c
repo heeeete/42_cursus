@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:31:56 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:59:15 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 01:20:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	go_rrb(t_point *b_info)
 
 void	go_rrr(t_point *a_info, t_point *b_info)
 {
-	go_rra(a_info, 1);
-	go_rrb(b_info, 1);
+	go_rra(a_info);
+	go_rrb(b_info);
 }

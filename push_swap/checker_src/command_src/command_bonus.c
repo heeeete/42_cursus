@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   command_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:45:57 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:59:23 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 02:06:21 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	go_pb(t_point *a_info, t_point *b_info)
 	node->prev = head;
 	(b_info)->head->size += 1;
 	(a_info)->head->size -= 1;
-	write (1, "pb\n", 3);
 }
 
 void	go_pa(t_point *a_info, t_point *b_info)

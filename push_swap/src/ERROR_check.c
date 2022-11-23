@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/21 20:44:32 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 03:56:59 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ void	error_check(int argc, char *argv[])
 				error();
 			i++;
 		}
+		if (!str[0])
+			error();
 		ft_free(str);
 	}
 }
 
-void	error_check2(int argc, t_list *head)
+void	error_check2(int argc, char *argv[], t_list *head)
 {
 	t_list	*temp;
 
 	if (argc == 1)
-		return ;
-	while (head->next != NULL)
+		exit(0);
+	while (head->next != NULL && argc != 2)
 	{
 		head = head->next;
 		if (head->next != NULL)
