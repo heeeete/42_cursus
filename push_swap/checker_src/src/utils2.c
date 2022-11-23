@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 16:00:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:53:49 by huipark          ###   ########.fr       */
+/*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/23 22:03:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/checker.h"
 
-int	main(int argc, char *argv[])
+void	aligned_already(t_list *head)
 {
-	t_point		*a_info;
-	t_point		*b_info;
-	t_arr_info	*arr_info;
+	while (head->next)
+	{
+		if (head->value > head->next->value)
+			head = head->next;
+		else
+			return ;
+	}
+	exit(0);
+}
 
-	init_list(&a_info, &b_info, &arr_info);
-	error_check(argc, argv);
-	init_value(&a_info, argc, argv);
-	aligned_already(a_info->head->next);
-	error_check2(argc, a_info->head);
-	set_arr(a_info, &arr_info, argv);
-	separation(a_info, b_info, arr_info);
-	sort2(a_info, b_info);
+void	init_zero(int *a, int *b, int *c)
+{
+	*a = 0;
+	*b = 0;
+	*c = 0;
 }

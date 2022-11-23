@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:40:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/21 19:50:29 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/23 21:38:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,16 @@ void	separation(t_point *a_info, t_point *b_info, t_arr_info *arr_info)
 {
 	if (list_size(a_info->head) <= 5)
 		small_stack(a_info, b_info);
-	while (a_info->head->size != a_info->head->start_size * 2 / 3)
+	while (a_info->head->size != a_info->head->start_size / 3)
 	{
 		if (a_info->tail->value <= arr_info->two_over_three_pivot)
 			go_pb(a_info, b_info);
-		else if (a_info->head->size != a_info->head->start_size * 2 / 3)
-			go_ra(a_info, 0);
-	}
-	while (a_info->head->size != a_info->head->start_size / 3)
-	{
-		if (a_info->tail->value <= arr_info->one_over_three_pivot)
+		else if (a_info->tail->value <= arr_info->one_over_three_pivot)
+		{
 			go_pb(a_info, b_info);
-		else if (a_info->head->size != a_info->head->start_size / 3)
+			go_rb(b_info, 0);
+		}
+		else
 			go_ra(a_info, 0);
 	}
 	separation2(a_info, b_info, arr_info);

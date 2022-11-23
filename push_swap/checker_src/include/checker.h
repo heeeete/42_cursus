@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 20:53:48 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/23 21:54:52 by huipark          ###   ########.fr       */
+/*   Created: 2022/11/23 21:49:06 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/23 22:05:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <unistd.h>
 # include <stdlib.h>
