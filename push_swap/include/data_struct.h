@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:40:10 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/20 16:40:28 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 19:47:39 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_list
 	int				size;
 	int				start_size;
 	int				index;
-	int				*command;
+	int				command[11];
 	int				max;
 }	t_list;
 

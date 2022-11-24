@@ -6,16 +6,31 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:47:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 03:23:35 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:16:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 
+void	error_check3(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i += ((str[0] == '-' || str[0] == '+') && i == 0);
+		if (str[i] < '0' || str[i] > '9')
+			error();
+		i++;
+	}
+	if (ft_atoi(str) > INT_MAX || ft_atoi(str) < INT_MIN)
+		error();
+}
+
 void	error_check(int argc, char *argv[])
 {
 	int		i;
-	int		j;
 	char	**str;
 
 	while (argc-- > 1)
@@ -24,34 +39,21 @@ void	error_check(int argc, char *argv[])
 		str = ft_split(argv[argc], ' ');
 		while (str[i])
 		{
-			j = 0;
-			while (str[i][j])
-			{
-				j += ((str[i][0] == '-' || str[i][0] == '+') && j == 0);
-				if ((str[i][j] < '0' || str[i][j] > '9'))
-					error();
-				j++;
-			}
-			if (ft_atoi(str[i]) > INT_MAX || ft_atoi(str[i]) < INT_MIN)
-				error();
+			error_check3(str[i]);
 			i++;
 		}
+		if (!str[0])
+			error();
 		ft_free(str);
 	}
 }
 
-void	error_check2(int argc, char *argv[], t_list *head)
+void	error_check2(int argc, t_list *head)
 {
 	t_list	*temp;
-	int		temp_argc;
 
-	temp_argc = argc;
 	if (argc == 1)
-		return ;
-	while (--argc)
-		if (!ft_strlen(argv[argc]))
-			Error();
-	argc = temp_argc;
+		exit(0);
 	while (head->next != NULL && argc != 2)
 	{
 		head = head->next;

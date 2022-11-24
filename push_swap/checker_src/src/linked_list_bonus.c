@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_list.c                                      :+:      :+:    :+:   */
+/*   linked_list_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:37:14 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 01:20:06 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:23:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,13 @@ void	init_value(t_point **info, int argc, char *argv[])
 	while (node->next)
 		node = node->next;
 	(*info)->tail = node;
-	(*info)->head->start_size = list_size((*info)->head);
 	(*info)->head->size = list_size((*info)->head);
 }
 
-void	init_list(t_point **a_info, t_point **b_info, t_arr_info **arr_info)
+void	init_list(t_point **a_info, t_point **b_info)
 {
 	*a_info = (t_point *)wrap_malloc(sizeof(t_point));
 	*b_info = (t_point *)wrap_malloc(sizeof(t_point));
-	*arr_info = (t_arr_info *)wrap_malloc(sizeof(t_arr_info));
 	(*a_info)->tail = (t_list *)wrap_malloc(sizeof(t_list));
 	(*b_info)->head = (t_list *)wrap_malloc(sizeof(t_list));
 	(*a_info)->tail->next = NULL;

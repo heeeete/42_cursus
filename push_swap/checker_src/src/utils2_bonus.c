@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 02:21:58 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:58:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ void	init_zero(int *a, int *b, int *c)
 	*a = 0;
 	*b = 0;
 	*c = 0;
-}
-
-void	Error()
-{
-	write(1, "Error\n", 6);
-	exit(1);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

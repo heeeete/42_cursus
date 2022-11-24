@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:09:59 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 02:23:50 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:09:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_read(int fd, char *backup)
 	size = 1;
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
-		return (NULL);
+		exit(0);
 	while (size)
 	{
 		size = read(fd, buf, BUFFER_SIZE);
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		exit(1);
 	line = get_read(fd, backup);
 	if (!line)
 		return (NULL);

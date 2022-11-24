@@ -6,13 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:53:30 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 03:18:47 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:11:06 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-#include <stdio.h>
-
+#include <unistd.h>
 #include "../include/checker.h"
 
 void	sort(t_point *a_info, t_point *b_info, char *str)
@@ -40,7 +38,7 @@ void	sort(t_point *a_info, t_point *b_info, char *str)
 	else if (!(ft_strcmp("pb\n", str)))
 		go_pb(a_info, b_info);
 	else
-		Error();
+		error();
 }
 
 void	take_input(t_point *a_info, t_point *b_info)
@@ -51,26 +49,22 @@ void	take_input(t_point *a_info, t_point *b_info)
 	{
 		str = get_next_line(STDIN_FILENO);
 		if (!str)
-			exit(1);
+			break ;
 		sort(a_info, b_info, str);
 		free (str);
 	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_point		*a_info;
 	t_point		*b_info;
-	t_arr_info	*arr_info;
 
-	init_list(&a_info, &b_info, &arr_info);
+	init_list(&a_info, &b_info);
 	error_check(argc, argv);
 	init_value(&a_info, argc, argv);
-	error_check2(argc, argv, a_info->head);
+	error_check2(argc, a_info->head);
 	take_input(a_info, b_info);
 	checker(a_info, b_info);
-	if (b_info->head->size == 0 && aligned_already(a_info->head->next))
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	exit(0);
 }
