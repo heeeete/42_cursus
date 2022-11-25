@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:57:39 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/21 17:51:27 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:22:23 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,12 @@ void	sort2(t_point *a_info, t_point *b_info)
 		current = b_info->head->next;
 		while (current)
 		{
-			init_arr(&current->command);
-			command_min(a_info, b_info, current, &current->command);
+			init_arr(current->command);
+			command_min(a_info, b_info, current, current->command);
 			current = current->next;
 		}
 		cmd_min_node = command_min_search(b_info->head->next);
 		move (a_info, b_info, cmd_min_node);
-		while (temp)
-		{
-			free(temp->command);
-			temp = temp->next;
-		}
 	}
 	last_sort(a_info);
 }

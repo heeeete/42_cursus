@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:42:25 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/21 17:51:02 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/24 19:54:57 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ void	set_arr(t_point *a, t_arr_info **arr_info, char *argv[])
 	a->head->max = (*arr_info)->max;
 }
 
-void	init_arr(int **arr)
+void	init_arr(int *arr)
 {
 	int	i;
 
-	*arr = wrap_malloc(sizeof(int) * 11);
 	i = 0;
 	while (i <= 10)
 	{
-		(*arr)[i] = 0;
+		arr[i] = 0;
 		i++;
 	}
 }

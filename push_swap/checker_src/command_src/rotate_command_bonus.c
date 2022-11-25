@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate_command.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/02 20:38:53 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/24 01:20:00 by huipark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/checker.h"
+
+void	go_ra(t_point *a_info)
+{
+	t_list	*first_node;
+	t_list	*tail_node;
+
+	if (list_size((a_info)->head) <= 1)
+		return ;
+	first_node = (a_info)->head->next;
+	tail_node = (a_info)->tail->prev;
+	(a_info)->head->next = (a_info)->tail;
+	(a_info)->tail->prev = (a_info)->head;
+	(a_info)->tail->next = first_node;
+	first_node->prev = (a_info)->tail;
+	tail_node->next = NULL;
+	(a_info)->tail = tail_node;
+}
+
+void	go_rb(t_point *b_info)
+{
+	t_list	*first_node;
+	t_list	*tail_node;
+
+	if (list_size((b_info)->head) <= 1)
+		return ;
+	first_node = (b_info)->head->next;
+	tail_node = (b_info)->tail->prev;
+	(b_info)->head->next = (b_info)->tail;
+	(b_info)->tail->prev = (b_info)->head;
+	(b_info)->tail->next = first_node;
+	first_node->prev = (b_info)->tail;
+	tail_node->next = NULL;
+	(b_info)->tail = tail_node;
+}
+
+void	go_rr(t_point *a_info, t_point *b_info)
+{
+	go_ra(a_info);
+	go_rb(b_info);
+}

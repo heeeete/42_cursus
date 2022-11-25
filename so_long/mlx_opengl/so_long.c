@@ -1,47 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/25 16:51:21 by huipark          ###   ########.fr       */
+/*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/25 20:39:08 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "mlx.h"
 
-void	aligned_already(t_list *head)
+int main()
 {
-	while (head->next)
-	{
-		if (head->value > head->next->value)
-			head = head->next;
-		else
-			return ;
-	}
-	exit(0);
-}
+	void	*mlx;
+	void	*mlx_win;
 
-void	init_zero(int *a, int *b, int *c)
-{
-	*a = 0;
-	*b = 0;
-	*c = 0;
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	count;
-
-	if (!str)
-		return (0);
-	count = 0;
-	while (*str)
-	{
-		str++;
-		count++;
-	}
-	return (count);
+	// mlx_init(mlx, mlx_win);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "huipark");
+	mlx_loop(mlx);
 }

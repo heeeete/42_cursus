@@ -1,47 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 16:52:58 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/25 16:51:21 by huipark          ###   ########.fr       */
+/*   Created: 2022/08/15 18:37:26 by huipark           #+#    #+#             */
+/*   Updated: 2022/11/24 15:47:44 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	aligned_already(t_list *head)
-{
-	while (head->next)
-	{
-		if (head->value > head->next->value)
-			head = head->next;
-		else
-			return ;
-	}
-	exit(0);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+# endif
 
-void	init_zero(int *a, int *b, int *c)
-{
-	*a = 0;
-	*b = 0;
-	*c = 0;
-}
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strchr(const char *s, int c);
+char			*ft_strdup(const char *s1);
+size_t			ft_strlen(const char *str);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	count;
-
-	if (!str)
-		return (0);
-	count = 0;
-	while (*str)
-	{
-		str++;
-		count++;
-	}
-	return (count);
-}
+#endif
