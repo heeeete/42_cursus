@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:40:42 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 18:38:38 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:51:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	small_stack(t_point *a_info, t_point *b_info)
 		three_size_stack_sort(a_info);
 		the_rest_sorting(a_info, b_info);
 	}
-	system ("leaks push_swap");
 	exit(0);
 }
 

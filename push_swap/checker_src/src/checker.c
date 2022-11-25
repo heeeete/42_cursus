@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:53:30 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/24 17:11:06 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:51:24 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ int	main(int argc, char *argv[])
 	error_check2(argc, a_info->head);
 	take_input(a_info, b_info);
 	checker(a_info, b_info);
-	exit(0);
 }
