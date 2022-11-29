@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/25 20:38:48 by huipark          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:51:48 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./mlx.h"
+#include "./include/so_long.h"
 
 int main()
 {
