@@ -3,7 +3,6 @@ BNAME	= checker
 
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra 
-A = -fsanitize=address -g3
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
