@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
-/*   Updated: 2022/11/26 16:51:48 by huipark          ###   ########.fr       */
+/*   Created: 2022/12/03 18:27:55 by huipark           #+#    #+#             */
+/*   Updated: 2022/12/03 21:37:51 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "../include/so_long.h"
 
-int main()
+void	*wrap_malloc(size_t s)
 {
-	void	*mlx;
-	void	*mlx_win;
+	void	*ret;
 
-	// mlx_init(mlx, mlx_win);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "huipark");
-	mlx_loop(mlx);
+	ret = malloc(s);
+	if (ret == NULL)
+		exit (1);
+	return (ret);
+}
+
+void	exit_game(t_game *game)
+{
+	printf("--------\nGAME END\n--------\n");
+	exit(0);
+}
+
+void	error(char *msg)
+{
+	printf("%s\n", msg);
+	exit(1);
 }
