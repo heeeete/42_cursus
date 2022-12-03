@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:12:11 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/03 21:44:19 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/03 21:53:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	press_key(int key_code, t_game *game, t_param *param)
 	return (0);
 }
 
-void	move_w(t_game *game, t_param param)
+void	move_w(t_game *game, t_param *param)
 {
+	param->x++;
 }
