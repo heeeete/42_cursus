@@ -1,9 +1,10 @@
 NAME	= so_long
 
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
+CC		= gcc
+# CFLAGS	= -Wall -Werror -Wextra
 MFLAGS 	= -lmlx -framework OpenGl -framework AppKit -Imlx
 MLX_DIR = mlx_opengl
+G = -g
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
@@ -13,7 +14,6 @@ SRC_FILES 	=					\
 								$(SRC_DIR)utils2.c \
 								$(SRC_DIR)get_next_line.c \
 								$(SRC_DIR)get_next_line_utils.c \
-								$(SRC_DIR)map_check.c \
 								$(SRC_DIR)move.c
 
 
@@ -27,7 +27,7 @@ OBJECTS			= $(SRC_OBJS)
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
-			$(CC) $(CFLAGS) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
+			$(CC) $(G) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
 
 bonus	:	$(BNAME)
 

@@ -6,16 +6,40 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:13:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/03 21:41:27 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/05 00:09:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
+void	map_check(t_game game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game.map[i])
+	{
+		j = 0;
+		while (game.map[i][j])
+		{
+			if (game.map[0][j] != '1' || game.map[game.row_size - 1][j] != '1'
+				|| game.map[i][0] != '1' || game.map[i][game.col_size - 1] != '1')
+				error("NOT VALID A MAP");
+			if (game.map[i][j] != '0' && game.map[i][j] != '1'
+				&& game.map[i][j] != 'C' && game.map[i][j] != 'E'
+				&& game.map[i][j] != 'P')
+				error("NOT VALID A MAP");
+			j++;
+		}
+		i++;
+	}
+}
+
 void	size_check_map(t_game *game)
 {
 	int temp_cor_count;
-	int	cor_count;
+	int	col_count;
 	int row_count;
 
 	row_count = 0;
@@ -24,15 +48,15 @@ void	size_check_map(t_game *game)
 		temp_cor_count++;
 	while (game->map[row_count])
 	{
-		cor_count = 0;
-		while (game->map[row_count][cor_count])
-			cor_count++;
-		if (temp_cor_count != cor_count)
+		col_count = 0;
+		while (game->map[row_count][col_count])
+			col_count++;
+		if (temp_cor_count != col_count)
 			error("MAP IS NOT RECTANGLE");
 		row_count++;
 	}
 	game->row_size = row_count;
-	game->col_size = cor_count;
+	game->col_size = col_count;
 }
 
 void	read_map(t_game *game, int fd)
@@ -44,6 +68,7 @@ void	read_map(t_game *game, int fd)
 	line = get_next_line(fd);
 	if (!line)
 		error("EMPTY MAP");
+	save = ft_strdup("");
 	while (line)
 	{
 		temp_address = save;
@@ -66,18 +91,13 @@ void	check_fd(t_game *game, char *map_name)
 	read_map(game, fd);
 }
 
-
-void			param_init(t_param *param)
+void	init(t_game *game, char *map_name)
 {
-	param->x = 0;
-	param->y = 0;
-}
-
-void	init(t_game *game, t_param *param, char *map_name)
-{
+	game->move_count = 0;
+	game->item_count = 0;
 	game->mlx = mlx_init();
-	param_init(param);
 	check_fd(game, map_name);
 	size_check_map(game);
+	game->win = mlx_new_window(game->mlx, game->col_size * IMG_SIZE, game->row_size * IMG_SIZE, "huipark");
 	map_check(*game);
 }

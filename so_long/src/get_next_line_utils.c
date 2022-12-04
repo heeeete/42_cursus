@@ -6,11 +6,12 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:53:38 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/03 20:44:39 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:44:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
+#include "../include/so_long.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -67,9 +68,7 @@ char	*ft_strdup(const char *s1)
 	char		*dest;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (0);
+	dest = (char *)wrap_malloc(sizeof(char) * (len + 1));
 	while (s1[i])
 	{
 		dest[i] = s1[i];
