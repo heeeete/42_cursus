@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:13:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 00:09:00 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:36:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	map_check(t_game game)
 		while (game.map[i][j])
 		{
 			if (game.map[0][j] != '1' || game.map[game.row_size - 1][j] != '1'
-				|| game.map[i][0] != '1' || game.map[i][game.col_size - 1] != '1')
+				|| game.map[i][0] != '1'
+				|| game.map[i][game.col_size - 1] != '1')
 				error("NOT VALID A MAP");
 			if (game.map[i][j] != '0' && game.map[i][j] != '1'
 				&& game.map[i][j] != 'C' && game.map[i][j] != 'E'
@@ -38,9 +39,9 @@ void	map_check(t_game game)
 
 void	size_check_map(t_game *game)
 {
-	int temp_cor_count;
+	int	temp_cor_count;
 	int	col_count;
-	int row_count;
+	int	row_count;
 
 	row_count = 0;
 	temp_cor_count = 0;
@@ -98,6 +99,7 @@ void	init(t_game *game, char *map_name)
 	game->mlx = mlx_init();
 	check_fd(game, map_name);
 	size_check_map(game);
-	game->win = mlx_new_window(game->mlx, game->col_size * IMG_SIZE, game->row_size * IMG_SIZE, "huipark");
+	game->win = mlx_new_window(game->mlx, game->col_size * IMG_SIZE,
+			game->row_size * IMG_SIZE, "huipark");
 	map_check(*game);
 }

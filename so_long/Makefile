@@ -1,10 +1,9 @@
 NAME	= so_long
 
 CC		= gcc
-# CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 MFLAGS 	= -lmlx -framework OpenGl -framework AppKit -Imlx
 MLX_DIR = mlx_opengl
-G = -g
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
@@ -27,7 +26,7 @@ OBJECTS			= $(SRC_OBJS)
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
-			$(CC) $(G) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
+			$(CC) $(CFLAGS) $(G) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
 
 bonus	:	$(BNAME)
 

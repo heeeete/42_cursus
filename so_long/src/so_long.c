@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 00:48:42 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:34:54 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_player	current_location_player(t_game game)
 {
 	t_player	player;
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (game.map[i])
@@ -39,16 +39,17 @@ t_player	current_location_player(t_game game)
 	return (player);
 }
 
-void	draw(t_game game, char *img_dir, int row, int col)
+void	draw(t_game *game, char *img_dir, int row, int col)
 {
 	void	*img;
 	int		widht;
 	int		height;
 
-	img = mlx_xpm_file_to_image(game.mlx, img_dir, &widht, &height);
+	img = mlx_xpm_file_to_image(game->mlx, img_dir, &widht, &height);
 	if (!img)
 		error ("IMG LOAD ERROR");
-	mlx_put_image_to_window(game.mlx, game.win, img, IMG_SIZE * col, IMG_SIZE * row);
+	mlx_put_image_to_window(game->mlx, game->win, img,
+		IMG_SIZE * col, IMG_SIZE * row);
 }
 
 void	check_elemnet(t_game *game, int row, int col)
@@ -57,20 +58,20 @@ void	check_elemnet(t_game *game, int row, int col)
 
 	element = game->map[row][col];
 	if (element == '1')
-		draw(*game, "./image/brick.xpm", row, col);
+		draw(game, "./image/brick.xpm", row, col);
 	else if (element == '0')
-		draw(*game, "./image/map.xpm", row, col);
+		draw(game, "./image/map.xpm", row, col);
 	else if (element == 'P')
-		draw(*game, "./image/pochita.xpm", row, col);
+		draw(game, "./image/pochita.xpm", row, col);
 	else if (element == 'C')
 	{
-		game->item_count++;
-		draw(*game, "./image/item.xpm", row, col);
+	game->item_count++;
+		draw(game, "./image/item.xpm", row, col);
 	}
 	else if (element == 'E')
 	{
-		draw(*game, "./image/map.xpm", row, col);
-		draw(*game, "./image/escape.xpm", row, col);
+		draw(game, "./image/map.xpm", row, col);
+		draw(game, "./image/escape.xpm", row, col);
 	}
 }
 
@@ -92,7 +93,7 @@ void	draw_image(t_game *game)
 	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_game	game;
 

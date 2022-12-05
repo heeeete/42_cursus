@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:09:47 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 00:23:24 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:34:16 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 typedef struct s_game{
 	void	*mlx;
 	void	*win;
+	void	*pochita;
 	char	**map;
 	int		col_size;
 	int		row_size;
@@ -48,16 +49,14 @@ typedef struct s_player{
 	int		col;
 }				t_player;
 
-
-
-void		init(t_game *game,  char *map_name);
+void		init(t_game *game, char *map_name);
 void		*wrap_malloc(size_t s);
 char		**ft_split(char const *s, char c);
 void		error(char *msg);
-int			exit_game(t_game *game);
+int			exit_game(void);
 int			press_key(int key_code, t_game *game);
 t_player	current_location_player(t_game game);
-void		draw(t_game game, char *img_dir, int row, int col);
-void	succsess_game();
+void		draw(t_game *game, char *img_dir, int row, int col);
+void		succsess_game(void);
 
 #endif
