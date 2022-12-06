@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:27:55 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 19:34:23 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/06 20:58:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,22 @@ int	exit_game(void)
 
 void	error(char *msg)
 {
-	printf("%s\n", msg);
+	int	len;
+	int	len2;
+
+	len = ft_strlen(msg) + 8;
+	len2 = ft_strlen(msg) + 8;
+	while (len--)
+	{
+		printf("-");
+	}
+	printf("\n");
+	printf("ERROR = %s\n", msg);
+	while (len2--)
+	{
+		printf("-");
+	}
+	printf("\n");
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:12:11 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 19:35:18 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:51:15 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	move_s(t_game *game)
 	else if (player.down == '0' || player.down == 'C')
 	{
 		if (player.down == 'C')
+		{
 			game->item_count--;
+			draw(game, "./image/map.xpm", player.row + 1, player.col);
+		}
 		draw(game, "./image/map.xpm", player.row, player.col);
 		draw(game, "./image/pochita.xpm", player.row + 1, player.col);
 		game->map[player.row][player.col] = '0';
@@ -43,7 +46,10 @@ void	move_w(t_game *game)
 	else if (player.up == '0' || player.up == 'C')
 	{
 		if (player.up == 'C')
+		{
 			game->item_count--;
+			draw(game, "./image/map.xpm", player.row - 1, player.col);
+		}
 		draw(game, "./image/map.xpm", player.row, player.col);
 		draw(game, "./image/pochita.xpm", player.row - 1, player.col);
 		game->map[player.row][player.col] = '0';
@@ -64,7 +70,10 @@ void	move_a(t_game *game)
 	else if (player.left == '0' || player.left == 'C')
 	{
 		if (player.left == 'C')
+		{
 			game->item_count--;
+			draw(game, "./image/map.xpm", player.row, player.col - 1);
+		}
 		draw(game, "./image/map.xpm", player.row, player.col);
 		draw(game, "./image/pochita_left.xpm", player.row, player.col - 1);
 		game->map[player.row][player.col] = '0';
@@ -85,7 +94,10 @@ void	move_d(t_game *game)
 	else if (player.right == '0' || player.right == 'C')
 	{
 		if (player.right == 'C')
+		{
 			game->item_count--;
+			draw(game, "./image/map.xpm", player.row, player.col + 1);
+		}
 		draw(game, "./image/map.xpm", player.row, player.col);
 		draw(game, "./image/pochita_right.xpm", player.row, player.col + 1);
 		game->map[player.row][player.col] = '0';

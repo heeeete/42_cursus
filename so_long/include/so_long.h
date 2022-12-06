@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:09:47 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 19:34:16 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/06 22:50:48 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@
 # define KEY_S			1
 # define KEY_D			2
 
+typedef struct s_check{
+	int	**visited;
+	int	x;
+	int	y;
+	int	item_count;
+	int	escape;
+}				t_check;
+
 typedef struct s_game{
 	void	*mlx;
 	void	*win;
@@ -38,6 +46,9 @@ typedef struct s_game{
 	int		row_size;
 	int		move_count;
 	int		item_count;
+	int		x;
+	int		y;
+	int		main_charecter_flag;
 }				t_game;
 
 typedef struct s_player{
@@ -58,5 +69,6 @@ int			press_key(int key_code, t_game *game);
 t_player	current_location_player(t_game game);
 void		draw(t_game *game, char *img_dir, int row, int col);
 void		succsess_game(void);
+void		dfs_check(t_game game);
 
 #endif

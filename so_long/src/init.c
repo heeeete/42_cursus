@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:13:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 19:36:00 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/06 21:09:56 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	init(t_game *game, char *map_name)
 {
 	game->move_count = 0;
 	game->item_count = 0;
+	game->main_charecter_flag = 0;
 	game->mlx = mlx_init();
 	check_fd(game, map_name);
 	size_check_map(game);

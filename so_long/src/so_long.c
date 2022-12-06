@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/05 19:34:54 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/06 22:34:42 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,19 @@ void	check_elemnet(t_game *game, int row, int col)
 	else if (element == '0')
 		draw(game, "./image/map.xpm", row, col);
 	else if (element == 'P')
+	{
 		draw(game, "./image/pochita.xpm", row, col);
+		game->y = row;
+		game->x = col;
+		game->main_charecter_flag++;
+	}
 	else if (element == 'C')
 	{
-	game->item_count++;
+		game->item_count++;
 		draw(game, "./image/item.xpm", row, col);
 	}
 	else if (element == 'E')
-	{
-		draw(game, "./image/map.xpm", row, col);
 		draw(game, "./image/escape.xpm", row, col);
-	}
 }
 
 void	draw_image(t_game *game)
@@ -91,6 +93,14 @@ void	draw_image(t_game *game)
 		}
 		i++;
 	}
+	if (game->main_charecter_flag != 1 || !game->item_count)
+		error("NOT VALID A MAP");
+}
+
+int	asd()
+{
+	printf("1 ");
+	return (0);
 }
 
 int	main(int argc, char *argv[])
@@ -101,7 +111,9 @@ int	main(int argc, char *argv[])
 		error("CHECK ARGC");
 	init(&game, argv[1]);
 	draw_image(&game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
-	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &exit_game, &game);
+	dfs_check(game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, press_key, &game);
+	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, exit_game, &game);
+	mlx_loop_hook(game.mlx, asd, &game);
 	mlx_loop(game.mlx);
 }

@@ -1,7 +1,7 @@
 NAME	= so_long
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 MFLAGS 	= -lmlx -framework OpenGl -framework AppKit -Imlx
 MLX_DIR = mlx_opengl
 
@@ -10,10 +10,11 @@ SRC_FILES 	=					\
 								$(SRC_DIR)so_long.c \
 								$(SRC_DIR)init.c \
 								$(SRC_DIR)utils.c \
-								$(SRC_DIR)utils2.c \
+								$(SRC_DIR)ft_split.c \
 								$(SRC_DIR)get_next_line.c \
 								$(SRC_DIR)get_next_line_utils.c \
-								$(SRC_DIR)move.c
+								$(SRC_DIR)move.c \
+								$(SRC_DIR)dfs.c
 
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)
@@ -26,7 +27,7 @@ OBJECTS			= $(SRC_OBJS)
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
-			$(CC) $(CFLAGS) $(G) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
+			$(CC) $(G) $(CFLAGS) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
 
 bonus	:	$(BNAME)
 
