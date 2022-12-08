@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 21:12:11 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/06 16:51:15 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:39:33 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	move_s(t_game *game)
 		printf("MOVEMENT : %d\n", ++game->move_count);
 	}
 	else if (player.down == 'E' && game->item_count == 0)
+	{
+		printf("MOVEMENT : %d\n", ++game->move_count);
 		succsess_game();
+	}
 }
 
 void	move_w(t_game *game)
@@ -57,7 +60,10 @@ void	move_w(t_game *game)
 		printf("MOVEMENT : %d\n", ++game->move_count);
 	}
 	else if (player.up == 'E' && game->item_count == 0)
+	{
+		printf("MOVEMENT : %d\n", ++game->move_count);
 		succsess_game();
+	}
 }
 
 void	move_a(t_game *game)
@@ -81,7 +87,10 @@ void	move_a(t_game *game)
 		printf("MOVEMENT : %d\n", ++game->move_count);
 	}
 	else if (player.left == 'E' && game->item_count == 0)
+	{
+		printf("MOVEMENT : %d\n", ++game->move_count);
 		succsess_game();
+	}
 }
 
 void	move_d(t_game *game)
@@ -105,7 +114,10 @@ void	move_d(t_game *game)
 		printf("MOVEMENT : %d\n", ++game->move_count);
 	}
 	else if (player.right == 'E' && game->item_count == 0)
+	{
+		printf("MOVEMENT : %d\n", ++game->move_count);
 		succsess_game();
+	}
 }
 
 int	press_key(int key_code, t_game *game)

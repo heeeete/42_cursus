@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:27:55 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/06 20:58:45 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:49:59 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	error(char *msg)
 
 void	succsess_game(void)
 {
+	printf("--------------------------\n");
 	printf("Congratulations! Success!\n");
+	printf("--------------------------\n");
 	exit(0);
 }

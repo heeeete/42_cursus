@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:13:35 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/06 21:09:56 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:51:49 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,13 @@ void	init(t_game *game, char *map_name)
 	game->item_count = 0;
 	game->main_charecter_flag = 0;
 	game->mlx = mlx_init();
+	if (!game->mlx)
+		error("MLX INIT ERROR");
 	check_fd(game, map_name);
 	size_check_map(game);
 	game->win = mlx_new_window(game->mlx, game->col_size * IMG_SIZE,
 			game->row_size * IMG_SIZE, "huipark");
+	if (!game->win)
+		error("MLX WINDOW OPEN ERROR");
 	map_check(*game);
 }

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 17:52:31 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/06 22:53:09 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:40:27 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	**copy_map(t_game game)
 }
 
 void	dfs(t_game *game, t_check *check, int x, int y)
-{//                     위 아래 왼족 오른쪽
+{
 	const int	add_x[4] = {0, 0, -1, 1};
 	const int	add_y[4] = {-1, 1, 0, 0};
 	int			move_x;
@@ -73,8 +73,6 @@ void	dfs_check(t_game game)
 	if (!check.escape || check.item_count)
 		error("NOT VALID A MAP");
 	while (i < game.row_size)
-	{
 		free (check.visited[i++]);
-	}
 	free (check.visited);
 }

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:37:26 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/03 20:42:38 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:56:01 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	4096
-#endif
+# endif
 
 # include <unistd.h>
 # include "so_long.h"
