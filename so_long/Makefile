@@ -1,6 +1,6 @@
 NAME	= so_long
 
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 MFLAGS 	= -lmlx -framework OpenGl -framework AppKit -Imlx
 MLX_DIR = mlx_opengl
@@ -28,7 +28,7 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
 			$(MAKE) -C mlx_opengl
-			$(CC) $(G) $(CFLAGS) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
+			$(CC) $(CFLAGS) -L./$(MLX_DIR) $(MFLAGS) $(OBJECTS) -o $(NAME)
 
 bonus	:	$(BNAME)
 

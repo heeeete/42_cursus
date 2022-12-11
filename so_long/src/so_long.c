@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:17:37 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/08 22:00:12 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/09 17:21:48 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int argc, char *argv[])
 	init(&game, argv[1]);
 	draw_image(&game);
 	dfs_check(game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, press_key, &game);
-	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, exit_game, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
+	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &exit_game, &game);
 	mlx_loop(game.mlx);
 }
