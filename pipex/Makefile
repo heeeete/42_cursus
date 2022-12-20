@@ -6,8 +6,9 @@ CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g3
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
 								$(SRC_DIR)pipex.c \
-								$(SRC_DIR)utils.c \
-								$(SRC_DIR)ft_split.c 
+								$(SRC_DIR)libft_utils.c \
+								$(SRC_DIR)ft_split.c \
+								$(SRC_DIR)pipex_utils.c
 
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)

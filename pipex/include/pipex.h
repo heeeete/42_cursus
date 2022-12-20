@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:43:36 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/17 18:36:50 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/20 19:48:11 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,4 @@ void	ft_perror(char *msg);
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_close(int fd, int fd2);

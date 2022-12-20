@@ -44,11 +44,9 @@ void	init(t_files *files, char *argv[], char *envp[])
 	char	*s_cmd;
 
 	files->infile = open(argv[1], O_RDONLY);
-	if (files->infile == -1)
-		ft_perror("ERROR");
 	files->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (files->outfile == -1)
-		ft_perror("ERROR");
+	if (files->outfile == -1 || files->infile == -1)
+		ft_perror("file open er");
 	get_path(files, envp);
 	files->temp1_cmd = ft_split(argv[2], ' ');
 	files->temp2_cmd = ft_split(argv[3], ' ');
@@ -60,6 +58,35 @@ void	init(t_files *files, char *argv[], char *envp[])
 	free(s_cmd);
 }
 
+void	run_command(t_files files, char *envp[])
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (pipe(fd) == -1)
+		perror("pipe error");
+	pid = fork();
+	if (pid == -1)
+		perror("fork error");
+	else if (pid > 0)
+	{
+		close(fd[WRITE]);
+		dup2(fd[READ], STDIN_FILENO);
+		dup2(files.outfile, STDOUT_FILENO);
+		ft_close(fd[READ], files.outfile);
+		wait(0);
+		execve(files.s_cmd, files.temp2_cmd, envp);
+	}
+	else
+	{
+		close(fd[READ]);
+		dup2(fd[WRITE], STDOUT_FILENO);
+		dup2(files.infile, STDIN_FILENO);
+		ft_close(fd[WRITE], files.infile);
+		execve(files.f_cmd, files.temp1_cmd, envp);
+	}
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
 	t_files	files;
@@ -67,4 +94,5 @@ int main(int argc, char *argv[], char *envp[])
 	if (argc != 5)
 		exit(0);
 	init(&files, argv, envp);
+	run_command(files, envp);
 }

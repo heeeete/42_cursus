@@ -1,23 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:18:22 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/17 18:36:38 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/20 19:47:04 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 #include <stdio.h>
-
-void	ft_perror(char *msg)
-{
-	perror(msg);
-	exit(1);
-}
 
 size_t	ft_strlen(const char *str)
 {
