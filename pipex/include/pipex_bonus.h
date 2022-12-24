@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:43:36 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/24 23:29:27 by huipark          ###   ########.fr       */
+/*   Updated: 2022/12/25 00:22:02 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_files
 {
 	int		infile;
 	int		outfile;
+	int		proc_cnt;
+	int		argc;
 	char	**path;
 	char	**cmd_options;
 	char	**cmd_options2;

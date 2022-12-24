@@ -1,4 +1,4 @@
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 #include <string.h>
 #include <errno.h>
 
@@ -44,12 +44,14 @@ void	get_path(t_files *files, char *envp[])
 	files->path = ft_split(envp[i], ':');
 }
 
-void	init(t_files *files, char *argv[], char *envp[])
+void	init(t_files *files, int argc, char *argv[], char *envp[])
 {
 	files->infile = open(argv[1], O_RDONLY);
-	files->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (files->outfile == -1 || files->infile == -1)
 		ft_perror();
+	files->argc = argc;
+	files->proc_cnt = 2;
 	get_path(files, envp);
 	files->cmd_options = ft_split(argv[2], ' ');
 	files->cmd_options2 = ft_split(argv[3], ' ');
@@ -64,23 +66,9 @@ void	run_command(t_files files, char *envp[])
 
 	if (pipe(fd) == -1)
 		ft_perror();
-	pid = fork();
-	if (pid == -1)
-		ft_perror();
-	else if (pid > 0)
+	while (files.proc_cnt < files.argc - 1)
 	{
-		close(fd[WRITE]);
-		ft_dup2(fd[READ], files.outfile);
-		ft_close(fd[READ], files.outfile);
-		wait(0);
-		execve(files.s_cmd, files.cmd_options2, envp);
-	}
-	else
-	{
-		close(fd[READ]);
-		ft_dup2(files.infile, fd[WRITE]);
-		ft_close(files.infile, fd[WRITE]);
-		execve(files.f_cmd, files.cmd_options, envp);
+
 	}
 }
 
@@ -90,6 +78,6 @@ int main(int argc, char *argv[], char *envp[])
 
 	if (argc != 5)
 		exit(1);
-	init(&files, argv, envp);
+	init(&files, argc, argv, envp);
 	run_command(files, envp);
 }

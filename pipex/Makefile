@@ -10,26 +10,33 @@ SRC_FILES 	=					\
 								$(SRC_DIR)ft_split.c \
 								$(SRC_DIR)pipex_utils.c
 
+BONUS_DIR	=	./bonus_src/
+BONUS_FILES	=					\
+								$(BONUS_DIR)pipex_bonus.c \
+								$(BONUS_DIR)libft_utils_bonus.c \
+								$(BONUS_DIR)ft_split_bonus.c \
+								$(BONUS_DIR)pipex_utils_bonus.c
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)
+BONUS_OBJS				=		$(BONUS_FILES:.c=.o)
 
-AR		= ar -crs
-RM		= rm -f
+ifdef WITH_BONUS
+	OBJECTS = $(BONUS_OBJS)
+else
+	OBJECTS = $(SRC_OBJS)
+endif
 
-OBJECTS			= $(SRC_OBJS)
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
 			$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
-bonus	:	$(BNAME)
-
-$(BNAME) :	$(OBJECTS_BONUS)
-			$(CC) $(OBJECTS_BONUS) -o $(BNAME)
+bonus	:	$(BONUS_OBJS)
+			make WITH_BONUS=1 all
 
 clean	:
-			$(RM) $(OBJECTS)
+			$(RM) $(SRC_OBJS) $(BONUS_OBJS)
 
 fclean	: 	clean
 			$(RM) $(NAME)
