@@ -67,8 +67,8 @@ void	execute(t_files *files, char *argv[], char *envp[])
 	if (files->proc_cnt == 2)
 	{
 		dup2(files->infile, STDIN_FILENO);
-		dup2(files->write_fd[WRITE], STDOUT_FILENO);
-		ft_close(files->infile, files->write_fd[WRITE]);
+		dup2(files->read_fd[WRITE], STDOUT_FILENO);
+		ft_close(files->infile, files->read_fd[WRITE]);
 		execve(files->cmd, files->cmd_options, envp);
 	}
 	else if (files->proc_cnt == files->argc - 2)
@@ -82,19 +82,24 @@ void	execute(t_files *files, char *argv[], char *envp[])
 	else
 	{
 		dup2(files->read_fd[READ], STDIN_FILENO);
-		dup2(files->write_fd[WRITE], STDOUT_FILENO);
-		ft_close(files->read_fd[READ], files->write_fd[WRITE]);
+		dup2(files->read_fd[WRITE], STDOUT_FILENO);
+		ft_close(files->read_fd[READ], files->read_fd[WRITE]);
 		execve(files->cmd, files->cmd_options, envp);
 	}
 }
 
 void	run_command(t_files *files, char *argv[], char *envp[])
 {
+	char *str;
+
+	str = malloc(1000);
+	memset(str,  0, 1000);
 	while (files->proc_cnt < files->argc - 1)
 	{
-		if (pipe(files->write_fd) == -1)
+		if (pipe(files->read_fd) == -1)
 			ft_perror();
-		// redirect_std_fd(files);
+		write(files->read_fd[1], str, 1000);
+		printf("1\n");
 		files->pid = fork();
 		if (files->pid == -1)
 			ft_perror();
@@ -103,8 +108,13 @@ void	run_command(t_files *files, char *argv[], char *envp[])
 		else
 		{
 			wait(0);
-			close(files->write_fd[WRITE]);
-			files->read_fd[0] = files->write_fd[0];
+			close(files->read_fd[WRITE]);
+			int size = read(files->read_fd[0], str, 10);
+			str[size] = '\0';
+			printf("%s\n", str);
+			// ft_close(files->read_fd[READ], files->write_fd[WRITE]);
+
+			// files->read_fd[0] = files->write_fd[0];
 			files->proc_cnt++;
 		}
 	}
