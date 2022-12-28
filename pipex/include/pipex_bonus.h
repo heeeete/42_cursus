@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "get_next_line.h"
 
 # define READ 0
 # define WRITE 1

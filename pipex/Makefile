@@ -15,7 +15,9 @@ BONUS_FILES	=					\
 								$(BONUS_DIR)pipex_bonus.c \
 								$(BONUS_DIR)libft_utils_bonus.c \
 								$(BONUS_DIR)ft_split_bonus.c \
-								$(BONUS_DIR)pipex_utils_bonus.c
+								$(BONUS_DIR)pipex_utils_bonus.c \
+								$(BONUS_DIR)get_next_line.c \
+								$(BONUS_DIR)get_next_line_utils.c
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)
 BONUS_OBJS				=		$(BONUS_FILES:.c=.o)

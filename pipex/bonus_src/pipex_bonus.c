@@ -43,10 +43,28 @@ void	get_path(t_files *files, char *envp[])
 	files->path = ft_split(envp[i], ':');
 }
 
+void	here_doc(t_files *files, char *argv[])
+{
+	char	*line;
+	if (pipe(files->write_fd) == -1)
+		ft_perror();
+	// close(files->write_fd[READ]);
+	while (1)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (!ft_strncmp(line, argv[2], ft_strlen(argv[2])))
+			break;
+		write(files->write_fd[WRITE], line, ft_strlen(line));
+		free(line);
+	}
+	printf("assdasd\n");
+	files->read_fd[0] = files->write_fd[0];
+	close(files->write_fd[WRITE]);
+	files->proc_cnt = 3;
+}
+
 void	init(t_files *files, int argc, char *argv[], char *envp[])
 {
-	files->infile = open(argv[1], O_RDONLY);
-	files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (files->outfile == -1 || files->infile == -1)
 		ft_perror();
 	files->argc = argc;
@@ -54,6 +72,16 @@ void	init(t_files *files, int argc, char *argv[], char *envp[])
 	if (pipe(files->read_fd) == -1)
 		ft_perror();
 	get_path(files, envp);
+	if (!ft_strncmp(argv[1], "here_doc", 8))
+	{
+		files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
+		here_doc(files, argv);
+	}
+	else
+	{
+		files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+		files->infile = open(argv[1], O_RDONLY);
+	}
 }
 
 void	execute(t_files *files, char *argv[], char *envp[])
@@ -88,13 +116,14 @@ void	execute(t_files *files, char *argv[], char *envp[])
 	}
 }
 
+
 void	run_command(t_files *files, char *argv[], char *envp[])
 {
+	close(files->read_fd[WRITE]);
 	while (files->proc_cnt < files->argc - 1)
 	{
 		if (pipe(files->write_fd) == -1)
 			ft_perror();
-		// redirect_std_fd(files);
 		files->pid = fork();
 		if (files->pid == -1)
 			ft_perror();
@@ -102,13 +131,13 @@ void	run_command(t_files *files, char *argv[], char *envp[])
 			execute(files, argv, envp);
 		else
 		{
-			wait(0);
 			close(files->write_fd[WRITE]);
 			files->read_fd[0] = files->write_fd[0];
 			files->proc_cnt++;
 		}
 	}
 }
+
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -118,5 +147,6 @@ int main(int argc, char *argv[], char *envp[])
 		exit(1);
 	init(&files, argc, argv, envp);
 	run_command(&files, argv, envp);
+	wait(0);
 	exit(0);
 }
