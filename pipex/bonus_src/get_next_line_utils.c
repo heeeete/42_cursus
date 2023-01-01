@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:53:38 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/03 19:24:26 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 21:59:49 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "../include/pipex_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -85,13 +85,13 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	size_t	s2_len;
 	char	*dest;
 
-	if (!s1)
-		return (ft_strdup(s2));
+	if (!s2)
+		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	dest = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!dest)
-		return (0);
+		return (NULL);
 	ft_strlcpy(dest, s1, s1_len + 1);
 	ft_strlcat(dest, s2, s1_len + s2_len + 1);
 	return (dest);

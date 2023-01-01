@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:43:36 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/24 23:29:27 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 20:29:14 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_files
 	char	*s_cmd;
 }			t_files;
 
-void	ft_perror(void);
+void	ft_perror(char *msg, int exit_status);
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);

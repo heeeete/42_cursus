@@ -6,11 +6,11 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:09:59 by huipark           #+#    #+#             */
-/*   Updated: 2022/09/03 19:19:52 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 20:18:28 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "../include/pipex_bonus.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {

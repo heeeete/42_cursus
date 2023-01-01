@@ -13,7 +13,6 @@ SRC_FILES 	=					\
 BONUS_DIR	=	./bonus_src/
 BONUS_FILES	=					\
 								$(BONUS_DIR)pipex_bonus.c \
-								$(BONUS_DIR)libft_utils_bonus.c \
 								$(BONUS_DIR)ft_split_bonus.c \
 								$(BONUS_DIR)pipex_utils_bonus.c \
 								$(BONUS_DIR)get_next_line.c \

@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_utils_bonus.c                                :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 18:18:22 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/25 00:17:22 by huipark          ###   ########.fr       */
+/*   Created: 2022/08/15 18:37:26 by huipark           #+#    #+#             */
+/*   Updated: 2023/01/01 20:20:11 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_bonus.h"
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
+# define BUFFER_SIZE 1024
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	while ((*s1 || *s2) && n > 0)
-	{
-		if (*s1 == *s2)
-		{
-			s1++;
-			s2++;
-			n--;
-		}
-		else
-			return (*(unsigned char *)s1 - *(unsigned char *)s2);
-	}
-	return (0);
-}
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strchr(const char *s, int c);
+char			*ft_strdup(const char *s1);
+char			*get_next_line(int fd);
+size_t			ft_strlen(const char *str);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+
+#endif

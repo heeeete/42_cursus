@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:18:22 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/25 00:48:20 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 21:01:56 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s2_len;
 	char	*dest;
 
+	if (!s2)
+		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	dest = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));

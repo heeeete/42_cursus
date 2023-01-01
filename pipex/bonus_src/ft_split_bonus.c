@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:49:33 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/25 00:11:19 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 22:33:11 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	row_cnt = row_count(s, c);
 	res = (char **)malloc(sizeof (char *) * (row_cnt + 1));
-	if (!res)
+	if (!res || *s == '\0')
 		return (0);
 	while (i < row_cnt)
 	{

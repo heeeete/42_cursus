@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split,c                                         :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:49:33 by huipark           #+#    #+#             */
-/*   Updated: 2022/12/15 18:49:57 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/01 22:24:31 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ char	**ft_split(char const *s, char c)
 	row_cnt = row_count(s, c);
 	res = (char **)malloc(sizeof (char *) * (row_cnt + 1));
 	if (!res)
-		return (0);
+		exit (1);
 	while (i < row_cnt)
 	{
-		while (*s && *s == c)
-			s++;
+		while (*s++ && *s == c)
+			;
 		res[i] = col_malloc(res[i], s, col_count(s, c));
 		if (!res[i])
 		{
