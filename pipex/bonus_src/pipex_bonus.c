@@ -10,7 +10,7 @@ char	*get_vaild_cmd(char **path, char *cmd)
 	i = 0;
 	temp_path = NULL;
 	if (access(cmd, X_OK) == 0)
-		return (ft_strdup(cmd));
+		return (cmd);
 	temp_cmd = ft_strjoin("/", cmd);
 	if (!temp_cmd)
 		exit (1);
@@ -19,7 +19,7 @@ char	*get_vaild_cmd(char **path, char *cmd)
 		temp_address = temp_path;
 		temp_path = ft_strjoin(path[i], temp_cmd);
 		free (temp_address);
-		if (access(temp_path, X_OK) != 0)
+		if (access(temp_path, X_OK) == 0)
 			return (temp_path);
 		i++;
 	}
@@ -29,7 +29,7 @@ char	*get_vaild_cmd(char **path, char *cmd)
 void	get_path(t_files *files, char *envp[])
 {
 	int	i = 0;
-	
+
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH", 4))
@@ -89,10 +89,10 @@ void	execute(t_files *files, char *argv[], char *envp[])
 {
 	files->cmd_options = ft_split(argv[files->proc_cnt], ' ');
 	if (!files->cmd_options)
-		ft_perror("not vaild cmd", 1);
+		ft_perror("empty string", 1);
 	files->cmd = get_vaild_cmd(files->path, files->cmd_options[0]);
 	if (!files->cmd)
-		ft_perror("asd", 1);
+		ft_perror("not valid cmd", 1);
 	if (files->proc_cnt == 2)
 	{
 		ft_dup2(files->infile, files->write_fd[WRITE]);

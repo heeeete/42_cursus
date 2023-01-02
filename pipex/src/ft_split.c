@@ -88,11 +88,11 @@ char	**ft_split(char const *s, char c)
 	row_cnt = row_count(s, c);
 	res = (char **)malloc(sizeof (char *) * (row_cnt + 1));
 	if (!res)
-		exit (1);
+		return (0);
 	while (i < row_cnt)
 	{
-		while (*s++ && *s == c)
-			;
+		while (*s && *s == c)
+			s++;
 		res[i] = col_malloc(res[i], s, col_count(s, c));
 		if (!res[i])
 		{
