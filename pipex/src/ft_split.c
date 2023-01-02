@@ -87,8 +87,8 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	row_cnt = row_count(s, c);
 	res = (char **)malloc(sizeof (char *) * (row_cnt + 1));
-	if (!res)
-		return (0);
+	if (!res || *s == '\0')
+		return (NULL);
 	while (i < row_cnt)
 	{
 		while (*s && *s == c)

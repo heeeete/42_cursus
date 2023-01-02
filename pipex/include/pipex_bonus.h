@@ -5,16 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 19:43:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/01 22:07:53 by huipark          ###   ########.fr       */
+/*   Created: 2023/01/02 22:14:34 by huipark           #+#    #+#             */
+/*   Updated: 2023/01/02 22:27:54 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "get_next_line_bonus.h"
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
+
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include "get_next_line_bonus.h"
 
 # define READ 0
 # define WRITE 1
@@ -33,10 +36,15 @@ typedef struct s_files
 	char	*cmd;
 }			t_files;
 
+void	init(t_files *files, int argc, char *argv[], char *envp[]);
+void	here_doc(t_files *files, char *argv[]);
 void	ft_perror(char *msg, int exit_status);
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_close(int fd, int fd2);
 void	ft_dup2(int fd, int fd2);
+void	get_path(t_files *files, char *envp[]);
 char	*ft_strdup(const char *s1);
+
+#endif

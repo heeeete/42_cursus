@@ -6,14 +6,17 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 19:43:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/01 20:29:14 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/02 22:25:14 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef PIPEX_H
+# define PIPEX_H
+
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 # define READ 0
 # define WRITE 1
@@ -37,3 +40,5 @@ void	ft_close(int fd, int fd2);
 void	ft_dup2(int fd, int fd2);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *str);
+
+#endif

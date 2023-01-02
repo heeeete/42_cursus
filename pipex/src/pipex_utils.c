@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:47:07 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/01 20:59:08 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/02 22:23:27 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ void	ft_dup2(int fd, int fd2)
 {
 	dup2(fd, STDIN_FILENO);
 	dup2(fd2, STDOUT_FILENO);
+	close(fd);
+	close(fd2);
 }

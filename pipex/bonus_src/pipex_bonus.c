@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 22:10:06 by huipark           #+#    #+#             */
+/*   Updated: 2023/01/02 22:18:36 by huipark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex_bonus.h"
 
 char	*get_vaild_cmd(char **path, char *cmd)
 {
-	int	i;
+	int		i;
 	char	*temp_address;
 	char	*temp_path;
 	char	*temp_cmd;
@@ -28,61 +40,19 @@ char	*get_vaild_cmd(char **path, char *cmd)
 
 void	get_path(t_files *files, char *envp[])
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH", 4))
 		{
 			envp[i] += 5;
-			break;
+			break ;
 		}
 		i++;
 	}
 	files->path = ft_split(envp[i], ':');
-}
-
-void	here_doc(t_files *files, char *argv[])
-{
-	char	*line;
-	if (pipe(files->write_fd) == -1)
-		ft_perror("pipe error", 1);
-	while (1)
-	{
-		line = get_next_line(STDIN_FILENO);
-		if (!ft_strncmp(line, argv[2], ft_strlen(argv[2])))
-			break;
-		write(files->write_fd[WRITE], line, ft_strlen(line));
-		free(line);
-	}
-	files->read_fd[0] = files->write_fd[0];
-	close(files->write_fd[WRITE]);
-	files->proc_cnt = 3;
-}
-
-void	init(t_files *files, int argc, char *argv[], char *envp[])
-{
-	files->argc = argc;
-	files->proc_cnt = 2;
-	if (pipe(files->read_fd) == -1)
-		ft_perror("pipe error", 1);
-	get_path(files, envp);
-	if (!ft_strncmp(argv[1], "here_doc", 8))
-	{
-		files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
-		if (files->outfile == -1)
-			ft_perror(argv[argc - 1], 1);
-		here_doc(files, argv);
-	}
-	else
-	{
-		files->infile = open(argv[1], O_RDONLY);
-		if (files->infile == -1)
-			ft_perror(argv[1], 1);
-		files->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-		if (files->outfile == -1)
-			ft_perror(argv[argc - 1], 1);
-	}
 }
 
 void	execute(t_files *files, char *argv[], char *envp[])
@@ -96,32 +66,31 @@ void	execute(t_files *files, char *argv[], char *envp[])
 	if (files->proc_cnt == 2)
 	{
 		ft_dup2(files->infile, files->write_fd[WRITE]);
-		ft_close(files->infile, files->write_fd[WRITE]);
 		execve(files->cmd, files->cmd_options, envp);
 	}
 	else if (files->proc_cnt == files->argc - 2)
 	{
-
 		ft_dup2(files->read_fd[READ], files->outfile);
-		ft_close(files->read_fd[READ], files->outfile);
 		execve(files->cmd, files->cmd_options, envp);
 	}
 	else
 	{
 		ft_dup2(files->read_fd[READ], files->write_fd[WRITE]);
-		ft_close(files->read_fd[READ], files->write_fd[WRITE]);
 		execve(files->cmd, files->cmd_options, envp);
 	}
 }
 
-
 void	run_command(t_files *files, char *argv[], char *envp[])
 {
-	close(files->read_fd[WRITE]);
+	int	fd;
+
 	while (files->proc_cnt < files->argc - 1)
 	{
-		if (pipe(files->write_fd) == -1)
-			ft_perror("pipe error", 1);
+		if (files->proc_cnt != files->argc - 2)
+		{
+			if (pipe(files->write_fd) == -1)
+				ft_perror("pipe error", 1);
+		}
 		files->pid = fork();
 		if (files->pid == -1)
 			ft_perror("fork error", 1);
@@ -130,14 +99,15 @@ void	run_command(t_files *files, char *argv[], char *envp[])
 		else
 		{
 			close(files->write_fd[WRITE]);
-			files->read_fd[0] = files->write_fd[0];
+			fd = files->read_fd[READ];
+			files->read_fd[READ] = files->write_fd[READ];
+			close(fd);
 			files->proc_cnt++;
 		}
 	}
 }
 
-
-int main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_files	files;
 
@@ -145,6 +115,8 @@ int main(int argc, char *argv[], char *envp[])
 		exit(1);
 	init(&files, argc, argv, envp);
 	run_command(&files, argv, envp);
-	wait(0);
+	while (wait(0) != -1)
+		;
+	system("leaks pipex");
 	exit(0);
 }

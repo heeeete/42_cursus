@@ -1,7 +1,7 @@
 NAME	= pipex
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS	= -Wall -Werror -Wextra
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
@@ -16,7 +16,8 @@ BONUS_FILES	=					\
 								$(BONUS_DIR)ft_split_bonus.c \
 								$(BONUS_DIR)pipex_utils_bonus.c \
 								$(BONUS_DIR)get_next_line.c \
-								$(BONUS_DIR)get_next_line_utils.c
+								$(BONUS_DIR)get_next_line_utils.c \
+								$(BONUS_DIR)init_bonus.c
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)
 BONUS_OBJS				=		$(BONUS_FILES:.c=.o)
