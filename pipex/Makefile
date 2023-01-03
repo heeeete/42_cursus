@@ -46,4 +46,4 @@ re		:
 			make fclean
 			make all
 
-.PHONY	: bonus all clean fclean re%
+.PHONY	: bonus all clean fclean re

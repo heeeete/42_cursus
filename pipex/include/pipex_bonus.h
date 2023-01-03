@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 22:14:34 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/02 22:27:54 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:33:29 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init(t_files *files, int argc, char *argv[], char *envp[]);
 void	here_doc(t_files *files, char *argv[]);
 void	ft_perror(char *msg, int exit_status);
 char	**ft_split(char const *s, char c);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_close(int fd, int fd2);

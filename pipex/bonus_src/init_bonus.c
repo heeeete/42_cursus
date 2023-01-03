@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 22:12:31 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/02 22:12:58 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:18:54 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init(t_files *files, int argc, char *argv[], char *envp[])
 		ft_perror("pipe error", 1);
 	close(files->read_fd[WRITE]);
 	get_path(files, envp);
-	if (!ft_strncmp(argv[1], "here_doc", 8))
+	if (!ft_strcmp(argv[1], "here_doc"))
 	{
 		files->outfile = open(argv[argc - 1],
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -38,4 +38,10 @@ void	init(t_files *files, int argc, char *argv[], char *envp[])
 		if (files->outfile == -1)
 			ft_perror(argv[argc - 1], 1);
 	}
+}
+
+void	ft_perror(char *msg, int exit_status)
+{
+	perror(msg);
+	exit(exit_status);
 }

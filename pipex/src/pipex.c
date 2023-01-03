@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 22:24:44 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/02 22:24:52 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:37:23 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ char	*get_vaild_cmd(char **path, char *cmd)
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	temp_cmd = ft_strjoin("/", cmd);
-	if (!temp_cmd)
-		exit (1);
 	while (path[i])
 	{
 		temp_address = temp_path;
 		temp_path = ft_strjoin(path[i], temp_cmd);
 		free (temp_address);
 		if (access(temp_path, X_OK) == 0)
+		{
+			free(temp_cmd);
 			return (temp_path);
+		}
 		i++;
 	}
+	free(temp_cmd);
 	return (NULL);
 }
 

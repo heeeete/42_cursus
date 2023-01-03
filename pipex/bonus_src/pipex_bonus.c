@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 22:10:06 by huipark           #+#    #+#             */
-/*   Updated: 2023/01/02 22:18:36 by huipark          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:32:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ int	main(int argc, char *argv[], char *envp[])
 	run_command(&files, argv, envp);
 	while (wait(0) != -1)
 		;
-	system("leaks pipex");
 	exit(0);
 }
