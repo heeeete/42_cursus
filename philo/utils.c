@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/02 19:56:54 by huipark          ###   ########.fr       */
+/*   Created: 2023/02/04 17:50:51 by huipark           #+#    #+#             */
+/*   Updated: 2023/02/04 17:51:54 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "./include/philo.h"
 
-void	p_function()
-
-int main()
+int	print_err(int error_code)
 {
-	pthread_t	p_th;
-	int			th_id;
-	char		*str = "thread creat";
-
+	static const char	*msg[] =
+	{
+		NULL,
+		"Error: Arguments has 5 or 6",
+		"Error: Arguments can only be number",
+		"Error: malloc fail",
+		"Error: mutex fail",
+		"Error: run time fail",
+	};
+	printf("%s\n", msg[error_code]);
+	return (FAILURE);
 }

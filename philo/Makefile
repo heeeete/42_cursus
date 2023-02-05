@@ -1,10 +1,13 @@
 NAME	= philo
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
 
-SRC_DIR		= 	./src/
-SRC_FILES 	=					\
+SRC_FILES 	=	main.c \
+				init_utils.c \
+				init.c \
+				utils.c
+
 
 
 SRC_OBJS				=		$(SRC_FILES:.c=.o)
