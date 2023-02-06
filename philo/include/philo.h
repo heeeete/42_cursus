@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/04 18:15:01 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/06 18:35:34 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ typedef struct	s_argv_info
 
 typedef struct	s_philo
 {
+	t_info			*info;
 	int				th_id;
 	pthread_t		pth;
-	pthread_mutex_t	l_fork;
-	int			r_fork;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
 }				t_philo;
 
 int		ft_atoi(const char *str);
 int		print_err(int error_code);
 int		init(int argc, char *argv[], t_info *info, t_philo **philo);
+int		philo_mutex_init(t_philo *philo);
 int		arguments_check(int argc, char *argv[]);
 
 #endif
