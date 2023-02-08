@@ -6,20 +6,18 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 14:48:22 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/06 20:37:57 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/08 18:31:40 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-int	arguments_check(int argc, char *argv[])
+int	arguments_check(char *argv[])
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	if (argc != 5 && argc != 6)
-		return (ARG_ERROR);
 	while (argv[i])
 	{
 		j = 0;

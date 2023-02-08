@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   simulate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 18:32:22 by huipark          ###   ########.fr       */
+/*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
+/*   Updated: 2023/02/08 23:01:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-int main(int argc, char *argv[])
+int	philo_pthread_create(t_philo *philo)
 {
-	t_info		info;
-	t_end_state	end_state;
-	t_philo		*philo;
-	int			error_code;
+	int	i;
 
-	if (argc != 5 && argc != 6)
-		return (ARG_ERROR);
-	error_code = init(argv, &info, &philo, &end_state);
-	if (error_code != 0)
-		return (print_err(error_code));
-	if (philo_mutex_init(philo))
-		return (print_err(MUTEX_ERROR));
-	simulate(philo);
+	i = 0;
+	while (i < philo->info->n_philo)
+	{
+		philo[i].start_time = get_ms_time();
+		philo[i].last_meal_time = philo[i].start_time;
+		if (pthread_create(&philo[i].pth, NULL, routine, &philo[i]))
+		{
+			//오류 났을때
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	simulate(t_philo *philo)
+{
+	time_t	start_time;
+
+	start_time = get_ms_time();
+	philo_pthread_create(philo);
+
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/06 18:36:27 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/08 23:01:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	philo_mutex_init(t_philo *philo)
 	int	i;
 
 	i = 0;
+	if (pthread_mutex_init(&philo[i].end_state->is_end_mutex, NULL))
+		return (MUTEX_ERROR);
 	while (i < philo->info->n_philo)
 	{
 		if (pthread_mutex_init(&(philo[i].fork), NULL))
@@ -42,7 +44,7 @@ int	philo_malloc(t_philo **philo, int n_philo)
 	return (SUCCESS);
 }
 
-void	philo_init(t_philo *philo, t_info *info)
+void	philo_init(t_philo *philo, t_info *info, t_end_state *end_state)
 {
 	int	i;
 
@@ -50,17 +52,20 @@ void	philo_init(t_philo *philo, t_info *info)
 	while (i < info->n_philo)
 	{
 		philo[i].info = info;
+		philo[i].end_state = end_state;
+		philo[i].th_id = i + 1;
+		philo[i].n_eat = 0;
 		philo[i].r_fork = &(philo[i].fork);
 		philo[i].l_fork = &(philo[(i + 1) % info->n_philo].fork);
 		i++;
 	}
 }
 
-int	init(int argc, char *argv[], t_info *info, t_philo **philo)
+int	init(char *argv[], t_info *info, t_philo **philo, t_end_state *end_state)
 {
 	int	error_code;
 
-	error_code = arguments_check(argc, argv);
+	error_code = arguments_check(argv);
 	if (error_code != 0)
 		return (error_code);
 	info->n_philo = ft_atoi(argv[1]);
@@ -74,6 +79,7 @@ int	init(int argc, char *argv[], t_info *info, t_philo **philo)
 	error_code = philo_malloc(philo, info->n_philo);
 	if (error_code != 0)
 		return (error_code);
-	philo_init(*philo, info);
+	philo_init(*philo, info, end_state);
+	end_state->is_end = 0;
 	return (SUCCESS);
 }

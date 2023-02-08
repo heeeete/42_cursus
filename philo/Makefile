@@ -6,7 +6,9 @@ CFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
 SRC_FILES 	=	main.c \
 				init_utils.c \
 				init.c \
-				utils.c
+				utils.c \
+				simulate.c \
+				routine.c
 
 
 

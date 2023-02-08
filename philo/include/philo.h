@@ -6,17 +6,20 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/06 18:35:34 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/08 22:53:17 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# define SUCCESS	0
+# define FAILURE	1
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 enum	e_error_code
 {
@@ -27,11 +30,20 @@ enum	e_error_code
 	RUNTIME_ERROR,
 };
 
-enum	e_return_status
+enum	e_philo_status
 {
-	SUCCESS,
-	FAILURE,
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE,
 };
+
+typedef struct s_end_state
+{
+	char			is_end;
+	pthread_mutex_t	is_end_mutex;
+}	t_end_state;
 
 typedef struct	s_argv_info
 {
@@ -45,17 +57,38 @@ typedef struct	s_argv_info
 typedef struct	s_philo
 {
 	t_info			*info;
-	int				th_id;
+	t_end_state		*end_state;
+	int				is_end;
+	int				id;
+	int				n_eat;
+	time_t			start_time;
+	time_t			last_meal_time;
 	pthread_t		pth;
+	pthread_mutex_t	is_end_mutex;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }				t_philo;
 
-int		ft_atoi(const char *str);
-int		print_err(int error_code);
-int		init(int argc, char *argv[], t_info *info, t_philo **philo);
+// init.c
+int	init(char *argv[], t_info *info, t_philo **philo, t_end_state *end_state);
 int		philo_mutex_init(t_philo *philo);
-int		arguments_check(int argc, char *argv[]);
+
+// init_utils.c
+int		arguments_check(char *argv[]);
+
+// util.c
+int		print_err(int error_code);
+int		ft_atoi(const char *str);
+int		print_state(t_philo *philo, int state);
+time_t	get_ms_time(void);
+time_t	get_time_passed_by(time_t start_time);
+
+// simulate.c
+int	simulate(t_philo *philo);
+
+// routine.c
+void	*routine(void *arg);
+int		solo_routine(void);
 
 #endif

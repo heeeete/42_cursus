@@ -1,30 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 18:32:22 by huipark          ###   ########.fr       */
+/*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
+/*   Updated: 2023/02/08 23:01:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-int main(int argc, char *argv[])
+int	eating(t_philo *philo)
 {
-	t_info		info;
-	t_end_state	end_state;
-	t_philo		*philo;
-	int			error_code;
+	pthread_mutex_lock(philo->l_fork);
+	print_state(philo, FORK);
+	pthread_mutex_lock(philo->r_fork);
+	print_state(philo, FORK);
 
-	if (argc != 5 && argc != 6)
-		return (ARG_ERROR);
-	error_code = init(argv, &info, &philo, &end_state);
-	if (error_code != 0)
-		return (print_err(error_code));
-	if (philo_mutex_init(philo))
-		return (print_err(MUTEX_ERROR));
-	simulate(philo);
+}
+
+int	solo_routine(void)
+{
+	//solo philo
+	return (0);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if (philo->info->n_philo == 1)
+		solo_routine();
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	while (1)
+	{
+
+	}
+	return (0);
 }
