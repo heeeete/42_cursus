@@ -6,19 +6,33 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 23:01:36 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/09 19:16:16 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-int	eating(t_philo *philo)
-{
-	pthread_mutex_lock(philo->l_fork);
-	print_state(philo, FORK);
-	pthread_mutex_lock(philo->r_fork);
-	print_state(philo, FORK);
 
+void	eating(t_philo *philo)
+{
+	take_fork(philo);
+	print_state(philo, EAT);
+	philo->last_meal_time = get_ms_time();
+	philo_action_time(philo->info->time_to_eat);
+	put_fork(philo);
+	philo->n_eat++;
+}
+
+void	sleeping(t_philo *philo)
+{
+	print_state(philo, SLEEP);
+	philo_action_time(philo->info->time_to_sleep);
+}
+
+void	thinking(t_philo *philo)
+{
+	print_state(philo, THINK);
+	// usleep(CONTEXT_SWITCHING);
 }
 
 int	solo_routine(void)
@@ -38,7 +52,9 @@ void	*routine(void *arg)
 		usleep(1000);
 	while (1)
 	{
-
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
 	return (0);
 }

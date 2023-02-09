@@ -6,12 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 22:53:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:27:42 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# define CONTEXT_SWITCHING	1000
 # define SUCCESS	0
 # define FAILURE	1
 
@@ -56,16 +57,14 @@ typedef struct	s_argv_info
 
 typedef struct	s_philo
 {
-	t_info			*info;
-	t_end_state		*end_state;
-	int				is_end;
+	t_info			*info;				//공유자원
+	t_end_state		*end_state;			//공유자원
 	int				id;
 	int				n_eat;
 	time_t			start_time;
 	time_t			last_meal_time;
 	pthread_t		pth;
-	pthread_mutex_t	is_end_mutex;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	fork;				//공유자원
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }				t_philo;
@@ -90,5 +89,10 @@ int	simulate(t_philo *philo);
 // routine.c
 void	*routine(void *arg);
 int		solo_routine(void);
+
+// rountine_utils.c
+void	put_fork(t_philo *philo);
+void	take_fork(t_philo *philo);
+void	philo_action_time(time_t time_to_wait);
 
 #endif

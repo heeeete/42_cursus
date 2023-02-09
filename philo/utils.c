@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:50:51 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 22:55:46 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:47:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 
 int	print_state(t_philo *philo, int state)
 {
-	int	curr_time;
+	time_t	curr_time;
+	const char	*cyan = "\033[0;036m";
+	const char	*yellow = "\033[0;033m";
+	const char	*blue = "\033[0;034m";
+	const char	*purple = "\033[0;035m";
+	const char	*red = "\033[0;031m";
+	const char	*reset = "\033[0m";
 
 	curr_time = get_time_passed_by(philo->start_time);
-	static const char	*msg[] =
-	{
-		"has taken fork",
-		"is eating",
-		"is sleeping",
-		"is thinking",
-		"died"
-	};
-	printf("%ld    %d    %s\n", curr_time, philo->id, state);
+	if (state == FORK)
+		printf("%s%ld  %d  has taken fork\n%s", cyan, curr_time,
+			philo->id, reset);
+	else if (state == EAT)
+		printf("%s%ld  %d  is eating\n%s", yellow, curr_time, philo->id, reset);
+	else if (state == SLEEP)
+		printf("%s%ld  %d  is sleeping\n%s", blue, curr_time, philo->id, reset);
+	else if (state == THINK)
+		printf("%s%ld  %d  is thinking\n%s", purple,curr_time, philo->id, reset);
+	else if (state == DIE)
+		printf("%s%ld  %d  died\n%s", red, curr_time, philo->id, reset);
+	return (0);
 }
 
 int	print_err(int error_code)

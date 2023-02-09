@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/08 23:01:37 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/09 17:59:20 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,7 @@ int	philo_mutex_init(t_philo *philo)
 
 int	philo_malloc(t_philo **philo, int n_philo)
 {
-	int	i;
-
-	i = 0;
 	*philo = (t_philo *)malloc(sizeof(t_philo) * n_philo);
-
 	if (*philo == NULL)
 		return (MALLOC_ERROR);
 	return (SUCCESS);
@@ -53,7 +49,7 @@ void	philo_init(t_philo *philo, t_info *info, t_end_state *end_state)
 	{
 		philo[i].info = info;
 		philo[i].end_state = end_state;
-		philo[i].th_id = i + 1;
+		philo[i].id = i + 1;
 		philo[i].n_eat = 0;
 		philo[i].r_fork = &(philo[i].fork);
 		philo[i].l_fork = &(philo[(i + 1) % info->n_philo].fork);

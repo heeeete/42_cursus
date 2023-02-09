@@ -8,7 +8,8 @@ SRC_FILES 	=	main.c \
 				init.c \
 				utils.c \
 				simulate.c \
-				routine.c
+				routine.c \
+				routine_utils.c
 
 
 
