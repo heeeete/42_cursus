@@ -6,39 +6,55 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/09 19:16:16 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/11 00:53:11 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
+int	is_end_monitoring(t_philo *philo)
+{
+	int	status;
 
-void	eating(t_philo *philo)
+	pthread_mutex_lock(&philo->info->is_die_mutex);
+	status = philo->info->die;
+	pthread_mutex_unlock(&philo->info->is_die_mutex);
+	return (status);
+}
+
+static int	eating(t_philo *philo)
 {
 	take_fork(philo);
-	print_state(philo, EAT);
+	pthread_mutex_lock(&philo->event->event);
 	philo->last_meal_time = get_ms_time();
+	pthread_mutex_unlock(&philo->event->event);
+	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
 	put_fork(philo);
 	philo->n_eat++;
+	return (is_end_monitoring(philo));
 }
 
-void	sleeping(t_philo *philo)
+static int	sleeping(t_philo *philo)
 {
 	print_state(philo, SLEEP);
 	philo_action_time(philo->info->time_to_sleep);
+	return (is_end_monitoring(philo));
 }
 
-void	thinking(t_philo *philo)
+static int	thinking(t_philo *philo)
 {
 	print_state(philo, THINK);
-	// usleep(CONTEXT_SWITCHING);
+	usleep(CONTEXT_SWITCHING);
+	return (is_end_monitoring(philo));
 }
 
-int	solo_routine(void)
+static void	*solo_routine(t_philo *philo)
 {
-	//solo philo
-	return (0);
+	pthread_mutex_lock(&philo->fork);
+	print_state(philo, FORK);
+	pthread_mutex_unlock(&philo->fork);
+	return (NULL);
 }
 
 void	*routine(void *arg)
@@ -47,14 +63,20 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->info->n_philo == 1)
-		solo_routine();
+		return (solo_routine(philo));
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(CONTEXT_SWITCHING);
 	while (1)
 	{
-		eating(philo);
-		sleeping(philo);
-		thinking(philo);
+		if ((philo->info->option != -1 &&
+			philo->n_eat == philo->info->option))
+			continue ;
+		if (eating(philo))
+			return (NULL);
+		if (sleeping(philo))
+			return (NULL);
+		if (thinking(philo))
+			return (NULL);
 	}
 	return (0);
 }
