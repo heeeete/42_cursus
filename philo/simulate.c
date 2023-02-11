@@ -1,0 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulate.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
+/*   Updated: 2023/02/11 22:15:41 by huipark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./include/philo.h"
+
+int	philo_ttd_check(t_philo *philo)
+{
+	int	i;
+	const char	*red = "\033[0;031m";
+
+	i = 0;
+	while (i < philo->info->n_philo)
+	{
+		if (philo[i].info->time_to_die <= get_time_passed_by(philo[i].last_meal_time))
+		{
+			philo->info->is_die = 1;
+			break ;
+		}
+		i++;
+	}
+	if (philo->info->is_die)
+		printf("%s%ld  %d  died\n\033[0m", red, get_time_passed_by(philo[i].start_time), philo[i].id);
+	return (philo->info->is_die);
+}
+
+int	philo_n_eat_check(t_philo *philo)
+{
+	return (philo->info->is_full);
+}
+
+void	*monitoring(t_philo *philo)
+{
+	while (1)
+	{
+		pthread_mutex_lock(&philo->event->is_die_mutex);
+		if (philo_ttd_check(philo))
+			return (NULL);
+		if (philo->info->option != -1)
+		{
+			if (philo_n_eat_check(philo))
+				return (NULL);
+		}
+		pthread_mutex_unlock(&philo->event->is_die_mutex);
+		usleep(CONTEXT_SWITCHING);
+	}
+	return (NULL);
+}
+
+// static void	*destroy_and_detach(t_philo *philo, int i)
+// {
+// 	int	j;
+
+// 	j = 0;
+// 	while (j < philo->info->n_philo)
+// 		pthread_mutex_destroy(&philo[j++].fork);
+// 	pthread_mutex_destroy(&philo->event->event);
+// 	i--;
+// 	while (i >= 0)
+// 		pthread_detach(philo[i--].pth);
+// 	return (NULL);
+// }
+
+void	*simulate(t_philo *philo)
+{
+	int		i;
+	time_t	start_time;
+
+	i = 0;
+	start_time = get_ms_time();
+	while (i < philo->info->n_philo)
+	{
+		philo[i].start_time = start_time;
+		philo[i].last_meal_time = start_time;
+		if (pthread_create(&philo[i].pth, NULL, routine, &philo[i]))
+			;
+			// return (destroy_and_detach(philo, i));
+		i++;
+	}
+	return (monitoring(philo));
+}
