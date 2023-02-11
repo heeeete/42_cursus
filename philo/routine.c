@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 00:53:11 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:28:33 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,19 @@ int	is_end_monitoring(t_philo *philo)
 {
 	int	status;
 
-	pthread_mutex_lock(&philo->info->is_die_mutex);
-	status = philo->info->die;
-	pthread_mutex_unlock(&philo->info->is_die_mutex);
+	pthread_mutex_lock(&philo->event->is_die_mutex);
+	status = philo->info->is_die;
+	pthread_mutex_unlock(&philo->event->is_die_mutex);
 	return (status);
 }
 
 static int	eating(t_philo *philo)
 {
 	take_fork(philo);
-	pthread_mutex_lock(&philo->event->event);
 	philo->last_meal_time = get_ms_time();
-	pthread_mutex_unlock(&philo->event->event);
 	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
 	put_fork(philo);
-	philo->n_eat++;
 	return (is_end_monitoring(philo));
 }
 

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 00:20:18 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:09:21 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	philo_mutex_init(t_philo *philo)
 	int	i;
 
 	i = 0;
-	if (pthread_mutex_init(&philo->event->event, NULL))
+	if (pthread_mutex_init(&philo->event->print, NULL))
 		return (MUTEX_ERROR);
-	if (pthread_mutex_init(&philo->info->is_die_mutex, NULL))
+	if (pthread_mutex_init(&philo->event->is_die_mutex, NULL))
 		return (MUTEX_ERROR);
 	while (i < philo->info->n_philo)
 	{
@@ -67,7 +67,8 @@ int	init(char *argv[], t_info *info, t_philo **philo, t_event *event)
 	error_code = arguments_check(argv);
 	if (error_code != 0)
 		return (error_code);
-	info->die = 0;
+	info->is_die = 0;
+	info->is_full = 0;
 	info->n_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);

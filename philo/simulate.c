@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 00:49:54 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:15:41 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,33 @@
 int	philo_ttd_check(t_philo *philo)
 {
 	int	i;
+	const char	*red = "\033[0;031m";
 
 	i = 0;
 	while (i < philo->info->n_philo)
 	{
 		if (philo[i].info->time_to_die <= get_time_passed_by(philo[i].last_meal_time))
 		{
-			pthread_mutex_lock(&philo->info->is_die_mutex);
-			philo->info->die = 1;
-			pthread_mutex_unlock(&philo->info->is_die_mutex);
-			print_state(&philo[i], DIE);
-			return (DIE);
+			philo->info->is_die = 1;
+			break ;
 		}
 		i++;
 	}
-	return (0);
+	if (philo->info->is_die)
+		printf("%s%ld  %d  died\n\033[0m", red, get_time_passed_by(philo[i].start_time), philo[i].id);
+	return (philo->info->is_die);
 }
 
 int	philo_n_eat_check(t_philo *philo)
 {
-	int	i;
-	int	n_count;
-
-	i = 0;
-	n_count = 0;
-	while (i < philo->info->n_philo)
-	{
-		if (philo[i++].n_eat >= philo->info->option)
-			n_count++;
-	}
-	if (n_count == philo->info->n_philo)
-		return (1);
-	else
-		return (0);
+	return (philo->info->is_full);
 }
 
 void	*monitoring(t_philo *philo)
 {
 	while (1)
 	{
+		pthread_mutex_lock(&philo->event->is_die_mutex);
 		if (philo_ttd_check(philo))
 			return (NULL);
 		if (philo->info->option != -1)
@@ -61,6 +49,7 @@ void	*monitoring(t_philo *philo)
 			if (philo_n_eat_check(philo))
 				return (NULL);
 		}
+		pthread_mutex_unlock(&philo->event->is_die_mutex);
 		usleep(CONTEXT_SWITCHING);
 	}
 	return (NULL);

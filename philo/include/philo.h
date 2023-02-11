@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 00:25:36 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/11 22:00:17 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ enum	e_philo_status
 
 typedef struct s_event
 {
-	pthread_mutex_t	event;
+	pthread_mutex_t	print;
+	pthread_mutex_t	is_die_mutex;
 }	t_event;
 
 typedef struct	s_argv_info
@@ -52,8 +53,8 @@ typedef struct	s_argv_info
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	option;
-	int	die;
-	pthread_mutex_t	is_die_mutex;
+	int	is_die;
+	int	is_full;
 }				t_info;
 
 typedef struct	s_philo
