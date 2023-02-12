@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/12 19:55:29 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/12 21:43:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_end_monitoring(t_philo *philo)
 	return (status);
 }
 
-static int	eating(t_philo *philo)
+static void	eating(t_philo *philo)
 {
 	take_fork(philo);
 	pthread_mutex_lock(&philo->event->is_die_mutex);
@@ -31,21 +31,21 @@ static int	eating(t_philo *philo)
 	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
 	put_fork(philo);
-	return (is_end_monitoring(philo));
+	// return (is_end_monitoring(philo));
 }
 
-static int	sleeping(t_philo *philo)
+static void	sleeping(t_philo *philo)
 {
 	print_state(philo, SLEEP);
 	philo_action_time(philo->info->time_to_sleep);
-	return (is_end_monitoring(philo));
+	// return (is_end_monitoring(philo));
 }
 
-static int	thinking(t_philo *philo)
+static void	thinking(t_philo *philo)
 {
 	print_state(philo, THINK);
 	usleep(CONTEXT_SWITCHING);
-	return (is_end_monitoring(philo));
+	// return (is_end_monitoring(philo));
 }
 
 static void	*solo_routine(t_philo *philo)
@@ -67,20 +67,12 @@ void	*routine(void *arg)
 		usleep(CONTEXT_SWITCHING);
 	while (1)
 	{
-		printf("is die = %d\n", philo->info->is_die);
 		if ((philo->info->option != -1 &&
 			philo->n_eat == philo->info->option))
 			continue ;
-		if (eating(philo))
-			return (NULL);
-		if (sleeping(philo))
-			return (NULL);
-		if (thinking(philo))
-			return (NULL);
-
-		// eating(philo);
-		// sleeping(philo);
-		// thinking(philo);
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
 	return (0);
 }
