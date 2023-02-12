@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:59:30 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 21:45:30 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/12 16:47:03 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,10 @@
 
 void	take_fork(t_philo *philo)
 {
-	if (philo->info->n_philo % 2)
-	{
 		pthread_mutex_lock(philo->l_fork);
 		print_state(philo, FORK);
 		pthread_mutex_lock(philo->r_fork);
 		print_state(philo, FORK);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->r_fork);
-		print_state(philo, FORK);
-		pthread_mutex_lock(philo->l_fork);
-		print_state(philo, FORK);
-	}
 }
 
 void	put_fork(t_philo *philo)

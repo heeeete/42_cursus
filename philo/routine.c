@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 22:28:33 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/12 19:55:29 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	is_end_monitoring(t_philo *philo)
 static int	eating(t_philo *philo)
 {
 	take_fork(philo);
+	pthread_mutex_lock(&philo->event->is_die_mutex);
 	philo->last_meal_time = get_ms_time();
+	pthread_mutex_unlock(&philo->event->is_die_mutex);
 	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
 	put_fork(philo);
@@ -65,6 +67,7 @@ void	*routine(void *arg)
 		usleep(CONTEXT_SWITCHING);
 	while (1)
 	{
+		printf("is die = %d\n", philo->info->is_die);
 		if ((philo->info->option != -1 &&
 			philo->n_eat == philo->info->option))
 			continue ;
@@ -74,6 +77,10 @@ void	*routine(void *arg)
 			return (NULL);
 		if (thinking(philo))
 			return (NULL);
+
+		// eating(philo);
+		// sleeping(philo);
+		// thinking(philo);
 	}
 	return (0);
 }

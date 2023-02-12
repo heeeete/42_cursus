@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 22:15:41 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/12 19:56:17 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	*monitoring(t_philo *philo)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->event->is_die_mutex);
-		if (philo_ttd_check(philo))
+		if (philo_ttd_check(philo)) {
+			pthread_mutex_unlock(&philo->event->is_die_mutex);
 			return (NULL);
+		}
 		if (philo->info->option != -1)
 		{
 			if (philo_n_eat_check(philo))
