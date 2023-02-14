@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:59:30 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/12 16:47:03 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/14 15:31:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ void	take_fork(t_philo *philo)
 
 void	put_fork(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->event->is_die_mutex);
-	philo->n_eat++;
-	if (philo->n_eat == philo->info->option)
-		philo->info->is_full = 1;
-	pthread_mutex_unlock(&philo->event->is_die_mutex);
+// 	pthread_mutex_lock(&philo->event->is_die_mutex);
+// 	pthread_mutex_unlock(&philo->event->is_die_mutex);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }

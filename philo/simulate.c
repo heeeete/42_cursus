@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/12 19:56:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/14 15:30:08 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,16 @@ int	philo_ttd_check(t_philo *philo)
 
 int	philo_n_eat_check(t_philo *philo)
 {
-	return (philo->info->is_full);
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (philo[i++].n_eat == philo->info->option)
+		cnt++;
+	if (cnt == philo->info->option)
+		return (1);
+	return (0);
 }
 
 void	*monitoring(t_philo *philo)
@@ -42,14 +51,18 @@ void	*monitoring(t_philo *philo)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->event->is_die_mutex);
-		if (philo_ttd_check(philo)) {
+		if (philo_ttd_check(philo))
+		{
 			pthread_mutex_unlock(&philo->event->is_die_mutex);
 			return (NULL);
 		}
 		if (philo->info->option != -1)
 		{
 			if (philo_n_eat_check(philo))
+			{
+				pthread_mutex_unlock(&philo->event->is_die_mutex);
 				return (NULL);
+			}
 		}
 		pthread_mutex_unlock(&philo->event->is_die_mutex);
 		usleep(CONTEXT_SWITCHING);
