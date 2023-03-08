@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/14 15:30:06 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/08 17:54:04 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	*routine(void *arg)
 		return (solo_routine(philo));
 	if (philo->id % 2 == 0)
 		usleep(CONTEXT_SWITCHING);
+		// philo_action_time(philo->info->time_to_eat);
 	while (1)
 	{
 		eating(philo);

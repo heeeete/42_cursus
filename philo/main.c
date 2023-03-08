@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/14 15:06:21 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/16 21:10:08 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	int			error_code;
 
 	if (argc != 5 && argc != 6)
-		return (ARG_ERROR);
+		return (print_err(ARG_ERROR));
 	error_code = init(argv, &info, &philo, event);
 	if (error_code != 0)
 		return (print_err(error_code));

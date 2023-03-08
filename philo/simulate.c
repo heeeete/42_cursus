@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/14 15:30:08 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/08 17:56:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int	philo_ttd_check(t_philo *philo)
 		if (philo[i].info->time_to_die <= get_time_passed_by(philo[i].last_meal_time))
 		{
 			philo->info->is_die = 1;
+			printf("%s%ld  %d  died\n\033[0m", red, get_time_passed_by(philo[i].start_time), philo[i].id);
 			break ;
 		}
 		i++;
 	}
-	if (philo->info->is_die)
-		printf("%s%ld  %d  died\n\033[0m", red, get_time_passed_by(philo[i].start_time), philo[i].id);
 	return (philo->info->is_die);
 }
 
