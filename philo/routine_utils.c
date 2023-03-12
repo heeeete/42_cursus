@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:59:30 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/08 15:25:15 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/12 20:22:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	philo_action_time(time_t time_to_wait)
 	time_t	start_time;
 
 	start_time = get_ms_time();
+	usleep(time_to_wait * 1000 * 0.8);
 	while (get_time_passed_by(start_time) < time_to_wait)
-		usleep(CONTEXT_SWITCHING);
+		;
+		// usleep(CONTEXT_SWITCHING)
 }

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/08 17:56:45 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/12 21:17:51 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,7 @@ int	philo_ttd_check(t_philo *philo)
 
 int	philo_n_eat_check(t_philo *philo)
 {
-	int	i;
-	int	cnt;
-
-	i = 0;
-	cnt = 0;
-	while (philo[i++].n_eat == philo->info->option)
-		cnt++;
-	if (cnt == philo->info->option)
+	if (philo->info->is_full == philo->info->n_philo)
 		return (1);
 	return (0);
 }
@@ -64,24 +57,24 @@ void	*monitoring(t_philo *philo)
 			}
 		}
 		pthread_mutex_unlock(&philo->event->is_die_mutex);
-		usleep(CONTEXT_SWITCHING);
+		usleep(100);
 	}
 	return (NULL);
 }
 
-// static void	*destroy_and_detach(t_philo *philo, int i)
-// {
-// 	int	j;
+static void	*detach(t_philo *philo, int i)
+{
+	int	j;
 
-// 	j = 0;
-// 	while (j < philo->info->n_philo)
-// 		pthread_mutex_destroy(&philo[j++].fork);
-// 	pthread_mutex_destroy(&philo->event->event);
-// 	i--;
-// 	while (i >= 0)
-// 		pthread_detach(philo[i--].pth);
-// 	return (NULL);
-// }
+	j = 0;
+	while (j < philo->info->n_philo)
+		pthread_mutex_destroy(&philo[j++].fork);
+	pthread_mutex_destroy(&philo->event->event);
+	i--;
+	while (i >= 0)
+		pthread_detach(philo[i--].pth);
+	return (NULL);
+}
 
 void	*simulate(t_philo *philo)
 {
@@ -96,7 +89,7 @@ void	*simulate(t_philo *philo)
 		philo[i].last_meal_time = start_time;
 		if (pthread_create(&philo[i].pth, NULL, routine, &philo[i]))
 			;
-			// return (destroy_and_detach(philo, i));
+			// return (detach(philo, i));
 		i++;
 	}
 	return (monitoring(philo));

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/08 17:54:04 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/12 20:50:14 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static void	eating(t_philo *philo)
 	philo->last_meal_time = get_ms_time();
 	philo->n_eat++;
 	if (philo->n_eat == philo->info->option)
-		philo->info->is_full = 1;
+	{
+		philo->info->is_full++;
+	}
 	pthread_mutex_unlock(&philo->event->is_die_mutex);
 	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
@@ -54,8 +56,8 @@ void	*routine(void *arg)
 	if (philo->info->n_philo == 1)
 		return (solo_routine(philo));
 	if (philo->id % 2 == 0)
-		usleep(CONTEXT_SWITCHING);
-		// philo_action_time(philo->info->time_to_eat);
+		// usleep(CONTEXT_SWITCHING);
+		philo_action_time(philo->info->time_to_eat);
 	while (1)
 	{
 		eating(philo);

@@ -6,21 +6,16 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/16 21:10:08 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/12 21:17:45 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-static int	destroy_and_detach(t_philo *philo)
+static int	detach(t_philo *philo)
 {
 	int	i;
 
-	i = 0;
-	// while (i < philo->info->n_philo)
-	// 	pthread_mutex_destroy(&philo[i++].fork);
-	// pthread_mutex_destroy(&philo->event->print);
-	// pthread_mutex_destroy(&philo->event->is_die_mutex);
 	i = 0;
 	while (i < philo->info->n_philo)
 		pthread_detach(philo[i++].pth);
@@ -42,7 +37,7 @@ int main(int argc, char *argv[])
 	if (philo_mutex_init(philo))
 		return (print_err(MUTEX_ERROR));
 	simulate(philo);
-	destroy_and_detach(philo);
+	detach(philo);
 	// int	i = 0;
 	// while (i < philo->info->n_philo)
 	// {
