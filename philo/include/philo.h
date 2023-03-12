@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 22:00:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/16 20:06:29 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum	e_error_code
 	MALLOC_ERROR,
 	MUTEX_ERROR,
 	RUNTIME_ERROR,
+	BIG,
 };
 
 enum	e_philo_status
@@ -79,11 +80,11 @@ int		philo_mutex_init(t_philo *philo);
 int		arguments_check(char *argv[]);
 
 // util.c
-int		print_err(int error_code);
-int		ft_atoi(const char *str);
-int		print_state(t_philo *philo, int state);
-time_t	get_ms_time(void);
-time_t	get_time_passed_by(time_t start_time);
+int			print_err(int error_code);
+long long	ft_atoi(const char *str);
+int			print_state(t_philo *philo, int state);
+time_t		get_ms_time(void);
+time_t		get_time_passed_by(time_t start_time);
 
 // simulate.c
 void	*simulate(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/11 22:09:21 by huipark          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:26:30 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ int	philo_mutex_init(t_philo *philo)
 	while (i < philo->info->n_philo)
 	{
 		if (pthread_mutex_init(&(philo[i].fork), NULL))
-			;
-		// {
-		// 	while (i--)
-		// 		pthread_mutex_destroy((&philo[i].fork));
-		// 	return (MUTEX_ERROR);
-		// }
+			return (MUTEX_ERROR);
 		i++;
 	}
 	return (SUCCESS);
