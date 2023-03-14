@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/12 21:17:45 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:13:44 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,4 @@ int main(int argc, char *argv[])
 		return (print_err(MUTEX_ERROR));
 	simulate(philo);
 	detach(philo);
-	// int	i = 0;
-	// while (i < philo->info->n_philo)
-	// {
-	// 	pthread_join(philo[i].pth, NULL);
-	// 	i++;
-	// 	printf("QWe\n");
-	// }
 }

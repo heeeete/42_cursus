@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/16 20:06:29 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:57:24 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ enum	e_philo_status
 
 typedef struct s_event
 {
-	pthread_mutex_t	print;
+	pthread_mutex_t	event;
 	pthread_mutex_t	is_die_mutex;
 }	t_event;
 

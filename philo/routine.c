@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/12 20:50:14 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:39:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	eating(t_philo *philo)
 {
 	take_fork(philo);
-	pthread_mutex_lock(&philo->event->is_die_mutex);
+	pthread_mutex_lock(&philo->event->event);
 	philo->last_meal_time = get_ms_time();
 	philo->n_eat++;
 	if (philo->n_eat == philo->info->option)
 	{
 		philo->info->is_full++;
 	}
-	pthread_mutex_unlock(&philo->event->is_die_mutex);
+	pthread_mutex_unlock(&philo->event->event);
 	print_state(philo, EAT);
 	philo_action_time(philo->info->time_to_eat);
 	put_fork(philo);
@@ -37,7 +37,6 @@ static void	sleeping(t_philo *philo)
 static void	thinking(t_philo *philo)
 {
 	print_state(philo, THINK);
-	// usleep(CONTEXT_SWITCHING);
 }
 
 static void	*solo_routine(t_philo *philo)
@@ -56,13 +55,20 @@ void	*routine(void *arg)
 	if (philo->info->n_philo == 1)
 		return (solo_routine(philo));
 	if (philo->id % 2 == 0)
-		// usleep(CONTEXT_SWITCHING);
 		philo_action_time(philo->info->time_to_eat);
 	while (1)
 	{
+		if (philo->info->is_die)
+			return (NULL);
 		eating(philo);
+		if (philo->info->is_die)
+			return (NULL);
 		sleeping(philo);
+		if (philo->info->is_die)
+			return (NULL);
 		thinking(philo);
+		if (philo->info->is_die)
+			return (NULL);
 	}
 	return (0);
 }
