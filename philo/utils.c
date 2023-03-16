@@ -6,58 +6,38 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:50:51 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/14 16:51:03 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/17 02:36:28 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philo.h"
 
-// int	print_state(t_philo *philo, int state)
-// {
-// 	time_t	curr_time;
-
-// 	pthread_mutex_lock(&philo->event->is_die_mutex);
-// 	curr_time = get_time_passed_by(philo->start_time);
-// 	if (state == FORK && philo->info->is_die == 0)
-// 		printf("%ld  %d  has taken fork\n", curr_time,
-// 			philo->id);
-// 	else if (state == EAT && philo->info->is_die == 0)
-// 		printf("%ld  %d  is eating\n", curr_time, philo->id);
-// 	else if (state == SLEEP && philo->info->is_die == 0)
-// 		printf("%ld  %d  is sleeping\n", curr_time, philo->id);
-// 	else if (state == THINK && philo->info->is_die == 0)
-// 		printf("%ld  %d  is thinking\n",curr_time, philo->id);
-// 	pthread_mutex_unlock(&philo->event->is_die_mutex);
-// 	return (0);
-// }
-
 int	print_state(t_philo *philo, int state)
 {
-	time_t	curr_time;
+	time_t		curr_time;
 	const char	*cyan = "\033[0;036m";
 	const char	*yellow = "\033[0;033m";
 	const char	*blue = "\033[0;034m";
 	const char	*purple = "\033[0;035m";
-	const char	*reset = "\033[0m";
 
 	pthread_mutex_lock(&philo->event->is_die_mutex);
 	curr_time = get_time_passed_by(philo->start_time);
 	if (state == FORK && philo->info->is_die == 0)
-		printf("%s%ld  %d  has taken fork\n%s", cyan, curr_time,
-			philo->id, reset);
+		printf("%s%ld %d has taken fork\n\033[0m", cyan, curr_time,
+			philo->id);
 	else if (state == EAT && philo->info->is_die == 0)
-		printf("%s%ld  %d  is eating\n%s", yellow, curr_time, philo->id, reset);
+		printf("%s%ld %d is eating\n\033[0m", yellow, curr_time, philo->id);
 	else if (state == SLEEP && philo->info->is_die == 0)
-		printf("%s%ld  %d  is sleeping\n%s", blue, curr_time, philo->id, reset);
+		printf("%s%ld %d is sleeping\n\033[0m", blue, curr_time, philo->id);
 	else if (state == THINK && philo->info->is_die == 0)
-		printf("%s%ld  %d  is thinking\n%s", purple,curr_time, philo->id, reset);
+		printf("%s%ld %d is thinking\n\033[0m", purple, curr_time, philo->id);
 	pthread_mutex_unlock(&philo->event->is_die_mutex);
 	return (0);
 }
 
 int	print_err(int error_code)
 {
-	static const char	*msg[] =
+	static const char	*msg[] = \
 	{
 		NULL,
 		"Error: [n_philo] [ttd] [tte] [tts] [option]",
@@ -67,6 +47,7 @@ int	print_err(int error_code)
 		"Error: run time fail",
 		"Error: too big number"
 	};
+
 	printf("%s\n", msg[error_code]);
 	return (FAILURE);
 }

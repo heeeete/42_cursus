@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:05:40 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/14 16:13:44 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/17 02:38:49 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static int	detach(t_philo *philo)
 	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_info		info;
-	t_event		*event = malloc(sizeof(t_event));
+	t_event		*event;
 	t_philo		*philo;
 	int			error_code;
 
 	if (argc != 5 && argc != 6)
 		return (print_err(ARG_ERROR));
-	error_code = init(argv, &info, &philo, event);
+	error_code = init(argv, &info, &philo, &event);
 	if (error_code != 0)
 		return (print_err(error_code));
 	if (philo_mutex_init(philo))

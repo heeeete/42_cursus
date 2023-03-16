@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/14 16:33:46 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/17 03:10:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	philo_ttd_check(t_philo *philo)
 {
-	int	i;
-	const char	*red = "\033[0;031m";
+	int					i;
+	const char			*red = "\033[0;031m";
 
 	i = 0;
 	while (i < philo->info->n_philo)

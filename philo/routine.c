@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 21:51:39 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/14 16:39:00 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/17 01:53:03 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static void	thinking(t_philo *philo)
 
 static void	*solo_routine(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->fork);
+	pthread_mutex_lock(philo->mr_fork);
+	*philo->r_fork = 1;
 	print_state(philo, FORK);
-	pthread_mutex_unlock(&philo->fork);
+	pthread_mutex_unlock(philo->mr_fork);
 	return (NULL);
 }
 
@@ -58,17 +59,9 @@ void	*routine(void *arg)
 		philo_action_time(philo->info->time_to_eat);
 	while (1)
 	{
-		if (philo->info->is_die)
-			return (NULL);
 		eating(philo);
-		if (philo->info->is_die)
-			return (NULL);
 		sleeping(philo);
-		if (philo->info->is_die)
-			return (NULL);
 		thinking(philo);
-		if (philo->info->is_die)
-			return (NULL);
 	}
 	return (0);
 }
