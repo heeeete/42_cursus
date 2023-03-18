@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/17 02:40:01 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 17:56:03 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum	e_error_code
 	MALLOC_ERROR,
 	MUTEX_ERROR,
 	RUNTIME_ERROR,
-	BIG,
+	TO_BIG,
 };
 
 enum	e_philo_status

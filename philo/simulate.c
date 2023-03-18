@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/17 03:10:10 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 18:48:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int	philo_ttd_check(t_philo *philo)
 	while (i < philo->info->n_philo)
 	{
 		pthread_mutex_lock(&philo->event->event);
-		if (philo[i].info->time_to_die <= get_time_passed_by(philo[i].last_meal_time))
+		if (philo[i].info->time_to_die <= \
+		get_time_passed_by(philo[i].last_meal_time))
 		{
 			pthread_mutex_lock(&philo->event->is_die_mutex);
 			philo->info->is_die = 1;
-			pthread_mutex_unlock(&philo->event->is_die_mutex);
-			printf("%s%ld  %d  died\n\033[0m", red, get_time_passed_by(philo[i].start_time), philo[i].id);
+			printf("%s%ld  %d  died\n\033[0m", \
+			red, get_time_passed_by(philo[i].start_time), philo[i].id);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->event->event);
