@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/16 20:06:29 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:53:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # define SUCCESS	0
 # define FAILURE	1
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <sys/time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 enum	e_error_code
 {
@@ -29,7 +29,7 @@ enum	e_error_code
 	MALLOC_ERROR,
 	MUTEX_ERROR,
 	RUNTIME_ERROR,
-	BIG,
+	TO_BIG,
 };
 
 enum	e_philo_status
@@ -43,41 +43,43 @@ enum	e_philo_status
 
 typedef struct s_event
 {
-	pthread_mutex_t	print;
+	pthread_mutex_t	event;
 	pthread_mutex_t	is_die_mutex;
-}	t_event;
+}				t_event;
 
-typedef struct	s_argv_info
+typedef struct s_argv_info
 {
 	int	n_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	option;
-	int	is_die;
 	int	is_full;
 }				t_info;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
-	t_info			*info;				//공유자원
-	t_event			*event;			//공유자원
+	t_info			*info;
+	t_event			*event;
 	int				id;
 	int				n_eat;
 	time_t			start_time;
 	time_t			last_meal_time;
 	pthread_t		pth;
-	pthread_mutex_t	fork;
-	pthread_mutex_t	*l_fork;			//공유자원
-	pthread_mutex_t	*r_fork;			//공유자원
+	pthread_mutex_t	m_fork;
+	pthread_mutex_t	*ml_fork;
+	pthread_mutex_t	*mr_fork;
+	int				fork;
+	int				*l_fork;
+	int				*r_fork;
 }				t_philo;
 
 // init.c
-int		init(char *argv[], t_info *info, t_philo **philo, t_event *event);
-int		philo_mutex_init(t_philo *philo);
+int			init(char *argv[], t_info *info, t_philo **philo, t_event **event);
+int			philo_mutex_init(t_philo *philo);
 
 // init_utils.c
-int		arguments_check(char *argv[]);
+int			arguments_check(char *argv[]);
 
 // util.c
 int			print_err(int error_code);
@@ -87,15 +89,15 @@ time_t		get_ms_time(void);
 time_t		get_time_passed_by(time_t start_time);
 
 // simulate.c
-void	*simulate(t_philo *philo);
-int		philo_ttd_check(t_philo *philo);
+void		*simulate(t_philo *philo);
+int			philo_ttd_check(t_philo *philo);
 
 // routine.c
-void	*routine(void *arg);
+void		*routine(void *arg);
 
 // rountine_utils.c
-void	put_fork(t_philo *philo);
-void	take_fork(t_philo *philo);
-void	philo_action_time(time_t time_to_wait);
+void		put_fork(t_philo *philo);
+void		take_fork(t_philo *philo);
+void		philo_action_time(time_t time_to_wait);
 
 #endif

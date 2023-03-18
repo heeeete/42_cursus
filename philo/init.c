@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/02/16 15:26:30 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:52:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	philo_mutex_init(t_philo *philo)
 	int	i;
 
 	i = 0;
-	if (pthread_mutex_init(&philo->event->print, NULL))
+	if (pthread_mutex_init(&philo->event->event, NULL))
 		return (MUTEX_ERROR);
 	if (pthread_mutex_init(&philo->event->is_die_mutex, NULL))
 		return (MUTEX_ERROR);
 	while (i < philo->info->n_philo)
 	{
-		if (pthread_mutex_init(&(philo[i].fork), NULL))
+		if (pthread_mutex_init((&philo[i].m_fork), NULL))
 			return (MUTEX_ERROR);
 		i++;
 	}
@@ -38,31 +38,34 @@ int	philo_malloc(t_philo **philo, int n_philo)
 	return (SUCCESS);
 }
 
-void	philo_init(t_philo *philo, t_info *info, t_event *event)
+void	philo_init(t_philo *philo, t_info *info, t_event **event)
 {
 	int	i;
 
 	i = 0;
+	*event = (t_event *)malloc(sizeof(t_event));
 	while (i < info->n_philo)
 	{
 		philo[i].info = info;
-		philo[i].event = event;
+		philo[i].event = *event;
 		philo[i].id = i + 1;
 		philo[i].n_eat = 0;
+		philo[i].fork = 0;
 		philo[i].r_fork = &(philo[i].fork);
 		philo[i].l_fork = &(philo[(i + 1) % info->n_philo].fork);
+		philo[i].mr_fork = &(philo[i].m_fork);
+		philo[i].ml_fork = &(philo[(i + 1) % info->n_philo].m_fork);
 		i++;
 	}
 }
 
-int	init(char *argv[], t_info *info, t_philo **philo, t_event *event)
+int	init(char *argv[], t_info *info, t_philo **philo, t_event **event)
 {
 	int	error_code;
 
 	error_code = arguments_check(argv);
 	if (error_code != 0)
 		return (error_code);
-	info->is_die = 0;
 	info->is_full = 0;
 	info->n_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
