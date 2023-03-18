@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/18 17:56:03 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:53:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_argv_info
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	option;
-	int	is_die;
 	int	is_full;
 }				t_info;
 

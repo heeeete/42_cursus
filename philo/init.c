@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:56:27 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/17 02:39:00 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/18 19:52:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	init(char *argv[], t_info *info, t_philo **philo, t_event **event)
 	error_code = arguments_check(argv);
 	if (error_code != 0)
 		return (error_code);
-	info->is_die = 0;
 	info->is_full = 0;
 	info->n_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
