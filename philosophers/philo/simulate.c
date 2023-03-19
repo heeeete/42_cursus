@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:29 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/18 19:53:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/19 15:47:20 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ void	*monitoring(t_philo *philo)
 			if (philo_n_eat_check(philo))
 				return (NULL);
 		}
-		usleep(100);
+		usleep(CONTEXT_SWITCHING);
 	}
 	return (NULL);
 }
 
 static void	*detach(t_philo *philo, int i)
 {
+	i--;
 	while (i >= 0)
 		pthread_detach(philo[i--].pth);
 	return (NULL);
