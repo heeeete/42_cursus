@@ -1,7 +1,8 @@
 NAME	= philo
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra #-g -fsanitize=thread
+CFLAGS	= -Wall -Werror -Wextra
+HED		= ./include/philo.h
 
 SRC_FILES 	=	main.c \
 				init_utils.c \
@@ -24,7 +25,7 @@ endif
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJECTS)
+$(NAME)	:	$(OBJECTS) $(HED)
 			$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
 bonus	:	$(BONUS_OBJS)

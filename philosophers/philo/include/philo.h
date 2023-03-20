@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:06:47 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/18 19:53:22 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/19 21:58:26 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# define CONTEXT_SWITCHING	1000
+# define CONTEXT_SWITCHING	100
 # define SUCCESS	0
 # define FAILURE	1
 
