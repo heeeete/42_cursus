@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   huipark-v2.c                                       :+:      :+:    :+:   */
+/*   micro_paint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:48:17 by huipark           #+#    #+#             */
-/*   Updated: 2023/03/28 18:11:49 by huipark          ###   ########.fr       */
+/*   Updated: 2023/03/28 19:53:11 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	str_err(char *s)
 	return (1);
 }
 
-int	clear_all(char *s)
+int	all_clear(char *s)
 {
 	if (file)
 		fclose(file);
@@ -73,6 +73,18 @@ int in_rectangle(float x, float y)
 	return (1);
 }
 
+void	draw_map()
+{
+	int	i = 0;
+
+	while (i < height)
+	{
+		write(1, map + (wight * i), wight);
+		write(1, "\n", 1);
+		i++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	int	i;
@@ -83,23 +95,21 @@ int main(int argc, char **argv)
 	if (!(file = fopen(argv[1], "r")))
 		return (str_err("Error: Operation file corrupted\n"));
 	if (fscanf(file, "%d %d %c\n", &wight, &height, &back_char) != 3)
-		return (clear_all("Error: Operation file corrupted\n"));
+		return (all_clear("Error: Operation file corrupted\n"));
 	if (wight <= 0 || wight > 300 || height <= 0 || height > 300)
-		return (clear_all("Error: Operation file corrupted\n"));
+		return (all_clear("Error: Operation file corrupted\n"));
 	if (!(map = (char *)malloc(sizeof(char) * (wight * height))))
 		return (1);
 	while (i < wight * height)
 		map[i++] = back_char;
 
-	int	x;
-	int	y;
-	int flag;
-	i = 0;
-	while ((i = fscanf(file, "%c %f %f %f %f %c\n", &type, &X, &Y, &r_wight, &r_height, &color)) == 6)
+	int	x, y, ret, flag;
+
+	while ((ret = fscanf(file, "%c %f %f %f %f %c\n", &type, &X, &Y, &r_wight, &r_height, &color)) == 6)
 	{
 		y = 0;
 		if ((type != 'r' && type != 'R') || r_wight <= 0.00000000 || r_height <= 0.00000000)
-			return (clear_all("Error: Operation file corrupted\n"));
+			return (all_clear("Error: Operation file corrupted\n"));
 		while (y < height)
 		{
 			x = 0;
@@ -113,13 +123,9 @@ int main(int argc, char **argv)
 			y++;
 		}
 	}
-	if (i != -1)
-		return (clear_all("Error: Operation file corrupted"));
-	i = 0;
-	while (i < height)
-	{
-		write(1, map + (wight * i), wight);
-		write(1, "\n", 1);
-		i++;
-	}
+	if (ret != -1)
+		return (all_clear("Error: Operation file corrupted"));
+	draw_map();
+	all_clear(NULL);
+	return (0);
 }
