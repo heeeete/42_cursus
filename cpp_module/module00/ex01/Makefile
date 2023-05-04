@@ -5,9 +5,11 @@ FLAGS = -std=c++98 -Wall -Wextra -Werror
 NAME = phoneBook
 
 SRCS = Contact.cpp \
-		PhoneBook.cpp
+		PhoneBook.cpp \
+		main.cpp
 
-DEPS = Contact.hpp
+DEPS = Contact.hpp \
+		PhoneBook.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
