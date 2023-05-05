@@ -2,14 +2,12 @@ CC = c++
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror -g -fsanitize=address
 
-NAME = phoneBook
+NAME = Account
 
-SRCS = Contact.cpp \
-		PhoneBook.cpp \
-		main.cpp
+SRCS = Account.cpp \
+		tests.cpp
 
-DEPS = Contact.hpp \
-		PhoneBook.hpp
+DEPS = Account.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 

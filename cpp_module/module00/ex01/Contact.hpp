@@ -18,7 +18,6 @@ class Contact {
 		void	set_nick_name(const std::string str);
 		void	set_phone_number(const std::string str);
 		void	set_darkest_secret(const std::string str);
-		bool	setting();
 		~Contact();
 
 		std::string	get_first_name() const ;
