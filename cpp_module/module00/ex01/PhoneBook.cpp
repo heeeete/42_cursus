@@ -10,6 +10,7 @@ std::string	PhoneBook::read_line() const {
 
 	std::getline(std::cin, str);
 	if (std::cin.fail()){
+		std::cout << std::endl << "Bye Bye" << std::endl;
 		exit (1);
 	}
 	else if (str.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ") != std::string::npos) {
@@ -106,7 +107,7 @@ std::string	PhoneBook::convert_str(std::string str) const {
 }
 
 void	PhoneBook::search() const {
-	std::cout << '|' << std::setw(11);
+	std::cout << '|' << std::setw(10) << "index";
 	std::cout << '|' << std::setw(10) << "first_name";
 	std::cout << '|' << std::setw(10) << "last_name";
 	std::cout << '|' << std::setw(10) << "nick_name";

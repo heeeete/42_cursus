@@ -2,14 +2,14 @@ CC = c++
 
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = phoneBook
+NAME = Zombie
 
-SRCS = Contact.cpp \
-		PhoneBook.cpp \
-		main.cpp
+SRCS = Zombie.cpp \
+		newZombie.cpp \
+		main.cpp \
+		randomChump.cpp
 
-DEPS = Contact.hpp \
-		PhoneBook.hpp
+DEPS = Zombie.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
