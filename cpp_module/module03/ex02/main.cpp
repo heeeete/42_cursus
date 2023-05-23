@@ -1,9 +1,9 @@
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main(){
-	ScavTrap huitae("huitae");
-	ScavTrap jimpark("jimpark");
+	FragTrap huitae("huitae");
+	FragTrap jimpark("jimpark");
 
 	huitae.attack("jimpark");
 	jimpark.takeDamage(huitae.getDamage());
@@ -22,4 +22,6 @@ int main(){
 	jimpark.takeDamage(huitae.getDamage());
 	huitae.attack("jimpark");
 	jimpark.takeDamage(huitae.getDamage());
+	jimpark.highFivesGuys();
+	huitae.highFivesGuys();
 }
