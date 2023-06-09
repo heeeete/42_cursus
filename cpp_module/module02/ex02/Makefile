@@ -1,6 +1,6 @@
 CC = c++
 
-FLAGS = -std=c++98 -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -std=c++98 -Wall -Wextra -Werror
 
 NAME = run
 
