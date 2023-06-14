@@ -1,7 +1,6 @@
 NAME	= pipex
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
 
 SRC_DIR		= 	./src/
 SRC_FILES 	=					\
