@@ -24,5 +24,6 @@ int main() {
 	{
 		delete meta[i];
 	}
+	system("leaks ex01");
   return 0;
 }
