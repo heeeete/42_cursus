@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 01:44:11 by huipark           #+#    #+#             */
-/*   Updated: 2022/08/07 16:23:15 by huipark          ###   ########.fr       */
+/*   Updated: 2023/06/16 13:42:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *str, const char *to_find, size_t n);
+char	*ft_strtok(char *str, const char *delim);
 char	*ft_strrchr(const char	*s, int c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
