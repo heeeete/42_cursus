@@ -1,5 +1,8 @@
 #include "../include/cub3d.h"
 
+#define RED "\033[0;31m"
+#define RESET "\033[0m"
+
 void	*wrap_malloc(size_t s)
 {
 	void	*ret;
@@ -14,6 +17,6 @@ void	error(char *msg, char *msg2) {
 	if (msg2)
 		printf("\"%s\" %s\n", msg2, msg);
 	else
-		printf("%s\n", msg);
+		printf("%s%s%s\n", RED,msg,RESET);
 	exit(1);
 }
