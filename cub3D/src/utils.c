@@ -20,3 +20,8 @@ void	error(char *msg, char *msg2) {
 		printf("%s%s%s\n", RED,msg,RESET);
 	exit(1);
 }
+
+int exit_game()
+{
+	exit(0);
+}

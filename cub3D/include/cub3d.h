@@ -10,6 +10,19 @@
 
 #define SIZE 64
 
+#define X_EVENT_KEY_PRESS		2
+#define X_EVENT_KEY_release		3
+#define X_EVENT_KEY_EXIT		17 //exit key code
+
+#define KEY_ESC			53
+# define KEY_Q			12
+# define KEY_W			13
+# define KEY_E			14
+# define KEY_R			15
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
+
 typedef struct	s_img
 {
 	void	*img;
@@ -68,8 +81,10 @@ typedef struct	s_game
 	t_crgb		c_rgb;
 }				t_game;
 
+//utils.c
 void	error(char *msg, char *msg2);
 void	*wrap_malloc(size_t s);
+int		exit_game(void);
 
 //parse.c
 void	check_texture(t_game *game, char *line);
