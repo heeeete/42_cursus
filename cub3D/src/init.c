@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:10:14 by huipark           #+#    #+#             */
-/*   Updated: 2023/06/16 18:25:11 by huipark          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:45:22 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void init(t_game *game, char *argv)
 	game->img.C = NULL;
 	search_map(game, &game->player);
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->map_info.max_width * SIZE, game->map_info.map_height * SIZE, "cub3D");
-	game->img.img = mlx_new_image(game->mlx, game->map_info.max_width * SIZE, game->map_info.map_height * SIZE);
+	game->win = mlx_new_window(game->mlx, 1920, 1080, "cub3D");
+	game->img.img = mlx_new_image(game->mlx, 1920, 1080);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.size_l, &game->img.endian);
 }

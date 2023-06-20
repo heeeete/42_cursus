@@ -22,6 +22,8 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+# define KEY_LEFT_ARROW 123
+# define KEY_RIGHT_ARROW 124
 
 typedef struct	s_img
 {
@@ -59,14 +61,24 @@ typedef struct	s_crgb
 typedef struct	s_map
 {
 	char	**map;
+	char	**int_map;
+	int		**buf;
+	int		**texture;
+	int		re_buf;
 	int		map_height;
 	int		max_width;
 }				t_map;
 
 typedef struct s_playsr
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
+	double		planeX;
+	double		planeY;
+	double		move_speed;
+	double		rot_speed;
 	char	player_direction;
 }				t_player;
 
