@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:18:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/06/20 21:09:42 by huipark          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:47:16 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,141 +104,142 @@ void draw_rectangles2(t_game *game)
 
 void carc(t_game *game)
 {
-    int	x;
-
-	x = 0;
-	if (game->map_info.re_buf == 1)
-	{
-		for (int i = 0; i < height; i++)
-		{
-			for (int j = 0; j < width; j++)
-			{
-				game->map_info.buf[i][j] = 0;
-			}
-		}
-		game->map_info.re_buf = 0;
-	}
+    int x;
+    x = 0;
+    if (game->map_info.re_buf == 1)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                game->map_info.buf[i][j] = 0;
+            }
+        }
+        game->map_info.re_buf = 0;
+    }
     while (x < width)
-	{
-		double cameraX = 2 * x / (double)width - 1;
-		double rayDirX = game->player.dir_x + game->player.planeX * cameraX;
-		double rayDirY = game->player.dir_y + game->player.planeY * cameraX;
+    {
+        double cameraX = 2 * x / (double)width - 1;
+        double rayDirX = game->player.dir_x + game->player.planeX * cameraX;
+        double rayDirY = game->player.dir_y + game->player.planeY * cameraX;
 
-		int mapX = (int)game->player.x;
-		int mapY = (int)game->player.y;
+        int mapX = (int)game->player.x;
+        int mapY = (int)game->player.y;
 
-		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
+        // Length of ray from current position to next x or y-side
+        double sideDistX;
+        double sideDistY;
 
-		 //length of ray from one x or y-side to next x or y-side
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
-		double perpWallDist;
+        // Length of ray from one x or y-side to next x or y-side
+        double deltaDistX = fabs(1 / rayDirX);
+        double deltaDistY = fabs(1 / rayDirY);
+        double perpWallDist;
 
-		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
+        // What direction to step in x or y-direction (either +1 or -1)
+        int stepX;
+        int stepY;
 
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+        int hit = 0; // Was there a wall hit?
+        int side; // Was a NS or a EW wall hit?
 
-		if (rayDirX < 0)
-		{
-			stepX = -1;
-			sideDistX = (game->player.x - mapX) * deltaDistX;
-		}
-		else
-		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->player.x) * deltaDistX;
-		}
-		if (rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (game->player.y - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
-		}
+        if (rayDirX < 0)
+        {
+            stepX = -1;
+            sideDistX = (game->player.x - mapX) * deltaDistX;
+        }
+        else
+        {
+            stepX = 1;
+            sideDistX = (mapX + 1.0 - game->player.x) * deltaDistX;
+        }
+        if (rayDirY < 0)
+        {
+            stepY = -1;
+            sideDistY = (game->player.y - mapY) * deltaDistY;
+        }
+        else
+        {
+            stepY = 1;
+            sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
+        }
 
-		while (hit == 0)
-		{
-			//jump to next map square, OR in x-direction, OR in y-direction
-			if (sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			//Check if ray has hit a wall
-			if (game->map_info.int_map[mapY][mapX] > 0) hit = 1;
-		}
-		if (side == 0)
-			perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirX;
-		else
-			perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirY;
+        while (hit == 0)
+        {
+            // Jump to next map square, OR in x-direction, OR in y-direction
+            if (sideDistX < sideDistY)
+            {
+                sideDistX += deltaDistX;
+                mapX += stepX;
+                side = 0;
+            }
+            else
+            {
+                sideDistY += deltaDistY;
+                mapY += stepY;
+                side = 1;
+            }
+            // Check if ray has hit a wall
+            if (game->map_info.int_map[mapY][mapX] > 0)
+                hit = 1;
+        }
 
-		//Calculate height of line to draw on screen
-		//Calculate height of line to draw on screen
-int lineHeight = (int)(height / perpWallDist);
+        // Calculate distance projected on camera direction
+        if (side == 0)
+            perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirX;
+        else
+            perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirY;
 
-// Check if line height exceeds screen height
-if(lineHeight > height) lineHeight = height;
+        // Calculate height of line to draw on screen
+        int lineHeight = (int)(height / perpWallDist);
 
-		//calculate lowest and highest pixel to fill in current stripe
-		//calculate lowest and highest pixel to fill in current stripe
-int drawStart = -lineHeight / 2 + height / 2;
-if(drawStart < 0)
-    drawStart = 0;
-int drawEnd = lineHeight / 2 + height / 2;
-if(drawEnd >= height)
-    drawEnd = height - 1;
+        // Calculate lowest and highest pixel to fill in current stripe
+        int drawStart = -lineHeight / 2 + height / 2;
+        if (drawStart < 0)
+            drawStart = 0;
+        int drawEnd = lineHeight / 2 + height / 2;
+        if (drawEnd >= height)
+            drawEnd = height - 1;
 
-		// texturing calculations
-		char texNum = game->map_info.int_map[mapY][mapX];
+        // Texturing calculations
+        char texNum = game->map_info.int_map[mapY][mapX];
 
-		// calculate value of wallX
-		double wallX;
-		if (side == 0)
-			wallX = game->player.y + perpWallDist * rayDirY;
-		else
-			wallX = game->player.x + perpWallDist * rayDirX;
-		wallX -= floor(wallX);
+        // Calculate value of wallX
+        double wallX;
+        if (side == 0)
+            wallX = game->player.y + perpWallDist * rayDirY;
+        else
+            wallX = game->player.x + perpWallDist * rayDirX;
+        wallX -= floor(wallX);
 
-		// x coordinate on the texture
-		int texX = (int)(wallX * (double)SIZE);
-		if (side == 0 && rayDirX > 0)
-			texX = SIZE - texX - 1;
-		if (side == 1 && rayDirY < 0)
-			texX = SIZE - texX - 1;
+        // X coordinate on the texture
+        int texX = (int)(wallX * (double)SIZE);
+        if (side == 0 && rayDirX > 0)
+            texX = SIZE - texX - 1;
+        if (side == 1 && rayDirY < 0)
+            texX = SIZE - texX - 1;
 
-		// How much to increase the texture coordinate perscreen pixel
-		double step = 1.0 * SIZE / lineHeight;
-		// Starting texture coordinate
-		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
-		for (int y = drawStart; y < drawEnd; y++)
-		{
-			// Cast the texture coordinate to integer, and mask with (SIZE - 1) in case of overflow
-			int texY = (int)texPos & (SIZE - 1);
-			texPos += step;
-			int color = game->map_info.texture[texNum][SIZE * texY + texX];
-			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if (side == 1)
-				color = (color >> 1) & 8355711;
-			game->map_info.buf[y][x] = color;
-			game->map_info.re_buf = 1;
-		}
-		x++;
-	}
+        // Calculate step and initial texture position
+        double step = 1.0 * SIZE / lineHeight;
+        double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
+
+        for (int y = drawStart; y < drawEnd; y++)
+        {
+            // Cast the texture coordinate to integer and mask with (SIZE - 1) in case of overflow
+            int texY = (int)texPos & (SIZE - 1);
+            texPos += step;
+
+            // Get the texture color for the current pixel
+            int color = game->map_info.texture[texNum][SIZE * texY + texX];
+
+            // Make color darker for y-sides: R, G, and B byte each divided through two with a "shift" and an "and"
+            if (side == 1)
+                color = (color >> 1) & 8355711;
+
+            game->map_info.buf[y][x] = color;
+            game->map_info.re_buf = 1;
+        }
+        x++;
+    }
 }
 
 void	draw(t_game *game)
