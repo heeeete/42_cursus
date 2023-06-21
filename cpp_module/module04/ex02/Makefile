@@ -22,9 +22,6 @@ all: $(NAME)
 $(NAME): $(OBJS) $(DEPS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
-
 clean:
 	rm -f $(OBJS)
 

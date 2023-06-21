@@ -62,4 +62,5 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(str);
 	}
+	int qweqwe=0;
 }

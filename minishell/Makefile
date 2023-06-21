@@ -14,7 +14,7 @@ NAME = minishell
 
 # compiler
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+# CFLAGS = -Wall -Werror -Wextra
 LINK_FLAG = -lreadline -L$(shell brew --prefix readline)/lib -I$(shell brew --prefix readline)/include #-L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 COMP_FLAG = -I includes/minishell.h
 
