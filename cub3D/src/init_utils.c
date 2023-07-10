@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:13:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/06/20 18:46:28 by huipark          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:49:02 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	check_rgb(char *rgb_str){
 	cnt = 0;
 	while (*rgb_str)
 	{
-		while (*rgb_str == ' ')
-			++rgb_str;
+		while ((*rgb_str >= 9 && *rgb_str <= 13) || *rgb_str == ' ')
+            ++rgb_str;
 		if (*rgb_str == ',')
 			++cnt;
 		else if ((*rgb_str == 0 && cnt != 2) || *rgb_str == 0)
