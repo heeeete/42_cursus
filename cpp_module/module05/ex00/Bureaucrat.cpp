@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:57 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/26 20:43:02 by huipark          ###   ########.fr       */
+/*   Updated: 2023/07/28 17:53:00 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(gr
 	{
 		std::cout << "your name : " << name << std::endl;
 		std::cout << "your grade : " << grade << std::endl;
-		GradeTooLowException();
+		GradeTooHighException();
 	}
 	else if (grade > 150)
 	{
 		std::cout << "your name : " << name << std::endl;
 		std::cout << "your grade : " << grade << std::endl;
-		GradeTooHighException();
+		GradeTooLowException();
 	}
 };
 Bureaucrat::Bureaucrat(const Bureaucrat& ref) :name(ref.name), grade(ref.grade) {};
