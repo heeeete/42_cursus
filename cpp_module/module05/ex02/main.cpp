@@ -6,13 +6,14 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:55:05 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/01 16:00:46 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/03 19:43:37 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main() {
 	std::srand(time(NULL));
@@ -54,11 +55,30 @@ int main() {
 	{
 		try
 		{
+			std::cout << "-------------RobotomyRequestForm Test-------------" << std::endl;
 			Bureaucrat huipark("huipakr", 1);
 			RobotomyRequestForm qqqqq;
-			qqqqq.beSigned(huipark);
-			qqqqq.execute(huipark);
-
+			RobotomyRequestForm b(qqqqq);
+			b.beSigned(huipark);
+			b.execute(huipark);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}
+	{
+		try
+		{
+			std::cout << "---------------ShrubberyCreationForm Test---------------" << std::endl;
+			Bureaucrat huipark("huipark", 1);
+			ShrubberyCreationForm form("huiparkForm2");
+			ShrubberyCreationForm form2(form);
+			ShrubberyCreationForm a;
+			a.beSigned(huipark);
+			a.execute(huipark);
+			form2.beSigned(huipark);
+			form2.execute(huipark);
 		}
 		catch(const std::exception& e)
 		{

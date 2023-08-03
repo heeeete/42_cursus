@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/01 15:42:49 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/03 17:57:48 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void AForm::beSigned(const Bureaucrat& ref) {
 }
 
 std::range_error AForm::GradeTooHighException() const{
-	throw (std::range_error("Grade Too High"));
+	return (std::range_error("Grade Too High"));
 }
 
 std::range_error AForm::GradeTooLowException() const{
-	throw (std::range_error("Grade Too Low"));
+	return (std::range_error("Grade Too Low"));
 }
 
 std::runtime_error AForm::FormNotSignedException() const {

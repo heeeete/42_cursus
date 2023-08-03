@@ -8,11 +8,13 @@ NAME = ex01
 SRCS = main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
-		RobotomyRequestForm.cpp
+		RobotomyRequestForm.cpp \
+		ShrubberyCreationForm.cpp
 
 DEPS = Bureaucrat.hpp \
 		AForm.hpp \
-		RobotomyRequestForm.hpp
+		RobotomyRequestForm.hpp \
+		ShrubberyCreationForm.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)
