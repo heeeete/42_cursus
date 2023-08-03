@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:26 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 19:46:02 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/01 14:47:36 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ public:
 	~Form();
 
 	const std::string& getName() const;
-	bool getSigned() const;
-	int getGradeToSign() const;
-	int getGradeToExec() const;
+	const bool getSigned() const;
+	const int getGradeToSign() const;
+	const int getGradeToExec() const;
 
 	void beSigned(const Bureaucrat& ref);
-
 
 	Form& operator=(const Form& ref);
 

@@ -7,10 +7,12 @@ NAME = ex01
 
 SRCS = main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		AForm.cpp \
+		RobotomyRequestForm.cpp
 
 DEPS = Bureaucrat.hpp \
-		Form.hpp
+		AForm.hpp \
+		RobotomyRequestForm.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)

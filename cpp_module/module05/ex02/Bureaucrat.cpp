@@ -6,13 +6,13 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:44 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 19:47:26 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/01 15:47:46 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : name("default"), grade(150) {};
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(grade) {
@@ -39,7 +39,7 @@ int Bureaucrat::getGrade() const{
 	return (grade);
 }
 
-void Bureaucrat::signForm(Form& form) {
+void Bureaucrat::signForm(AForm& form) {
   try {
     form.beSigned(*this);
     std::cout << name << " signed " << form.getName() << std::endl;

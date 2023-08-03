@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 18:02:07 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/01 14:47:17 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ const std::string& Form::getName() const {
 	return (_name);
 };
 
-bool Form::getSigned() const {
+const bool Form::getSigned() const {
 	return (_signed);
 };
 
-int Form::getGradeToSign() const {
+const int Form::getGradeToSign() const {
 	return (_gradeToSign);
 }
 
-int Form::getGradeToExec() const {
+const int Form::getGradeToExec() const {
 	return (_gradeToExec);
 }
 

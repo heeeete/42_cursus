@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:26 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 19:46:02 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/01 15:42:35 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 
-class Form
+class AForm
 {
 private:
 	const std::string _name;
@@ -23,10 +23,10 @@ private:
 	const int _gradeToSign;
 	const int _gradeToExec;
 public:
-	Form();
-	Form(const std::string name, int gradeToSign, int gradeToExec);
-	Form(const Form& ref);
-	~Form();
+	AForm();
+	AForm(const std::string name, int gradeToSign, int gradeToExec);
+	AForm(const AForm& ref);
+	virtual ~AForm();
 
 	const std::string& getName() const;
 	bool getSigned() const;
@@ -34,14 +34,15 @@ public:
 	int getGradeToExec() const;
 
 	void beSigned(const Bureaucrat& ref);
+	virtual void execute(Bureaucrat const& executor) const = 0;
 
-
-	Form& operator=(const Form& ref);
+	AForm& operator=(const AForm& ref);
 
 	std::range_error GradeTooHighException() const;
 	std::range_error GradeTooLowException() const;
+	std::runtime_error FormNotSignedException() const;
 };
 
-std::ostream& operator<<(std::ostream& temp, const Form& ref);
+std::ostream& operator<<(std::ostream& temp, const AForm& ref);
 
 #endif

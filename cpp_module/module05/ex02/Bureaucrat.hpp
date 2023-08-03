@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:41 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 19:50:56 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/01 15:48:05 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <iostream>
 #include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -33,7 +33,7 @@ public:
 	const std::string& getName() const;
 	int getGrade() const;
 
-	void signForm(Form& form);
+	void signForm(AForm& form);
 
 	Bureaucrat& operator=(const Bureaucrat& ref);
 
