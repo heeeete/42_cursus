@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:09:05 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 17:59:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/07 17:59:57 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 							   						"   `&%\\ ` /%&'    |.|        \\ '|8'\n"
 							   						"       |o|        | |         | |\n"
 							   						"       |.|        | |         | |\n"
-							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n";
+							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
 		std::ofstream file;
 		file.open(_target + "_shrubbery ");
 		if (file.is_open()){

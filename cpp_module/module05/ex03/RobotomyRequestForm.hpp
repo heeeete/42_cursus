@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 17:04:03 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 17:07:55 by huipark          ###   ########.fr       */
+/*   Created: 2023/08/01 14:53:30 by huipark           #+#    #+#             */
+/*   Updated: 2023/08/03 17:52:20 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
-#include "AForm.hpp"
+#include "./AForm.hpp"
 
-class ShrubberyCreationForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 private:
 	std::string _target;
 public:
-	ShrubberyCreationForm();
-	ShrubberyCreationForm(const std::string& target);
-	ShrubberyCreationForm(const ShrubberyCreationForm& src);
-	~ShrubberyCreationForm();
+	RobotomyRequestForm();
+	RobotomyRequestForm(const std::string& target);
+	RobotomyRequestForm(const RobotomyRequestForm& src);
+	~RobotomyRequestForm();
 
 	void execute(const Bureaucrat& executor) const;
 
-	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& ref);
-	std::runtime_error fileOpenError() const;
+	RobotomyRequestForm& operator=(const RobotomyRequestForm& ref);
 };
 
 #endif

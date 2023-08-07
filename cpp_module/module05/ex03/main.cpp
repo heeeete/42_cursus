@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:55:05 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 18:06:02 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/07 17:08:53 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int main() {
 			std::cout << "---------------ShrubberyCreationForm Test---------------" << std::endl;
 			Bureaucrat huipark("huipark", 1);
 			ShrubberyCreationForm form("huiparkForm2123123123");
-			ShrubberyCreationForm form3("!@#!@");
+			ShrubberyCreationForm form3("!@#!@#!!@#!@#!@#!@#");
 			ShrubberyCreationForm form2(form);
 			form2 = form3;
 			ShrubberyCreationForm a;
@@ -92,7 +92,6 @@ int main() {
 		try
 		{
 			std::cout << "---------------PresidentialPardonForm Test---------------" << std::endl;
-			std::cout << "∙signed: true" << std::endl;
 			Bureaucrat huipark("huipark", 1);
 			Bureaucrat asd("asd", 25);
 			PresidentialPardonForm haaui("huipark");
@@ -100,8 +99,6 @@ int main() {
 			a = haaui;
 			a.beSigned(asd);
 			a.execute(huipark);
-			std::cout << "∙signed: false" << std::endl;
-			haaui.execute(huipark);
 		}
 		catch(const std::exception& e)
 		{

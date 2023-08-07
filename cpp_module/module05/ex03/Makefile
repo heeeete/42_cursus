@@ -3,14 +3,20 @@ CXX = c++
 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = ex01
+NAME = ex03
 
 SRCS = main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		AForm.cpp \
+		RobotomyRequestForm.cpp \
+		ShrubberyCreationForm.cpp \
+		PresidentialPardonForm.cpp
 
 DEPS = Bureaucrat.hpp \
-		Form.hpp
+		AForm.hpp \
+		RobotomyRequestForm.hpp \
+		ShrubberyCreationForm.hpp \
+		PresidentialPardonForm.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)

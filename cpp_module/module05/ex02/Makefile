@@ -1,20 +1,22 @@
 
 CXX = c++
 
-CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -g -fsanitize=address
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = ex01
+NAME = ex02
 
 SRCS = main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp
+		ShrubberyCreationForm.cpp \
+		PresidentialPardonForm.cpp
 
 DEPS = Bureaucrat.hpp \
 		AForm.hpp \
 		RobotomyRequestForm.hpp \
-		ShrubberyCreationForm.hpp
+		ShrubberyCreationForm.hpp \
+		PresidentialPardonForm.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)
