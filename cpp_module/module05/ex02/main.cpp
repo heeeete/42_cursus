@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 17:55:05 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 18:06:02 by huipark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -30,7 +18,7 @@ int main() {
 			Bureaucrat hyunjki("hyunjki", 0);
 			std::cout << hyunjki << std::endl;
 		}
-		catch(const std::range_error& e)
+		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
@@ -48,7 +36,7 @@ int main() {
 			Bureaucrat hyunjki("hyunjki", 151);
 			std::cout << hyunjki << std::endl;
 		}
-		catch(const std::range_error& e)
+		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
@@ -73,15 +61,9 @@ int main() {
 		{
 			std::cout << "---------------ShrubberyCreationForm Test---------------" << std::endl;
 			Bureaucrat huipark("huipark", 1);
-			ShrubberyCreationForm form("huiparkForm2123123123");
-			ShrubberyCreationForm form3("!@#!@");
-			ShrubberyCreationForm form2(form);
-			form2 = form3;
 			ShrubberyCreationForm a;
 			a.beSigned(huipark);
 			a.execute(huipark);
-			form2.beSigned(huipark);
-			form2.execute(huipark);
 		}
 		catch(const std::exception& e)
 		{
@@ -94,11 +76,9 @@ int main() {
 			std::cout << "---------------PresidentialPardonForm Test---------------" << std::endl;
 			std::cout << "∙signed: true" << std::endl;
 			Bureaucrat huipark("huipark", 1);
-			Bureaucrat asd("asd", 25);
 			PresidentialPardonForm haaui("huipark");
-			PresidentialPardonForm a(haaui);
-			a = haaui;
-			a.beSigned(asd);
+			PresidentialPardonForm a;
+			a.beSigned(huipark);
 			a.execute(huipark);
 			std::cout << "∙signed: false" << std::endl;
 			haaui.execute(huipark);

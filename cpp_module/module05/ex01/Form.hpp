@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:26 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/01 14:47:36 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:38:29 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,23 @@ public:
 	~Form();
 
 	const std::string& getName() const;
-	const bool getSigned() const;
-	const int getGradeToSign() const;
-	const int getGradeToExec() const;
+	bool getSigned() const;
+	int getGradeToSign() const;
+	int getGradeToExec() const;
 
 	void beSigned(const Bureaucrat& ref);
 
 	Form& operator=(const Form& ref);
 
-	std::range_error GradeTooHighException() const;
-	std::range_error GradeTooLowException() const;
+	class GradeTooHighException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream& temp, const Form& ref);

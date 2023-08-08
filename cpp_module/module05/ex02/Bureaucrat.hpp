@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:41 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/01 15:48:05 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:41:32 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <string>
 
 class AForm;
 
@@ -37,8 +36,15 @@ public:
 
 	Bureaucrat& operator=(const Bureaucrat& ref);
 
-	std::range_error GradeTooHighException() const;
-	std::range_error GradeTooLowException() const;
+	class GradeTooHighException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream &temp, const Bureaucrat& ref);

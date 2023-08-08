@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:09:05 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 17:59:57 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:33:10 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	if (!getSigned()) {
-        throw FormNotSignedException();
+        throw AForm::FormNotSignedException();
     } else if (executor.getGrade() > this->getGradeToExec()) {
-        throw GradeTooLowException();
+        throw AForm::GradeTooLowException();
     } else {
 		std::string			shrubbery =	"               ,@@@@@@@,\n"
 							   						"       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
@@ -40,7 +40,7 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 							   						"   `&%\\ ` /%&'    |.|        \\ '|8'\n"
 							   						"       |o|        | |         | |\n"
 							   						"       |.|        | |         | |\n"
-							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
+							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n";
 		std::ofstream file;
 		file.open(_target + "_shrubbery ");
 		if (file.is_open()){
@@ -48,10 +48,11 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 			file.close();
 		}
 		else
-			throw fileOpenError();
+			throw ShrubberyCreationForm::FileOpenError();
     }
 }
-std::runtime_error ShrubberyCreationForm::fileOpenError() const {
-	return (std::runtime_error("fileOpenError"));
+
+const char* ShrubberyCreationForm::FileOpenError::what() const throw() {
+	return "file open error";
 }
 

@@ -26,9 +26,20 @@ public:
 
 	AForm& operator=(const AForm& ref);
 
-	std::range_error GradeTooHighException() const;
-	std::range_error GradeTooLowException() const;
-	std::runtime_error FormNotSignedException() const;
+	class GradeTooHighException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class FormNotSignedException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream& temp, const AForm& ref);

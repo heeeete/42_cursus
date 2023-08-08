@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 17:54:54 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 20:39:17 by huipark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
@@ -32,12 +19,15 @@ public:
 
 	Bureaucrat& operator=(const Bureaucrat& ref);
 
-	class GradeTooHighException : public std::range_error {
-		public:
-			 const char * what() const throw();
+	class GradeTooHighException : public std::exception {
+	public:
+		virtual const char* what() const throw();
 	};
-	// std::range_error GradeTooHighException() const;
-	// std::range_error GradeTooLowException() const;
+
+	class GradeTooLowException : public std::exception {
+	public:
+		virtual const char* what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream &temp, const Bureaucrat& ref);

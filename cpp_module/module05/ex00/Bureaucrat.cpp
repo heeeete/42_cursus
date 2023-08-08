@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:57 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/28 17:53:00 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 14:54:29 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(gr
 	{
 		std::cout << "your name : " << name << std::endl;
 		std::cout << "your grade : " << grade << std::endl;
-		GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
 	else if (grade > 150)
 	{
 		std::cout << "your name : " << name << std::endl;
 		std::cout << "your grade : " << grade << std::endl;
-		GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 };
 Bureaucrat::Bureaucrat(const Bureaucrat& ref) :name(ref.name), grade(ref.grade) {};
@@ -49,10 +49,12 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ref){
 	return (*this);
 }
 
-std::range_error Bureaucrat::GradeTooHighException() const{
-  throw (std::range_error("Grade too high : 1 <= Grade <= 150"));
-}
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Grade is too high!";
+};
 
-std::range_error Bureaucrat::GradeTooLowException() const{
-  throw (std::range_error("Grade too low : 1 <= Grade <= 150"));
-}
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low!";
+};

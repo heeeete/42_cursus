@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:50 by huipark           #+#    #+#             */
-/*   Updated: 2023/07/26 20:43:34 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:05:58 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main() {
 			Bureaucrat hyunjki("hyunjki", 0);
 			std::cout << hyunjki << std::endl;
 		}
-		catch(const std::range_error& e)
+		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
@@ -48,7 +48,7 @@ int main() {
 			Bureaucrat hyunjki("hyunjki", 151);
 			std::cout << hyunjki << std::endl;
 		}
-		catch(const std::range_error& e)
+		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}

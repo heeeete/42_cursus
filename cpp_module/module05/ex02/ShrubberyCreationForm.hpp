@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:04:03 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 17:07:55 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:33:18 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ public:
 	void execute(const Bureaucrat& executor) const;
 
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& ref);
-	std::runtime_error fileOpenError() const;
+	class FileOpenError : public std::exception{
+		virtual const char* what() const throw();
+	};
 };
 
 #endif

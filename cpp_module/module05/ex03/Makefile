@@ -10,13 +10,15 @@ SRCS = main.cpp \
 		AForm.cpp \
 		RobotomyRequestForm.cpp \
 		ShrubberyCreationForm.cpp \
-		PresidentialPardonForm.cpp
+		PresidentialPardonForm.cpp \
+		Intern.cpp
 
 DEPS = Bureaucrat.hpp \
 		AForm.hpp \
 		RobotomyRequestForm.hpp \
 		ShrubberyCreationForm.hpp \
-		PresidentialPardonForm.hpp
+		PresidentialPardonForm.hpp \
+		Intern.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)

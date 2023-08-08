@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/01 14:47:17 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:24:56 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Form::Form(const std::string name, int gradeToSign, int gradeToExec) : _name(nam
 		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
 
 		std::cout << "1 <= value <= 150" << ", ";
-		GradeTooHighException();
+		throw Form::GradeTooHighException();
 	}
 	else if (_gradeToSign > 150 || _gradeToExec > 150) {
 		std::cout << _name << ", ";
@@ -30,7 +30,7 @@ Form::Form(const std::string name, int gradeToSign, int gradeToExec) : _name(nam
 		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
 
 		std::cout << "1 <= value <= 150" << ", ";
-		GradeTooLowException();
+		throw Form::GradeTooLowException();
 	}
 };
 Form::Form(const Form& ref) : _name(ref._name), _signed(ref._signed), _gradeToSign(ref._gradeToSign), _gradeToExec(ref._gradeToExec) {};
@@ -40,34 +40,36 @@ const std::string& Form::getName() const {
 	return (_name);
 };
 
-const bool Form::getSigned() const {
+bool Form::getSigned() const {
 	return (_signed);
 };
 
-const int Form::getGradeToSign() const {
+int Form::getGradeToSign() const {
 	return (_gradeToSign);
 }
 
-const int Form::getGradeToExec() const {
+int Form::getGradeToExec() const {
 	return (_gradeToExec);
 }
 
 void Form::beSigned(const Bureaucrat& ref) {
 	if (ref.getGrade() > _gradeToSign){
 		std::cout << "your grade is " << ref.getGrade() << ", gradeToSign is " << _gradeToSign << ", ";
-		GradeTooLowException();
+		throw Form::GradeTooLowException();
 	}
 	else
 		_signed = true;
 }
 
-std::range_error Form::GradeTooHighException() const{
-	throw (std::range_error("Grade Too High"));
-}
+const char* Form::GradeTooHighException::what() const throw()
+{
+	return "Grade is too high!";
+};
 
-std::range_error Form::GradeTooLowException() const{
-	throw (std::range_error("Grade Too Low"));
-}
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low!";
+};
 
 Form& Form::operator=(const Form& ref){
 	if (this == &ref)

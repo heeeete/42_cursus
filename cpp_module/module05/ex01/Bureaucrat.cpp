@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 17:54:44 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 20:39:04 by huipark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
@@ -20,13 +7,13 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(gr
 	{
 		std::cout << name << ", "
 		<< "your grade : " << grade << ", ";
-		GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
 	else if (grade > 150)
 	{
 		std::cout << name << ", "
 		<< "your grade : " << grade << ", ";
-		GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 };
 Bureaucrat::Bureaucrat(const Bureaucrat& ref) :name(ref.name), grade(ref.grade) {};
@@ -41,11 +28,11 @@ int Bureaucrat::getGrade() const{
 
 void Bureaucrat::signForm(Form& form) {
   try {
-    form.beSigned(*this);
-    std::cout << name << " signed " << form.getName() << std::endl;
+	form.beSigned(*this);
+	std::cout << name << " signed " << form.getName() << std::endl;
   } catch (std::exception& e) {
-    std::cout << name << " couldn\\'t sign " << form.getName() << " because "
-              << e.what() << std::endl;
+	std::cout << name << " couldn\\'t sign " << form.getName() << " because "
+			  << e.what() << std::endl;
   }
 }
 
@@ -54,15 +41,12 @@ std::ostream& operator<<(std::ostream &temp, const Bureaucrat& ref) {
 	return temp;
 }
 
-// std::range_error Bureaucrat::GradeTooHighException() const{
-//   throw (std::range_error("Grade too high : 1 <= Grade <= 150"));
-// }
-
-std::range_error Bureaucrat::GradeTooLowException() const{
-  throw (std::range_error("Grade too low : 1 <= Grade <= 150"));
-}
-
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-  return nullptr;
-}
+	return "Grade is too high!";
+};
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low!";
+};

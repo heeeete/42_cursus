@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/07 17:59:49 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:02:35 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,20 @@ void AForm::beSigned(const Bureaucrat& ref) {
 		_signed = true;
 }
 
-std::range_error AForm::GradeTooHighException() const{
-	return (std::range_error("Grade Too High"));
-}
+const char* AForm::GradeTooHighException::what() const throw()
+{
+	return "Grade is too high!";
+};
 
-std::range_error AForm::GradeTooLowException() const{
-	return (std::range_error("Grade Too Low"));
-}
+const char* AForm::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low!";
+};
 
-std::runtime_error AForm::FormNotSignedException() const {
-    return std::runtime_error("Form is not signed");
-}
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return "Form is not signed";
+};
 
 AForm& AForm::operator=(const AForm& ref){
 	if (this == &ref)
