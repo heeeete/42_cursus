@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 17:54:41 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/08 17:12:27 by huipark          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
@@ -32,6 +19,9 @@ public:
 	const std::string& getName() const;
 	int getGrade() const;
 
+	void increment();
+	void decrement();
+	void executeForm(AForm const & form);
 	void signForm(AForm& form);
 
 	Bureaucrat& operator=(const Bureaucrat& ref);

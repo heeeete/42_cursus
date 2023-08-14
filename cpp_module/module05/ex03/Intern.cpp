@@ -24,10 +24,13 @@ AForm* Intern::makeForm(std::string formName, std::string formTarget) {
 	switch (i)
 	{
 	case 0:
+		std::cout << "Intern creates RobotomyRequestForm" << std::endl;
 		return (new RobotomyRequestForm(formTarget));
 	case 1:
+		std::cout << "Intern creates ShrubberyCreationForm" << std::endl;
 		return (new ShrubberyCreationForm(formTarget));
 	case 2:
+		std::cout << "Intern creates PresidentialPardonForm" << std::endl;
 		return (new PresidentialPardonForm(formTarget));
 	default:
 		throw Intern::CouldNotFindForm();
@@ -35,5 +38,5 @@ AForm* Intern::makeForm(std::string formName, std::string formTarget) {
 }
 
 const char* Intern::CouldNotFindForm::what() const throw(){
-	return "Could not fine form";
-}
+	return "Could not find form";
+};

@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/08 15:24:56 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:57:42 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,11 @@ Form::Form() : _name("default"), _signed(false), _gradeToSign(150), _gradeToExec
 Form::Form(const std::string name, int gradeToSign, int gradeToExec) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec) {
 	if (_gradeToSign < 1 || _gradeToExec < 1) {
 		std::cout << _name << ", ";
-
-		if (_gradeToSign < 1)	std::cout << "your GradeToSign : " << _gradeToSign << ", ";
-		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
-
-		std::cout << "1 <= value <= 150" << ", ";
-		throw Form::GradeTooHighException();
+		throw GradeTooHighException();
 	}
 	else if (_gradeToSign > 150 || _gradeToExec > 150) {
 		std::cout << _name << ", ";
-
-		if (_gradeToSign > 150)	std::cout << "your GradeToSign : " << _gradeToSign << ", ";
-		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
-
-		std::cout << "1 <= value <= 150" << ", ";
-		throw Form::GradeTooLowException();
+		throw GradeTooLowException();
 	}
 };
 Form::Form(const Form& ref) : _name(ref._name), _signed(ref._signed), _gradeToSign(ref._gradeToSign), _gradeToExec(ref._gradeToExec) {};
@@ -53,10 +43,8 @@ int Form::getGradeToExec() const {
 }
 
 void Form::beSigned(const Bureaucrat& ref) {
-	if (ref.getGrade() > _gradeToSign){
-		std::cout << "your grade is " << ref.getGrade() << ", gradeToSign is " << _gradeToSign << ", ";
+	if (ref.getGrade() > _gradeToSign)
 		throw Form::GradeTooLowException();
-	}
 	else
 		_signed = true;
 }

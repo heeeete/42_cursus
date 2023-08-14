@@ -5,14 +5,12 @@ Bureaucrat::Bureaucrat() : name("default"), grade(150) {};
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name), grade(grade) {
 	if (grade < 1)
 	{
-		std::cout << name << ", "
-		<< "your grade : " << grade << ", ";
+		std::cout << name << ", ";
 		throw Bureaucrat::GradeTooHighException();
 	}
 	else if (grade > 150)
 	{
-		std::cout << name << ", "
-		<< "your grade : " << grade << ", ";
+		std::cout << name << ", ";
 		throw Bureaucrat::GradeTooLowException();
 	}
 };
@@ -26,12 +24,24 @@ int Bureaucrat::getGrade() const{
 	return (grade);
 }
 
+void Bureaucrat::increment() {
+	if (getGrade() == 1)
+		throw GradeTooHighException();
+	--grade;
+}
+
+void Bureaucrat::decrement() {
+	if (getGrade() == 150)
+		throw GradeTooLowException();
+	++grade;
+}
+
 void Bureaucrat::signForm(Form& form) {
   try {
 	form.beSigned(*this);
 	std::cout << name << " signed " << form.getName() << std::endl;
   } catch (std::exception& e) {
-	std::cout << name << " couldn\\'t sign " << form.getName() << " because "
+	std::cout << name << " couldn't sign " << form.getName() << " because "
 			  << e.what() << std::endl;
   }
 }

@@ -7,7 +7,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src)
 }
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("RobotomyRequestForm", 72, 45), _target(target) {}
-RobotomyRequestForm::~RobotomyRequestForm(){}
+RobotomyRequestForm::~RobotomyRequestForm() {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& ref){
 	if (this == &ref)

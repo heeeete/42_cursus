@@ -6,7 +6,7 @@
 /*   By: huipark <huipark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:54:36 by huipark           #+#    #+#             */
-/*   Updated: 2023/08/08 15:02:35 by huipark          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:46:43 by huipark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,11 @@ AForm::AForm() : _name("default"), _signed(false), _gradeToSign(150), _gradeToEx
 AForm::AForm(const std::string name, int gradeToSign, int gradeToExec) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec) {
 	if (_gradeToSign < 1 || _gradeToExec < 1) {
 		std::cout << _name << ", ";
-
-		if (_gradeToSign < 1)	std::cout << "your GradeToSign : " << _gradeToSign << ", ";
-		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
-
-		std::cout << "1 <= value <= 150" << ", ";
-		GradeTooHighException();
+		throw GradeTooHighException();
 	}
 	else if (_gradeToSign > 150 || _gradeToExec > 150) {
 		std::cout << _name << ", ";
-
-		if (_gradeToSign > 150)	std::cout << "your GradeToSign : " << _gradeToSign << ", ";
-		else	std::cout << "your GradeToExec : " << _gradeToExec << ", ";
-
-		std::cout << "1 <= value <= 150" << ", ";
-		GradeTooLowException();
+		throw GradeTooLowException();
 	}
 };
 AForm::AForm(const AForm& ref) : _name(ref._name), _signed(ref._signed), _gradeToSign(ref._gradeToSign), _gradeToExec(ref._gradeToExec) {};
@@ -54,8 +44,7 @@ int AForm::getGradeToExec() const {
 
 void AForm::beSigned(const Bureaucrat& ref) {
 	if (ref.getGrade() > _gradeToSign){
-		std::cout << "your grade is " << ref.getGrade() << ", gradeToSign is " << _gradeToSign << ", ";
-		GradeTooLowException();
+		throw GradeTooLowException();
 	}
 	else
 		_signed = true;
