@@ -3,7 +3,7 @@ CXX = c++
 
 CXXFLAGS = -std=c++98 -g -fsanitize=address
 
-NAME = ex00
+NAME = convert
 
 SRCS = main.cpp \
 		ScalarConverter.cpp

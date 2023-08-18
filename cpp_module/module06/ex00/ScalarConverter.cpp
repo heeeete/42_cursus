@@ -8,42 +8,46 @@ enum {
 };
 
 int ScalarConverter::_type = 0;
-ScalarConverter::ScalarConverter(){};
-// ScalarConverter::ScalarConverter(const ScalarConverter& ref) {};
-ScalarConverter::~ScalarConverter() {};
+double ScalarConverter::_value = 0.0;
+bool ScalarConverter::_minusSign = false;
+ScalarConverter::ScalarConverter(){
+	_type = 0;
+	_value = 0;
+};
+ScalarConverter::ScalarConverter(const ScalarConverter& ref){
+	*this = ref;
+};
+ScalarConverter::~ScalarConverter(){};
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter &ref){
+	if (this == &ref)
+		return *this;
+	_type = ref._type;
+	_value = ref._value;
+	return *this;
+};
 
-void intToOther(std::string target, int type){
+void putNum(double value, int type){
+	if (type == SPC_VALUE || value > INT_MAX || value < INT_MIN)
+		std::cout << "int: impossible" << "\n";
+	else
+		std::cout << "int: " << static_cast<int>(value) << "\n";
+	std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(value) << "f" << "\n";
+	std::cout << "double: " << static_cast<double>(value) << "\n";
+}
+
+void ScalarConverter::numToOther(std::string target){
 	try
 	{
-		double value = std::strtod(target.c_str(), NULL);
-		if (type == INTEGER)
-			value = static_cast<int>(value);
-		else if (type == FLOAT)
-			value = static_cast<float>(value);
-
-		if (type == SPC_VALUE){
+		_value = std::strtod(target.c_str(), NULL);
+		if (_minusSign == true)
+			_value *= -1;
+		if (_type == SPC_VALUE)
 			std::cout << "char: impossible" << "\n";
-			std::cout << "int: impossible" << "\n";
-		} else if (type == INTEGER || type == FLOAT || type == DOUBLE){
-			if (!std::isprint(value))
-				std::cout << "char: Non displayable" << "\n";
-			else
-				std::cout << "char: \'" << static_cast<char>(value) << "\'"  << "\n";
-
-			if (type == INTEGER) {
-				std::cout << "int : " << value << "\n";
-				std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(value) << "f" << "\n";
-				std::cout << "double: " << static_cast<double>(value) << "\n";
-			} else if (type == FLOAT) {
-				std::cout << "int : " << static_cast<int>(value) << "\n";
-				std::cout << std::fixed<<"float: " << std::setprecision(1) << value << "f" << "\n";
-				std::cout << "double: " << static_cast<double>(value) << "\n";
-			} else if (type == DOUBLE) {
-				std::cout << "int : " << static_cast<int>(value) << "\n";
-				std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(value) << "f" << "\n";
-				std::cout << "double: " << value << "\n";
-			}
-		}
+		else if (!std::isprint(_value))
+			std::cout << "char: Non displayable" << "\n";
+		else
+			std::cout << "char: \'" << static_cast<char>(_value) << "\'"  << "\n";
+		putNum(_value, _type);
 	}
 	catch(const std::exception& e)
 	{
@@ -55,8 +59,13 @@ int typeSearch(std::string target){
 	bool hasF = false;
 	bool hasDot = false;
 
-	if (target[target.size() - 1] == 'f') hasF = true;
-	for (int i = 0; target[i]; i++) {
+	if (target[target.size() - 1] == 'f'){
+		if (!std::isdigit(target[target.size() - 2]))
+			return NOT_A_NUMBER;
+		hasF = true;
+		}
+	else if (!std::isdigit(target[target.size() - 1])) return NOT_A_NUMBER;
+	for (unsigned long i = 0; target[i]; i++) {
 		if (target[i] == '.'){
 			if (hasDot || target[0] == '.')
 				return NOT_A_NUMBER;
@@ -69,20 +78,20 @@ int typeSearch(std::string target){
 	return INTEGER;
 }
 
-int strVaildCheck(std::string& target){
+int ScalarConverter::strVaildCheck(std::string& target){
 	int i = 0;
-	char sign;
-	std::string value[4] = {"nan", "nanf", "inf", "inff"};
+	char sign = 0;
+	std::string _value[4] = {"nan", "nanf", "inf", "inff"};
 
 	for (; target[i] == ' '; i++) ;
 	if (target[i] == '-' || target[i] == '+'){
-		i++;
 		if (target[i] == '-')
-			sign = '-';
+			_minusSign = true;
+		i++;
 	}
 	target.erase(0,i);
 	for(i = 0 ; i < 4 ; i++) {
-		if (target == value[i])
+		if (target == _value[i])
 			return (SPC_VALUE);
 	}
 	return typeSearch(target);
@@ -111,6 +120,6 @@ void ScalarConverter::convert(std::string target) {
 			std::cerr << "Error : Invaild string" << "\n";
 		}
 		else
-			intToOther(target, _type);
+			numToOther(target);
 	}
 }

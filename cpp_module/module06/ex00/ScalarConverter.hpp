@@ -9,14 +9,17 @@
 class ScalarConverter
 {
 private:
-	ScalarConverter(/* args*/);
-	// ScalarConverter(const ScalarConverter& ref);
+	ScalarConverter();
+	ScalarConverter(const ScalarConverter& ref);
 	~ScalarConverter();
-	// ScalarConverter& operator=(const ScalarConverter& ref);
+	ScalarConverter &operator=(const ScalarConverter &ref);
 	static void charType(std::string target);
+	static void numToOther(std::string target);
+	static int strVaildCheck(std::string& target);
 	static int _type;
+	static double _value;
+	static bool _minusSign;
 public:
-
 	static void convert(std::string target);
 };
 
