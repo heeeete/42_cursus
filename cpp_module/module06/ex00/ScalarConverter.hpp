@@ -2,7 +2,9 @@
 # define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <sstream>
 #include <cctype>
+#include <iomanip>
 
 class ScalarConverter
 {
@@ -12,6 +14,7 @@ private:
 	~ScalarConverter();
 	// ScalarConverter& operator=(const ScalarConverter& ref);
 	static void charType(std::string target);
+	static int _type;
 public:
 
 	static void convert(std::string target);

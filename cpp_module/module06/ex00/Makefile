@@ -1,7 +1,7 @@
 
 CXX = c++
 
-CXXFLAGS = -std=c++98
+CXXFLAGS = -std=c++98 -g -fsanitize=address
 
 NAME = ex00
 
