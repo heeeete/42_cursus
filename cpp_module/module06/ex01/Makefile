@@ -3,12 +3,12 @@ CXX = c++
 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Wall
 
-NAME = convert
+NAME = ex01
 
 SRCS = main.cpp \
-		ScalarConverter.cpp
+		Serializer.cpp
 
-DEPS = ScalarConverter.hpp \
+DEPS = Serializer.hpp \
 
 
 OBJS = $(SRCS:.cpp=.o)

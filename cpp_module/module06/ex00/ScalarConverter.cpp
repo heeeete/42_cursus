@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+
 enum {
     NOT_A_NUMBER,
     INTEGER,
@@ -26,13 +27,60 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &ref){
 	return *this;
 };
 
-void putNum(double value, int type){
-	if (type == SPC_VALUE || value > INT_MAX || value < INT_MIN)
+void putInt(double n) {
+	if (n > INT_MAX || n < INT_MIN)
+	{
+		std::cout << "int: impossible" << "\n";
+		std::cout << "float: impossible" << "\n";
+		std::cout << "double: impossible" << "\n";
+	}
+	else
+	{
+		int value = static_cast<int>(n);
+		std::cout << "int: " << value << "\n";
+		std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(value) << "f" << "\n";
+		std::cout << "double: " << static_cast<double>(value) << "\n";
+	}
+}
+
+void putFloat(double n) {
+	float value = static_cast<float>(n);
+	if (n > INT_MAX || n < INT_MIN)
 		std::cout << "int: impossible" << "\n";
 	else
-		std::cout << "int: " << static_cast<int>(value) << "\n";
-	std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(value) << "f" << "\n";
+		std::cout << "int: " << static_cast<int>(n) << "\n";
+	std::cout << std::fixed<< "float: " << std::setprecision(1) << value << "f" << "\n";
 	std::cout << "double: " << static_cast<double>(value) << "\n";
+}
+
+void putDouble(double n) {
+
+	if (n > INT_MAX || n < INT_MIN)
+		std::cout << "int: impossible" << "\n";
+	else
+		std::cout << "int: " << static_cast<int>(n) << "\n";
+	std::cout << std::fixed<<"float: " << std::setprecision(1) << static_cast<float>(n) << "f" << "\n";
+	std::cout << "double: " << n << "\n";
+}
+
+void putSpcValue(double n){
+	std::cout << "int: impossible" << "\n";
+	std::cout << "float: " << n << "f" << "\n";
+	std::cout << "double: " << n << "\n";
+}
+
+void otherChar(int _type, double value){
+	if (_type == INTEGER) {
+		int n = static_cast<int>(value);
+		std::cout << "char: \'" << static_cast<char>(n) << "\'"  << "\n";
+	}
+	else if (_type == FLOAT){
+		float n = static_cast<float>(value);
+		std::cout << "char: \'" << static_cast<char>(n) << "\'"  << "\n";
+	}
+	else if (_type == DOUBLE){
+		std::cout << "char: \'" << static_cast<char>(value) << "\'"  << "\n";
+	}
 }
 
 void ScalarConverter::numToOther(std::string target){
@@ -46,8 +94,15 @@ void ScalarConverter::numToOther(std::string target){
 		else if (!std::isprint(_value))
 			std::cout << "char: Non displayable" << "\n";
 		else
-			std::cout << "char: \'" << static_cast<char>(_value) << "\'"  << "\n";
-		putNum(_value, _type);
+			otherChar(_type, _value);
+		if (_type == INTEGER)
+			putInt(_value);
+		else if (_type == FLOAT)
+			putFloat(_value);
+		else if (_type == DOUBLE)
+			putDouble(_value);
+		else
+			putSpcValue(_value);
 	}
 	catch(const std::exception& e)
 	{
@@ -75,12 +130,13 @@ int typeSearch(std::string target){
 	}
 	if (hasDot && !hasF) return DOUBLE;
 	else if (hasDot && hasF) return FLOAT;
+	else if (!hasDot && hasF) return NOT_A_NUMBER;
 	return INTEGER;
 }
 
 int ScalarConverter::strVaildCheck(std::string& target){
 	int i = 0;
-	char sign = 0;
+
 	std::string _value[4] = {"nan", "nanf", "inf", "inff"};
 
 	for (; target[i] == ' '; i++) ;

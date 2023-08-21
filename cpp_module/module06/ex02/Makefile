@@ -3,12 +3,20 @@ CXX = c++
 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Wall
 
-NAME = convert
+NAME = ex02
 
 SRCS = main.cpp \
-		ScalarConverter.cpp
+		utils.cpp \
+		Base.cpp \
+		A.cpp \
+		B.cpp \
+		C.cpp
 
-DEPS = ScalarConverter.hpp \
+DEPS = A.hpp \
+		B.hpp \
+		C.hpp \
+		Base.hpp \
+		utils.hpp
 
 
 OBJS = $(SRCS:.cpp=.o)
