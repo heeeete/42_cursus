@@ -47,4 +47,11 @@ public:
 	}
 };
 
+template<typename T>
+void print(Array<T> arr){
+	for (unsigned int i = 0; i < arr.size() ; i++)
+		std::cout << arr[i];
+	std::cout << "\n";
+}
+
 #endif

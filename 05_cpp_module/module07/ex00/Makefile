@@ -10,7 +10,7 @@ SRC = main.cpp
 DEPS = whatever.hpp
 
 
-SRCS = $(SRC) $(SRC_CMD)
+SRCS = $(SRC)
 
 OBJS = $(SRCS:.cpp=.o)
 
