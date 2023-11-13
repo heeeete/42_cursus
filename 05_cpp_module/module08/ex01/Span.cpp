@@ -21,6 +21,15 @@ void Span::addNumber(int n){
 	_v.push_back(n);
 }
 
+void Span::easyAdd(size_t n){
+	for (size_t i = 0; i < n; i++){
+		if (_v.size() >= _size)
+			throw std::runtime_error("ERROR: oversize");
+		_v.push_back(i);
+	}
+
+}
+
 int Span::shortestSpan() const {
 	if (_v.size() <= 1)
 		throw std::length_error("ERROR: Size must be greater than 1");

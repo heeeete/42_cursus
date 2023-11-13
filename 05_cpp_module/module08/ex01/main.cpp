@@ -1,5 +1,7 @@
-#include "iostream"
-#include "Span.hpp"
+# include "iostream"
+# include <cstdlib>
+# include <ctime>
+# include "Span.hpp"
 
 int main()
 {
@@ -74,15 +76,19 @@ int main()
 			std::cerr << e.what() << '\n';
 		}
 	}
-	try
 	{
-		Span a(0);
-		a.addNumber(10);
+		try
+		{
+			std::cout << "------------ Big Value Test 2 ------------" << "\n";
+			Span sp(10001);
+			sp.easyAdd(10001);
+			std::cout << sp.shortestSpan() << std::endl;
+			std::cout << sp.longestSpan() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
 }

@@ -1,7 +1,6 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <stdio.h>
 # include <vector>
 # include <exception>
 # include <algorithm>
@@ -19,8 +18,10 @@ public:
 	~Span();
 
 	void addNumber(int);
+	void easyAdd(size_t);
 	int shortestSpan() const;
 	int longestSpan() const;
+
 };
 
 
