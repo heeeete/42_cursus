@@ -2,7 +2,7 @@ CXX = c++
 
 CXXFLAGS 	= -std=c++98 -Wall -Werror -Wextra
 
-NAME = ex01
+NAME = ex02
 
 SRC = main.cpp \
 
