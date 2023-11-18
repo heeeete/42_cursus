@@ -5,7 +5,7 @@ int main(int ac, char **av){
 	if (ac == 2){
 		try
 		{
-			BitcoinExchange bit;
+			BitcoinExchange bit(av[1]);
 		}
 		catch(const std::exception& e)
 		{
