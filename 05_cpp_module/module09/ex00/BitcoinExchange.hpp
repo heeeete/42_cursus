@@ -7,18 +7,21 @@
 # include <map>
 # include <fstream>
 # include <string>
+# include <sstream>
+# include <iomanip>
 
 class BitcoinExchange
 {
 private:
-	std::map< std::string, double> _DB;
+	std::map<std::string, double> _DB;
 
 public:
-	BitcoinExchange(char* file);
+	BitcoinExchange(char* file, char* csvFile);
 	BitcoinExchange(const BitcoinExchange& ref);
 	BitcoinExchange& operator=(const BitcoinExchange& ref);
 	~BitcoinExchange();
-	bool validData(std::string data);
+	bool validDataCheck(std::string data);
+	void validData(std::string data);
 	void execute(char* file);
 };
 

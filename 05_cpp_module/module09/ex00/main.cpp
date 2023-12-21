@@ -2,10 +2,10 @@
 #include "BitcoinExchange.hpp"
 
 int main(int ac, char **av){
-	if (ac == 2){
+	if (ac == 3){
 		try
 		{
-			BitcoinExchange bit(av[1]);
+			BitcoinExchange bit(av[1], av[2]);
 		}
 		catch(const std::exception& e)
 		{
@@ -13,7 +13,7 @@ int main(int ac, char **av){
 		}
 	}
 	else {
-		std::cout << "Error: could not open file." << std::endl;
+		std::cout << "example $./bit (data) (bit-coin data)" << std::endl;
 		return 1;
 	}
 	return 0;

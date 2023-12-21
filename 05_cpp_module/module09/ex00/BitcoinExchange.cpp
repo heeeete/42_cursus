@@ -2,6 +2,10 @@
 # define INVALID_ERROR 1
 # define NOT_IN_SCOPE_VALUE_ERROR 2
 
+void removeWhiteSpace(std::string& str){
+	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+}
+
 bool validDate(std::string date){
 	size_t idx;
 	size_t curIdx = 0;
@@ -36,14 +40,17 @@ bool validDate(std::string date){
 	return true;
 }
 
-int validInput(std::string read){
+int validInput(std::string& read){
 	size_t idx;
 	if ((idx = read.find('|')) == std::string::npos) return INVALID_ERROR;
 
 	std::string date = read.substr(0, idx);
 	std::string value = read.substr(idx + 1, read.length());
-	date.erase(remove(date.begin(), date.end(), ' '), date.end());
-	value.erase(remove(value.begin(), value.end(), ' '), value.end());
+	removeWhiteSpace(date);
+	removeWhiteSpace(value);
+
+
+
 
 	if (!validDate(date))
 		return INVALID_ERROR;
@@ -54,7 +61,7 @@ int validInput(std::string read){
 	return 0;
 }
 
-bool BitcoinExchange::validData(std::string data){
+bool BitcoinExchange::validDataCheck(std::string data){
 	size_t idx;
 	size_t curIdx = 0;
 
@@ -62,7 +69,7 @@ bool BitcoinExchange::validData(std::string data){
 
 	std::string date = data.substr(0,idx);
 	std::string value = data.substr(idx + 1, data.length());
-	date.erase(remove(date.begin(), date.end(), ' '), date.end());
+	removeWhiteSpace(date);
 	//year, month, day parse
 	if (!validDate(date))
 		return false;
@@ -72,12 +79,45 @@ bool BitcoinExchange::validData(std::string data){
 	double v = std::strtod(value.c_str(), &ptr);
 	if (*ptr && strcmp(ptr, "f")) return false;
 	else if (v < 0) return false;
-	// std::cout << Y << " " << M << " " << D << " " << v << "\n";
-	// std::map<std::string, double>::iterator it = _DB.find(date);
-	// if (it == _DB.end())
 	_DB[date] = v;
-	// std::cout << _DB[date] << "\n";
 	return true;
+}
+
+void BitcoinExchange::validData(std::string data) {
+	size_t idx = data.find('|');
+	std::string date = data.substr(0, idx);
+	double cnt = atof((data.substr(idx + 1).c_str()));
+	removeWhiteSpace(date);
+	std::istringstream iss(date);
+	std::ostringstream oss;
+	std::string temp;
+
+	size_t i = 3;
+	while(i){
+		std::getline(iss, temp, '-');
+		switch (i)
+		{
+			case 3:
+				oss << std::right << std::setfill('0') << std::setw(4) << temp;
+				oss << '-';
+				break;
+			case 2:
+				oss << std::right << std::setfill('0') << std::setw(2) << temp;
+				oss << '-';
+				break;
+			case 1:
+				oss << std::right << std::setfill('0') << std::setw(2) << temp;
+				break;
+		}
+		i--;
+	}
+	date = oss.str();
+
+	std::map<std::string, double>::iterator it = _DB.lower_bound(date);
+	if (it->first == date) std::cout << date << " => " << cnt << " = " << cnt * it->second << "\n";
+	else if (it == _DB.begin() && date != _DB.begin()->first) std::cerr << "Error: No coin information before " << date << "\n";
+	else std::cout << date << " => " << cnt << " = " << cnt * (--it)->second << "\n";
+
 }
 
 void BitcoinExchange::execute(char* file){
@@ -103,32 +143,38 @@ void BitcoinExchange::execute(char* file){
 			else if (status == NOT_IN_SCOPE_VALUE_ERROR){
 				std::cout << "ERROR: not in scope(0 < value < 1000) value => " << lineIdx << " Line of " << file << " \"" << read << "\"\n";
 			}
-			else std::cout << read << "\n";
+			else validData(read);
 		}
 		lineIdx++;
 	}
 }
 
-BitcoinExchange::BitcoinExchange(char* file){
-	std::ifstream csv("data.csv");
+BitcoinExchange::BitcoinExchange(char* file, char* csvFile){
+	std::ifstream csv(csvFile);
 	std::string read;
 	int lineIdx = 2;
 
 
 	if (!csv)
-		throw std::runtime_error("Error: could not open data.csv file.");
+		throw std::runtime_error("Error: could not open bitcoin DATA file.");
 	else if (std::getline(csv, read).eof())
-		throw std::runtime_error("Error: The data.csv file is an empty file.");
+		throw std::runtime_error("Error: The bitcoin DATA file is an empty file.");
 
 	for (; !std::getline(csv, read).eof();){
 		if (read != "date,exchange_rate" && !read.empty()){
-			if (!validData(read)){
+			if (!validDataCheck(read)){
 				std::cout << lineIdx << " Line of " << file << "\n\"" << read << "\" ";
 				throw std::runtime_error("Error: syntex error.");
 			}
 		}
 		lineIdx++;
 	}
+
+	//_DB 데이터 확인
+	// std::map<std::string, double>::iterator isBegin = _DB.begin();
+	// for (; isBegin != _DB.end(); isBegin++){
+	// 	std::cout << isBegin->first << "  " << isBegin->second << "\n";
+	// }
 	execute(file);
 }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& ref){
