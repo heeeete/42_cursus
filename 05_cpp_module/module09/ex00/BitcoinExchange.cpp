@@ -6,6 +6,17 @@ void removeWhiteSpace(std::string& str){
 	str.erase(remove(str.begin(), str.end(), ' '), str.end());
 }
 
+std::string trimTrailingZeros(double number) {
+    std::ostringstream out;
+    out << std::fixed << std::setprecision(10) << number;
+    std::string str = out.str();
+    // 소수점 이하 마지막에 있는 0들을 제거합니다.
+    str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+    // 만약 소수점 이하가 0이었다면, 소수점도 제거합니다.
+    str.erase(str.find_last_not_of('.') + 1, std::string::npos);
+    return str;
+}
+
 bool validDate(std::string date){
 	size_t idx;
 	size_t curIdx = 0;
@@ -63,7 +74,6 @@ int validInput(std::string& read){
 
 bool BitcoinExchange::validDataCheck(std::string data){
 	size_t idx;
-	size_t curIdx = 0;
 
 	if ((idx = data.find(',')) == std::string::npos) return false;
 
@@ -114,9 +124,9 @@ void BitcoinExchange::validData(std::string data) {
 	date = oss.str();
 
 	std::map<std::string, double>::iterator it = _DB.lower_bound(date);
-	if (it->first == date) std::cout << date << " => " << cnt << " = " << cnt * it->second << "\n";
+	if (it->first == date) std::cout << date << " => " << trimTrailingZeros(cnt) << " = " << trimTrailingZeros(cnt * it->second) << "\n";
 	else if (it == _DB.begin() && date != _DB.begin()->first) std::cerr << "Error: No coin information before " << date << "\n";
-	else std::cout << date << " => " << cnt << " = " << cnt * (--it)->second << "\n";
+	else std::cout << date << " => " << trimTrailingZeros(cnt) << " = " << trimTrailingZeros(cnt * (--it)->second) << "\n";
 
 }
 
@@ -185,5 +195,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& ref){
 		_DB = ref._DB;
 	return *this;
 }
+BitcoinExchange::BitcoinExchange(){}
 BitcoinExchange::~BitcoinExchange(){
 }

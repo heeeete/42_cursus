@@ -13,7 +13,7 @@ int main(int ac, char **av){
 		}
 	}
 	else {
-		std::cout << "example $./bit (data) (bit-coin data)" << std::endl;
+		std::cout << "\033[0;31m" << "example $./bit (data) (bit-coin data)" << std::endl;
 		return 1;
 	}
 	return 0;

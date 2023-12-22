@@ -1,13 +1,13 @@
 CXX = c++
 
-CXXFLAGS 	= -std=c++98 -g3 -Wall -Werror -Wextra
+CXXFLAGS 	= -std=c++98 -Wall -Werror -Wextra
 
-NAME = btc
+NAME = PmergeMe
 
 SRC = main.cpp \
-		BitcoinExchange.cpp
+		PmergeMe.cpp
 
-DEPS = BitcoinExchange.hpp
+DEPS = PmergeMe.hpp
 
 
 SRCS = $(SRC) $(SRC_CMD)

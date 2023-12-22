@@ -14,8 +14,8 @@ class BitcoinExchange
 {
 private:
 	std::map<std::string, double> _DB;
-
 public:
+	BitcoinExchange();
 	BitcoinExchange(char* file, char* csvFile);
 	BitcoinExchange(const BitcoinExchange& ref);
 	BitcoinExchange& operator=(const BitcoinExchange& ref);
