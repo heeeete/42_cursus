@@ -20,6 +20,8 @@ public:
 	std::deque<std::pair <int,int> > makePairsAndSortDeque();
 	void printContainer(const std::string& str);
 	void printTime(const std::string& ct, const double& time);
+	void mergeInserionSortVector(std::vector<std::pair<int,int> >& vec, int left, int right);
+	void mergeVector(std::vector<std::pair<int,int> >& vec, int left, int mid, int rigth);
 
 	PmergeMe();
 	PmergeMe(int ac, char* av[]);

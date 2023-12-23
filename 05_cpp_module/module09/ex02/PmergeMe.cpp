@@ -25,8 +25,58 @@ std::vector<std::pair<int,int> > PmergeMe::makePairsAndSortVector() {
 			_tempNum = _vec[i];
         }
     }
-    std::sort(pairs.begin(), pairs.end());
+
 	return pairs;
+}
+
+void PmergeMe::mergeVector(std::vector<std::pair<int,int> >& vec, int left, int mid, int rigth){
+	int n1 = mid - left + 1;
+	int n2 = rigth - mid;
+
+	std::vector<std::pair<int, int> > L(n1), R(n2);
+
+	for (int i = 0; i < n1; i++){
+		L[i] = vec[left + i];
+	}
+	for (int j = 0; j < n2; j++){
+		R[j] = vec[mid + j + 1];
+	}
+
+	int i = 0, j = 0;
+	int k = left;
+
+	while (i < n1 && j < n2){
+		if (L[i].first <= R[j].first){
+			vec[k] = L[i];
+			i++;
+		}
+		else {
+			vec[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+    while (i < n1) {
+        vec[k] = L[i];
+        i++;
+        k++;
+    }
+    while (j < n2) {
+        vec[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void PmergeMe::mergeInserionSortVector(std::vector<std::pair<int,int> >& vec, int left, int right){
+	if (left < right){
+		int mid = (right + left) / 2;
+
+		mergeInserionSortVector(vec, left, mid);
+		mergeInserionSortVector(vec, mid + 1, right);
+		mergeVector(vec, left, mid, right);
+	}
 }
 
 std::deque<std::pair <int,int> > PmergeMe::makePairsAndSortDeque() {
@@ -56,7 +106,11 @@ void PmergeMe::sort() {
 	//2개씩 짝을 지으면서 큰 수가 앞 작은 수가 뒤에 오게 만들고 짝을 다 지으면 pair 중에 큰 수를 기준으로 오름차순 정렬
 	start = clock();
 	std::vector<std::pair<int,int> > pair = makePairsAndSortVector();
+	mergeInserionSortVector(pair, 0, pair.size() - 1);
 
+	for (size_t i = 0; i < pair.size(); i++){
+		std::cout << "(" << pair[i].first << " " << pair[i].second << ")" << " ";
+	}
 	_vec.clear();
 	for (size_t i = 0; i < pair.size(); i++)
 		_vec.push_back(pair[i].first);	//정렬된 큰 수를 _vec에 다 담음
