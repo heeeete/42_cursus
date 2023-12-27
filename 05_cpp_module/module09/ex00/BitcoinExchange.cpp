@@ -2,10 +2,6 @@
 # define INVALID_ERROR 1
 # define NOT_IN_SCOPE_VALUE_ERROR 2
 
-void removeWhiteSpace(std::string& str){
-	str.erase(remove(str.begin(), str.end(), ' '), str.end());
-}
-
 std::string trimTrailingZeros(double number) {
     std::ostringstream out;
     out << std::fixed << std::setprecision(10) << number;
@@ -51,20 +47,16 @@ bool validDate(std::string date){
 	return true;
 }
 
-int validInput(std::string& read){
+int validInput(std::string& read, std::string sep){
 	size_t idx;
-	if ((idx = read.find('|')) == std::string::npos) return INVALID_ERROR;
+	if ((idx = read.find(sep)) == std::string::npos) return INVALID_ERROR;
 
 	std::string date = read.substr(0, idx);
-	std::string value = read.substr(idx + 1, read.length());
-	removeWhiteSpace(date);
-	removeWhiteSpace(value);
-
-
-
+	std::string value = read.substr(idx + sep.length(), read.length());
 
 	if (!validDate(date))
 		return INVALID_ERROR;
+
 	char* ptr = NULL;
 	double v = std::strtod(value.c_str(), &ptr);
 	if (*ptr && strcmp(ptr, "f")) return INVALID_ERROR;
@@ -72,14 +64,13 @@ int validInput(std::string& read){
 	return 0;
 }
 
-bool BitcoinExchange::validDataCheck(std::string data){
+bool BitcoinExchange::validDataCheck(std::string data, std::string sep){
 	size_t idx;
 
-	if ((idx = data.find(',')) == std::string::npos) return false;
+	if ((idx = data.find(sep)) == std::string::npos) return false;
 
 	std::string date = data.substr(0,idx);
-	std::string value = data.substr(idx + 1, data.length());
-	removeWhiteSpace(date);
+	std::string value = data.substr(idx + sep.length(), data.length());
 	//year, month, day parse
 	if (!validDate(date))
 		return false;
@@ -97,7 +88,6 @@ void BitcoinExchange::validData(std::string data) {
 	size_t idx = data.find('|');
 	std::string date = data.substr(0, idx);
 	double cnt = atof((data.substr(idx + 1).c_str()));
-	removeWhiteSpace(date);
 	std::istringstream iss(date);
 	std::ostringstream oss;
 	std::string temp;
@@ -143,10 +133,15 @@ void BitcoinExchange::execute(char* file){
 		std::cout << "Error: The " << file << " file is an empty file.";
 		throw std::runtime_error("");
 	}
+	size_t fIdx = read.find("date");
+	size_t sIdx = read.find("value");
+	if (fIdx == std::string::npos || sIdx == std::string::npos) throw std::runtime_error("Error: invaild data.csv file");
+	std::string sep = read.substr(fIdx + 4, sIdx - (fIdx + 4));
+	if (sep.empty()) throw std::runtime_error("Error: invaild data.csv file");
 
 	for (; !std::getline(input, read).eof() ;){
-		if (read != "date | value." && !read.empty()){
-			status = validInput(read);
+		if (!read.empty()){
+			status = validInput(read, sep);
 			if (status == INVALID_ERROR){
 				std::cout << "ERROR: bad input => " << lineIdx << " Line of " << file << " \"" << read << "\"\n";
 			}
@@ -164,15 +159,19 @@ BitcoinExchange::BitcoinExchange(char* file, char* csvFile){
 	std::string read;
 	int lineIdx = 2;
 
-
 	if (!csv)
 		throw std::runtime_error("Error: could not open bitcoin DATA file.");
 	else if (std::getline(csv, read).eof())
 		throw std::runtime_error("Error: The bitcoin DATA file is an empty file.");
+	size_t fIdx = read.find("date");
+	size_t sIdx = read.find("exchange_rate");
+	if (fIdx == std::string::npos || sIdx == std::string::npos) throw std::runtime_error("Error: invaild data.csv file");
+	std::string sep = read.substr(fIdx + 4, sIdx - (fIdx + 4));
+	if (sep.empty()) throw std::runtime_error("Error: invaild data.csv file");
 
 	for (; !std::getline(csv, read).eof();){
-		if (read != "date,exchange_rate" && !read.empty()){
-			if (!validDataCheck(read)){
+		if (!read.empty()){
+			if (!validDataCheck(read, sep)){
 				std::cout << lineIdx << " Line of " << file << "\n\"" << read << "\" ";
 				throw std::runtime_error("Error: syntex error.");
 			}
