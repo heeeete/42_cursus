@@ -21,7 +21,10 @@ RPN::RPN(std::string formula){
 			if (formula[i] == '+') st.push(f + s);
 			else if (formula[i] == '-') st.push(f - s);
 			else if (formula[i] == '*') st.push(f * s);
-			else if (formula[i] == '/') st.push(f / s);
+			else if (formula[i] == '/') {
+				if (s == 0) throw std::runtime_error("0으로 나눌 수 없습니다.");
+				st.push(f / s);
+				}
 		} else {
 			throw std::runtime_error("Error: Only numbers and (+, -, *, /) can be used as arguments.");
 		}

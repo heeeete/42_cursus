@@ -9,6 +9,7 @@
 # include <string>
 # include <sstream>
 # include <iomanip>
+# include <cstdlib>
 
 class BitcoinExchange
 {

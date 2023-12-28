@@ -38,6 +38,17 @@ void PmergeMe::sort() {
 	end = clock();
 	printTime("deque", static_cast<double>(end - start) / CLOCKS_PER_SEC);
 	//            ------------- deque ---------------
+
+	// //            ------------- check ---------------
+	// std::vector<int> cpV = _vec;
+	// std::deque<int> cpD = _deq;
+	// std::sort(cpV.begin(), cpV.end());
+	// std::sort(cpD.begin(), cpD.end());
+	// for (size_t i = 0; i < _vec.size(); i++){
+	// 	if (cpV[i] != _vec[i] || cpD[i] != _deq[i]) std::cout << "다름\n";
+	// }
+	// //            ------------- check ---------------
+
 }
 
 PmergeMe::PmergeMe() : _tempNum(-1) {}

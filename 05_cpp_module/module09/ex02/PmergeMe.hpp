@@ -8,6 +8,7 @@
 # include <utility>
 # include <ctime>
 # include <algorithm>
+# include <climits>
 
 class PmergeMe
 {
@@ -98,22 +99,37 @@ public:
 			container.push_back(pairs[i].first);
 		typename T2::iterator it =  std::upper_bound(container.begin(), container.begin(), pairs[0].second);
 		container.insert(it, pairs[0].second);
+		//야콥스탈 3번째(3) 부터 시작
 		int i = 3;
-		int a = 1;
+		int searchLimit = 1;
 		int jacob;
 		while ((jacob = jacobsthal(i)) <= static_cast<int>(pairs.size())){
-			it =  std::upper_bound(container.begin(), container.begin() + ((jacob - 1) + a), pairs[jacob - 1].second);
-			a++;
+			int rangeIncrement = 0;
+			it =  std::upper_bound(container.begin(), container.begin() + ((jacob - 1) + searchLimit), pairs[jacob - 1].second);
+			// std::cout << "jacob 탐색 범위 = "<< *(container.begin() + ((jacob - 1) + searchLimit)) << "\n";
+			if (pairs[jacob - 1].second  <= pairs[jacob - 2].first)
+				searchLimit++;
+			else rangeIncrement++;
 			container.insert(it, pairs[jacob - 1].second);
 			for (int j = jacob - 1; j > jacobsthal(i - 1); j--){
-				it =  std::upper_bound(container.begin(), container.begin() + ((j - 1) + a), pairs[j - 1].second);
-				a++;
+				it =  std::upper_bound(container.begin(), container.begin() + ((j - 1) + searchLimit), pairs[j - 1].second);
+				// std::cout << *(container.begin() + ((j - 1) + searchLimit)) << "\n";
+				if (pairs[j - 1].second  <= pairs[j - 2].first)
+					searchLimit++;
+				else rangeIncrement++;
 				container.insert(it, pairs[j - 1].second);
 			}
 			i++;
+			searchLimit += rangeIncrement;
 		}
+
+		int rangeDecrease = 1;
 		for (int j = pairs.size() - 1; j >= jacobsthal(i - 1); j--){
-			it =  std::upper_bound(container.begin(), std::find(container.begin(), container.end(), pairs[j].first), pairs[j].second);
+			searchLimit = container.size() - rangeDecrease;
+			it =  std::upper_bound(container.begin(), container.begin() + searchLimit, pairs[j].second);
+			// std::cout << "jacob for문 끝나고 탐색 범위 = "<< *(container.begin() + searchLimit) << "\n";
+			if (pairs[j].second >= pairs[j - 1].first) rangeDecrease += 2;
+			else rangeDecrease++;
 			container.insert(it, pairs[j].second);
 		}
 		if (_tempNum != -1) {
