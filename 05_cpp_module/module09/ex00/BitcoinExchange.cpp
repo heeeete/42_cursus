@@ -81,10 +81,10 @@ bool BitcoinExchange::validDataCheck(std::string data, std::string sep){
 	return true;
 }
 
-void BitcoinExchange::validData(std::string data) {
-	size_t idx = data.find('|');
+void BitcoinExchange::validData(std::string data, std::string sep) {
+	size_t idx = data.find(sep);
 	std::string date = data.substr(0, idx);
-	double cnt = atof((data.substr(idx + 1).c_str()));
+	double cnt = atof((data.substr(idx + sep.length()).c_str()));
 	std::istringstream iss(date);
 	std::ostringstream oss;
 	std::string temp;
@@ -145,7 +145,7 @@ void BitcoinExchange::execute(char* file){
 			else if (status == NOT_IN_SCOPE_VALUE_ERROR){
 				std::cout << "ERROR: not in scope(0 < value < 1000) value => " << lineIdx << " Line of " << file << " \"" << read << "\"\n";
 			}
-			else validData(read);
+			else validData(read, sep);
 		}
 		lineIdx++;
 	}

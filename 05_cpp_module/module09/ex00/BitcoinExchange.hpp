@@ -22,7 +22,7 @@ public:
 	BitcoinExchange& operator=(const BitcoinExchange& ref);
 	~BitcoinExchange();
 	bool validDataCheck(std::string data, std::string sep);
-	void validData(std::string data);
+	void validData(std::string data, std::string sep);
 	void execute(char* file);
 };
 
