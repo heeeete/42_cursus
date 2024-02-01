@@ -18,7 +18,7 @@ clean:
 	@echo "Containers stopped and images removed."
 
 fclean: clean
-	@sudo rm -rf /Users/huipark/data
+	@rm -rf /Users/huipark/data
 	@echo "Data directory removed."
 
 re:
