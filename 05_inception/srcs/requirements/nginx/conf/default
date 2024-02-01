@@ -1,0 +1,61 @@
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# https://www.nginx.com/resources/wiki/start/
+# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+# https://wiki.debian.org/Nginx/DirectoryStructure
+#
+# In most cases, administrators will remove this file from sites-enabled/ and
+# leave it as reference inside of sites-available where it will continue to be
+# updated by the nginx packaging team.
+#
+# This file will automatically load configuration files provided by other
+# applications, such as Drupal or Wordpress. These applications will be made
+# available underneath a path with that package name, such as /drupal8.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        # SSL configuration
+        # IPv4
+        listen 443 ssl;
+        # IPv6
+        listen [::]:443 ssl;
+
+        # SSL 인증서 경로
+        ssl_certificate /etc/nginx/ssl/huipark.42.fr.crt;
+        # SSL 개인키 인증서 경로
+        ssl_certificate_key /etc/nginx/ssl/huipark.42.fr.key;
+        # TLS1.2버전 사용
+        ssl_protocols TLSv1.2;
+
+        # Index File 경로
+        root /var/www/html;
+
+        index index.php index.html;
+
+        # 클라이언트에서 https://example.com/about 요청을 보내면 문서 디렉토리에서 about파일을 찾는데
+        # 없을시 404오류 페이지를 반환
+        # uri: /about
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        # 모든 *.php 확장자를 가진 파일을 wordpress container로 요청을 보내 해당 컨테이너에서 php-fpm을 사용해서
+        # php script를 처리해 nginx로 반환해줌
+        location ~ \.php$ {
+                include fastcgi_params;
+                try_files $uri $uri/ =404;
+                fastcgi_pass wordpress:9000;
+                # 요청이 디렉토리로 들어오면 index.php 파일을 찾음
+                fastcgi_index index.php;
+                # example: http://example.com/index.php/page
+                # SCRIPT_FILENAME: /var/www/html/index.php
+                # PATH_INFO: /page
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+}

@@ -1,0 +1,59 @@
+services:
+  nginx:
+    build: ./requirements/nginx
+    image: nginx:42
+    networks:
+      - inception
+    restart: always
+    ports:
+      - 443:443
+    volumes:
+      - wordpress_data:/var/www/
+    depends_on:
+      - wordpress
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress:42
+    networks:
+      - inception
+    restart: always
+    expose:
+      - 9000
+    env_file:
+      - ./.env
+    volumes:
+      - wordpress_data:/var/www/
+    depends_on:
+      - mariadb
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb:42
+    networks:
+      - inception
+    restart: always
+    expose:
+      - 3306
+    env_file:
+      - ./.env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      # 바꿔라
+      device: /Users/huipark/data/wordpress
+      o: bind
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      # 바꿔라
+      device: /Users/huipark/data/mariadb
+      o: bind
