@@ -1,8 +1,8 @@
 all: setup up
 
 setup:
-	@mkdir -p /Users/huipark/data/wordpress
-	@mkdir -p /Users/huipark/data/mariadb
+	@mkdir -p /home/huipark/data/wordpress
+	@mkdir -p /home/huipark/data/mariadb
 	@echo "Data directory created."
 
 up: setup
@@ -18,7 +18,7 @@ clean:
 	@echo "Containers stopped and images removed."
 
 fclean: clean
-	@rm -rf /Users/huipark/data
+	@sudo rm -r /home/huipark/data
 	@echo "Data directory removed."
 
 re:

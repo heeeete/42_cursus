@@ -24,8 +24,7 @@ if [ ! -f /var/www/html/index.php ]; then
   # WP-CLI에 WordPress 코어 파일을 다운로드
   wp core download --allow-root
   wp config create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb --allow-root
-  # 바꿔라
-  wp core install --url=https://127.0.0.1 --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL  --allow-root
+  wp core install --url=https://huipark.42.fr --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL  --allow-root
   wp user create $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD --role=author --allow-root
 fi
 

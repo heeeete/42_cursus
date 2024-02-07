@@ -47,13 +47,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      # 바꿔라
-      device: /Users/huipark/data/wordpress
+      device: /home/huipark/data/wordpress
       o: bind
   mariadb_data:
     driver: local
     driver_opts:
       type: none
-      # 바꿔라
-      device: /Users/huipark/data/mariadb
+      device: /home/huipark/data/mariadb
       o: bind
