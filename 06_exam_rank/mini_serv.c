@@ -1,21 +1,37 @@
-#include <errno.h>
-#include <netdb.h>
-#include <netinet/in.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 
 typedef struct s_client
 {
 	int id;
-	char msg[1024];
+	char msg[110000];
 } t_client;
-fd_set sockets, read_sock, write_sock;
-char read_buf[120000], write_but[120000];
-int next_id = 0, max_fd;
-t_client clients[1024 * 4];
+
+t_client clients[1024];
+const int BUF_SIZE = 42 * 4096;
+char read_buf[BUF_SIZE], write_buf[BUF_SIZE];
+fd_set sockets, read_fd, wirte_fd;
+int max_fd = 0, next_id = 0;
+unsigned int ipAddr;
+
+void set_ip(unsigned int *ip)
+{
+	char a = 127, b = 0, c = 1;
+	*ip = a << 24 | b << 16 | b < 8 | c;
+}
+
+void send_all(int is_not)
+{
+	for (int i = 0; i <= max_fd; i++)
+	{
+		if (FD_ISSET(i, &wirte_fd) && i != is_not)
+			send(i, write_buf, strlen(write_buf), 0);
+	}
+}
 
 void err(char *msg)
 {
@@ -23,67 +39,55 @@ void err(char *msg)
 	exit(1);
 }
 
-void send_all(int not )
-{
-	for (int i = 0; i < max_fd; i++)
-		if (FD_ISSET(i, &write_sock) && i != not )
-			send(i, write_but, strlen(write_but), 0);
-}
-
 int main(int ac, char **av)
 {
 	if (ac != 2)
-		err("Wrong number arguments\n");
-
-	int sockfd;
-	struct sockaddr_in servaddr, cli;
-	socklen_t len;
-
-	sockfd = socket(2, 1, 0);
-
-	if (sockfd == -1)
-		err("Fatal Error\n");
-	len = sizeof(cli);
-	max_fd = sockfd;
+		err("Wrong number of input\n");
+	int sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock < 0)
+		err("Fatal error");
+	max_fd = sock;
 	FD_ZERO(&sockets);
-	FD_SET(sockfd, &sockets);
+	FD_SET(sock, &sockets);
 	bzero(clients, sizeof(clients));
-	bzero(&servaddr, sizeof(servaddr));
-	servaddr.sin_family = 2;
-	servaddr.sin_addr.s_addr = htonl(2130706433);
+	set_ip(&ipAddr);
+
+	struct sockaddr_in servaddr;
+	socklen_t len = sizeof(servaddr);
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_addr.s_addr = htonl(ipAddr);
 	servaddr.sin_port = htons(atoi(av[1]));
 
-	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
-		err("Fatal Error\n");
-	if (listen(sockfd, 10) < 0)
-		err("Fatal Error\n");
+	if (bind(sock, (const struct sockaddr *)&servaddr, len) < 0)
+		err("Fatal error");
+	if (listen(sock, 42) < 0)
+		err("Fatal error");
 
 	while (1)
 	{
-		read_sock = write_sock = sockets;
-		if (select(max_fd + 1, &read_sock, &write_sock, NULL, NULL) < 0)
+		read_fd = wirte_fd = sockets;
+		if (select(max_fd + 1, &read_fd, &wirte_fd, NULL, NULL) < 0)
 			continue;
-
 		for (int fd = 0; fd <= max_fd; fd++)
 		{
-			if (FD_ISSET(fd, &read_sock) && fd == sockfd)
+			if (FD_ISSET(fd, &read_fd) && fd == sock)
 			{
-				int connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
+				int connfd = accept(fd, (struct sockaddr *)&servaddr, &len);
 				if (connfd < 0)
 					continue;
+				FD_SET(connfd, &sockets);
 				clients[connfd].id = next_id++;
 				max_fd = connfd > max_fd ? connfd : max_fd;
-				FD_SET(connfd, &sockets);
-				sprintf(write_but, "server: client %d just arrived\n", clients[connfd].id);
+				sprintf(write_buf, "server: client %d just arrived\n", clients[connfd].id);
 				send_all(connfd);
 				break;
 			}
-			if (FD_ISSET(fd, &read_sock) && fd != sockfd)
+			else if (FD_ISSET(fd, &read_fd))
 			{
-				int res = recv(fd, read_buf, 65536, 0);
+				int res = recv(fd, read_buf, BUF_SIZE, 0);
 				if (res <= 0)
 				{
-					sprintf(write_but, "server: client %d just left\n", clients[fd].id);
+					sprintf(write_buf, "server: client %d just left\n", clients[fd].id);
 					send_all(fd);
 					FD_CLR(fd, &sockets);
 					close(fd);
@@ -97,7 +101,7 @@ int main(int ac, char **av)
 						if (clients[fd].msg[j] == '\n')
 						{
 							clients[fd].msg[j] = '\0';
-							sprintf(write_but, "client %d: %s\n", clients[fd].id, clients[fd].msg);
+							sprintf(write_buf, "client %d: %s\n", clients[fd].id, clients[fd].msg);
 							send_all(fd);
 							bzero(clients[fd].msg, sizeof(clients[fd].msg));
 							j = -1;
@@ -110,4 +114,3 @@ int main(int ac, char **av)
 	}
 	return 0;
 }
-
